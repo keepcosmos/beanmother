@@ -1,0 +1,12 @@
+brutalAnimal: &brutalAnimal
+  isDangerous: y
+
+lion:
+  <<: *brutalAnimal
+  scientificName: Panthera leo
+  classification: Panthera
+
+tiger:
+  <<: *brutalAnimal
+  scientificName: Panthera tigris
+  classification: Panthera

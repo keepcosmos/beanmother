@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.jmother.core.fixture.scanner.YamlFixtureScannerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-08-15T12:51:10" hostname="Keepcosmos-2" time="0.011">
+  <properties/>
+  <testcase name="testOnlyLoadYAMLFile" classname="io.jmother.core.fixture.scanner.YamlFixtureScannerTest" time="0.009"/>
+  <testcase name="testFilesystemPath" classname="io.jmother.core.fixture.scanner.YamlFixtureScannerTest" time="0.0"/>
+  <testcase name="testSingleFixtureFile" classname="io.jmother.core.fixture.scanner.YamlFixtureScannerTest" time="0.0"/>
+  <testcase name="testFixtureFilesInDirectory" classname="io.jmother.core.fixture.scanner.YamlFixtureScannerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

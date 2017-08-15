@@ -1,0 +1,6 @@
+group 'io.jmother'
+
+dependencies {
+    compile project(':jmother-core')
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '1.1.0'
+}
