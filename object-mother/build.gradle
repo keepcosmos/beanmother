@@ -1,0 +1,7 @@
+group 'io.jmother'
+
+dependencies {
+    compile project(':jmother-core')
+    compile project(':jmother-modelmapper')
+    testCompile project(':jmother-testmodel')
+}
