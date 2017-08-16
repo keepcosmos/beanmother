@@ -75,11 +75,13 @@ public abstract class AbstractFixtureScanner implements FixtureScanner {
         Set<File> files = new HashSet<>();
 
         if (file.isDirectory()) {
-            for (File subfile : file.listFiles()) {
-                if(subfile.isDirectory()) {
-                    files.addAll(listOfAllFixtureFiles(subfile));
+            File[] filesInDic = file.listFiles();
+            if (filesInDic == null)  return files;
+            for (File sub : filesInDic) {
+                if(sub.isDirectory()) {
+                    files.addAll(listOfAllFixtureFiles(sub));
                 } else {
-                    if (isFixtureFile(subfile)) files.add(subfile);
+                    if (isFixtureFile(sub)) files.add(sub);
                 }
             }
         } else {

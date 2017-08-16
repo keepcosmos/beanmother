@@ -24,4 +24,5 @@ subprojects {
 dependencies {
     compile project(':jmother-core')
     compile project(':jmother-modelmapper')
+    testCompile project(':jmother-testmodel')
 }

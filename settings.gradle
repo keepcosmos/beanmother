@@ -2,4 +2,5 @@ rootProject.name = 'jmother'
 
 include 'jmother-core'
 include 'jmother-modelmapper'
+include 'jmother-testmodel'
 
