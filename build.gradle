@@ -1,4 +1,4 @@
-group 'io.jmother'
+group 'io.beanmother'
 version '0.1'
 
 allprojects {

@@ -1,7 +1,6 @@
-rootProject.name = 'jmother'
+rootProject.name = 'beanmother'
 
-include 'jmother-core'
-include 'jmother-modelmapper'
-include 'jmother-testmodel'
+include 'beanmother-core'
+include 'beanmother-modelmapper'
+include 'beanmother-testmodel'
 include 'object-mother'
-

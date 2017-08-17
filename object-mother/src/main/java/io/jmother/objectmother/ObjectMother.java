@@ -1,11 +1,11 @@
-package io.jmother.objectmother;
+package io.beanmother.objectmother;
 
-import io.jmother.core.fixture.parser.FixtureParser;
-import io.jmother.core.fixture.parser.YamlFixtureParser;
-import io.jmother.core.fixture.scanner.FixtureScanner;
-import io.jmother.core.fixture.scanner.YamlFixtureScanner;
-import io.jmother.core.mapper.FixtureMapper;
-import io.jmother.modelmapper.FixtureModelMapper;
+import io.beanmother.core.fixture.parser.FixtureParser;
+import io.beanmother.core.fixture.parser.YamlFixtureParser;
+import io.beanmother.core.fixture.scanner.FixtureScanner;
+import io.beanmother.core.fixture.scanner.YamlFixtureScanner;
+import io.beanmother.core.mapper.FixtureMapper;
+import io.beanmother.modelmapper.FixtureModelMapper;
 
 public class ObjectMother {
 
