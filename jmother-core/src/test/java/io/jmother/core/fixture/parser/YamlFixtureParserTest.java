@@ -1,5 +1,6 @@
 package io.jmother.core.fixture.parser;
 
+import io.jmother.core.fixture.FixtureMap;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ public class YamlFixtureParserTest {
         Path path = Paths.get(ClassLoader.getSystemClassLoader().getResource("fixtures/this.yml").getFile());
         String str = new String(Files.readAllBytes(path));
 
-        Map<String, Object> data = parser.parse(str);
+        Map<String, FixtureMap> data = parser.parse(str);
         Map<String, Object> jmotherData = (Map<String, Object>) data.get("jmother");
         Assert.assertEquals(jmotherData.get("id"), 1);
         Assert.assertEquals(jmotherData.get("title"), "JMother");

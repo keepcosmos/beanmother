@@ -1,9 +1,14 @@
 .gradle
 /build/
+/out/
 /jmother-core/build/
+/jmother-core/out/
 /jmother-modelmapper/build/
+/jmother-modelmapper/out/
 /jmother-testmodel/build/
+/jmother-testmodel/out/
 /object-mother/build/
+/object-mother/out/
 .idea
 
 # Ignore Gradle GUI config

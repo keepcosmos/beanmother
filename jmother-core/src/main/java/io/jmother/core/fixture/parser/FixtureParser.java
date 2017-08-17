@@ -1,5 +1,7 @@
 package io.jmother.core.fixture.parser;
 
+import io.jmother.core.fixture.FixtureMap;
+
 import java.util.Map;
 
 /**
@@ -10,5 +12,5 @@ public interface FixtureParser {
      * Parse fixture string to Map
      * @return fixture map
      */
-    Map<String, Object> parse(String fixture);
+    Map<String, FixtureMap> parse(String fixture);
 }

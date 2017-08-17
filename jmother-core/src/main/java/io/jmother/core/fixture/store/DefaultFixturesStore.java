@@ -1,5 +1,6 @@
 package io.jmother.core.fixture.store;
 
+import io.jmother.core.fixture.FixtureMap;
 import io.jmother.core.fixture.parser.FixtureParser;
 import io.jmother.core.fixture.parser.YamlFixtureParser;
 import io.jmother.core.fixture.scanner.FixtureScanner;
@@ -18,9 +19,9 @@ import java.util.logging.Logger;
  * Default fixture store.
  * It uses {@link YamlFixtureScanner} and {@link YamlFixtureParser} for loading and parsing fixture files.
  */
-public class DefaultFixtureStore implements FixtureStore {
+public class DefaultFixturesStore implements FixturesStore {
 
-    private static Logger logger = Logger.getLogger(DefaultFixtureStore.class.getName());
+    private static Logger logger = Logger.getLogger(DefaultFixturesStore.class.getName());
 
     private ClassLoader classLoader;
 
@@ -47,19 +48,19 @@ public class DefaultFixtureStore implements FixtureStore {
     /**
      * Fixtures that are parsed.
      */
-    private Map<String, Object> fixtureMap;
+    private Map<String, FixtureMap> fixtureMaps;
 
     /**
      * Create a default fixture store.
      */
-    public DefaultFixtureStore() {
+    public DefaultFixturesStore() {
         this(ClassUtils.getDefaultClassLoader());
     }
 
     /**
      * Create a default fixture store.
      */
-    public DefaultFixtureStore(ClassLoader classLoader) {
+    public DefaultFixturesStore(ClassLoader classLoader) {
         this.classLoader = classLoader;
         this.fixtureScanner = new YamlFixtureScanner(classLoader);
         this.fixtureParser = new YamlFixtureParser();
@@ -73,13 +74,12 @@ public class DefaultFixtureStore implements FixtureStore {
     }
 
     @Override
-    public void addLocation(Location location) {
+    public void addLocation(Location location) throws IOException {
         if (fixtureLocations.contains(location)) {
             logger.warning(location.getDescriptor() + " is already added.");
             return;
         }
 
-        fixtureLocations.add(location);
         List<File> files = fixtureScanner.scan(location);
 
         if (files.size() == 0) {
@@ -87,31 +87,23 @@ public class DefaultFixtureStore implements FixtureStore {
             return;
         }
 
+        Map<String, FixtureMap> parsed = new HashMap<>();
+        for (File file : files) {
+            if (fixtureFiles.contains(file)) continue;
+            String fixtureStr = new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
+            parsed.putAll(fixtureParser.parse(fixtureStr));
+        }
+
         fixtureFiles.addAll(files);
+        fixtureLocations.add(location);
+        fixtureMaps.putAll(parsed);
     }
 
     @Override
     public void reset() {
         fixtureLocations = new HashSet<>();
         fixtureFiles = new HashSet<>();
-        fixtureMap = new HashMap<>();
-    }
-
-    @Override
-    public void refresh() {
-        fixtureMap = new HashMap<>();
-        for(File file : fixtureFiles) {
-            String fixtureStr;
-            try {
-                fixtureStr = new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
-            } catch (IOException e) {
-                e.printStackTrace();
-                continue;
-            }
-            Map<String, Object> fixture = fixtureParser.parse(fixtureStr);
-
-            fixtureMap.putAll(fixture);
-        }
+        fixtureMaps = new HashMap<>();
     }
 
     public Set<Location> getFixtureLocations() {
@@ -122,7 +114,7 @@ public class DefaultFixtureStore implements FixtureStore {
         return fixtureFiles;
     }
 
-    public Map<String, Object> getFixtureMap() {
-        return fixtureMap;
+    public Map<String, FixtureMap> getFixtureMap() {
+        return fixtureMaps;
     }
 }
