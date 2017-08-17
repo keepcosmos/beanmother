@@ -5,8 +5,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Test for {@link YamlFixtureScanner}
@@ -27,7 +27,10 @@ public class YamlFixtureScannerTest {
     public void testFixtureFilesInDirectory() {
         FixtureScanner scanner = new YamlFixtureScanner(classLoader);
         List<File> files = scanner.scan(new Location("fixtures/animals/"));
-        List fileNames = files.stream().map(file -> file.getName()).collect(Collectors.toList());
+        List<String> fileNames = new ArrayList();
+        for (File file : files) {
+            fileNames.add(file.getName());
+        }
 
         Assert.assertTrue(fileNames.contains("dog.yml"));
         Assert.assertTrue(fileNames.contains("brutals.yml"));
@@ -37,8 +40,10 @@ public class YamlFixtureScannerTest {
     public void testOnlyLoadYAMLFile() {
         FixtureScanner scanner = new YamlFixtureScanner(classLoader);
         List<File> files = scanner.scan(new Location("fixtures"));
-
-        List fileNames = files.stream().map(file -> file.getName()).collect(Collectors.toList());
+        List<String> fileNames = new ArrayList();
+        for (File file : files) {
+            fileNames.add(file.getName());
+        }
 
         Assert.assertTrue(fileNames.contains("dog.yml"));
         Assert.assertFalse(fileNames.contains("unknown.txt"));
