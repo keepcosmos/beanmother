@@ -6,7 +6,7 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
 
-    sourceCompatibility = 1.8
+    sourceCompatibility = 1.7
 
     repositories {
         jcenter()

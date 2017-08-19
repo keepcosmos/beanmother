@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * Generally, fixtureMap is a raw Map data just read from a fixture file.
  */
-public class FixtureMap extends LinkedHashMap {
+public class FixtureMap extends LinkedHashMap<String, Object> {
 
     /**
      * The name of fixture.
