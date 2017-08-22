@@ -11,7 +11,7 @@ import java.util.Map;
  * FixtureMap that is parsed by {@link io.beanmother.core.fixture.parser.YamlFixtureParser} has only Map and List structure and String key.
  *
  */
-public class FixtureMapEdgeTraversal {
+public class FixtureMapUtil {
 
     /**
      * The interface that runs when visit edges.
@@ -34,13 +34,25 @@ public class FixtureMapEdgeTraversal {
         }
     }
 
+    /**
+     * Convert {@link Map<String, Object>} to {@link FixtureMap}.
+     * @param map Map object that is parsed by {@link io.beanmother.core.fixture.parser.YamlFixtureParser} generally.
+     * @return fixtureMap
+     */
+    public static FixtureMap convertMapToFixtureMap(Map<String, Object> map) {
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+
+        }
+        return null;
+    }
+
     @SuppressWarnings("unchecked")
     private static Object _traverse(String key, Object data, Processor processor) {
-        if ((data instanceof Map) || data.getClass().isInstance(Map.class)) {
+        if ((data instanceof Map)) {
             for (Map.Entry<String, Object> entry : ((Map<String, Object>) data).entrySet()) {
                 entry.setValue(_traverse(entry.getKey(), entry.getValue(), processor));
             }
-        } else if ((data instanceof List) || data.getClass().isInstance(List.class)) {
+        } else if ((data instanceof List)) {
             List<Object> dataAsList = (List) data;
             for ( int i = 0 ; i < dataAsList.size() ; i++) {
                 dataAsList.set(i, _traverse(key, dataAsList.get(i), processor));

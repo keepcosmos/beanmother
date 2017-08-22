@@ -1,7 +1,0 @@
-group 'io.beanmother'
-
-dependencies {
-    compile project(':beanmother-core')
-    compile project(':beanmother-modelmapper')
-    testCompile project(':beanmother-testmodel')
-}

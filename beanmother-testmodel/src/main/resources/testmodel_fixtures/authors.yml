@@ -1,0 +1,15 @@
+hemingway:
+  id: 1
+  name: Ernest Hemingway
+  birth: 1899-07-21
+  gener: MALE
+  dead: true
+  introduction: |
+    Ernest Miller Hemingway was an American novelist, short story writer, and journalist. His economical and understated style had a strong influence on 20th-century fiction, while his life of adventure and his public image influenced later generations. Wikipedia
+  works:
+    - title: A farewell to arms
+      language: en
+      publishedAt: 1929-01-01
+    - title: The sun also rises
+      language: en
+      publishedAt: 1926-01-01

@@ -23,8 +23,6 @@ public class DefaultFixturesStore implements FixturesStore {
 
     private static Logger logger = Logger.getLogger(DefaultFixturesStore.class.getName());
 
-    private ClassLoader classLoader;
-
     /**
      * Scanner to load fixture files.
      */
@@ -54,23 +52,21 @@ public class DefaultFixturesStore implements FixturesStore {
      * Create a default fixture store.
      */
     public DefaultFixturesStore() {
-        this(ClassUtils.getDefaultClassLoader());
+        this(new YamlFixtureScanner(ClassUtils.getDefaultClassLoader()), new YamlFixtureParser());
     }
 
     /**
      * Create a default fixture store.
      */
-    public DefaultFixturesStore(ClassLoader classLoader) {
-        this.classLoader = classLoader;
-        this.fixtureScanner = new YamlFixtureScanner(classLoader);
-        this.fixtureParser = new YamlFixtureParser();
-
+    public DefaultFixturesStore(FixtureScanner fixtureScanner, FixtureParser fixtureParser) {
+        this.fixtureScanner = fixtureScanner;
+        this.fixtureParser = fixtureParser;
         reset();
     }
 
     @Override
-    public Map<String, Object> get(String fixtureKey) {
-        return null;
+    public FixtureMap get(String fixtureKey) {
+        return this.fixtureMaps.get(fixtureKey);
     }
 
     @Override

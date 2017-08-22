@@ -2,6 +2,8 @@ group 'io.beanmother'
 
 dependencies {
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.18'
+    // https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
+    compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.0'
 
     testCompile project(':beanmother-testmodel')

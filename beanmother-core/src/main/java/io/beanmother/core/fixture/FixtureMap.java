@@ -24,11 +24,6 @@ public class FixtureMap extends LinkedHashMap<String, Object> {
      */
     private FixtureFormatException fixtureFormatException;
 
-    /**
-     * check for cloned
-     */
-    private boolean cloned;
-
     public FixtureMap(String fixtureName) {
         super();
         this.fixtureName = fixtureName;
@@ -66,13 +61,6 @@ public class FixtureMap extends LinkedHashMap<String, Object> {
      */
     public boolean isInvalidFormat() {
         return fixtureFormatException != null;
-    }
-
-    /**
-     * @return true if this is cloned fixtureMap
-     */
-    public boolean isCloned() {
-        return cloned;
     }
 
     /**

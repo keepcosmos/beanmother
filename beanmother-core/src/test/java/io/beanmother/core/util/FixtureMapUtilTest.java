@@ -1,7 +1,7 @@
 package io.beanmother.core.util;
 
 import io.beanmother.core.fixture.FixtureMap;
-import org.junit.Assert;
+import io.beanmother.core.fixture.FixtureObject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,10 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
- * Test for {@link FixtureMapEdgeTraversal}
+ * Test for {@link FixtureMapUtil}
  */
-public class FixtureMapEdgeTraversalTest {
+public class FixtureMapUtilTest {
 
     FixtureMap fixtureMap;
 
@@ -41,24 +44,47 @@ public class FixtureMapEdgeTraversalTest {
         allKeys.add("edge6");
         allKeys.add("list");
 
-        FixtureMapEdgeTraversal.traverse(fixtureMap, new FixtureMapEdgeTraversal.Processor() {
+        FixtureMapUtil.traverse(fixtureMap, new FixtureMapUtil.Processor() {
             @Override
             public Object visit(String key, Object data) {
                 allKeys.remove(key);
                 return data;
             }
         });
-        Assert.assertTrue(allKeys.isEmpty());
+        assertTrue(allKeys.isEmpty());
     }
 
     @Test
     public void testTraversalAndUpdateValue() {
-        FixtureMapEdgeTraversal.traverse(fixtureMap, new FixtureMapEdgeTraversal.Processor() {
+        FixtureMapUtil.traverse(fixtureMap, new FixtureMapUtil.Processor() {
             @Override
             public Object visit(String key, Object data) {
                 return (Integer) data + 1;
             }
         });
-        Assert.assertEquals("{edge1=2, edge2=3, list=[4, 5, {edge5=6, edge6=7}]}", fixtureMap.toString());
+        assertEquals("{edge1=2, edge2=3, list=[4, 5, {edge5=6, edge6=7}]}", fixtureMap.toString());
     }
+
+    @Test
+    public void testMapToFixtureMap() {
+        Map<String, Object> map = new HashMap();
+        map.put("edge1", 1);
+        map.put("edge2", 2);
+        List<Object> arr = new ArrayList<>();
+        arr.add(3);
+        arr.add(4);
+        Map<String, Object> map2= new HashMap<>();
+        map2.put("edge5", 5);
+        map2.put("edge6", 6);
+        arr.add(map);
+        map.put("list", arr);
+
+        FixtureMap fixtureMap = FixtureMapUtil.convertMapToFixtureMap(map);
+
+        assertTrue(fixtureMap.get("edge1") instanceof FixtureObject);
+        assertTrue(fixtureMap.get("edge2") instanceof FixtureObject);
+
+    }
+
+
 }

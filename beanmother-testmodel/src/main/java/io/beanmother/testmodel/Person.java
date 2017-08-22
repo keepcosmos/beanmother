@@ -1,6 +1,6 @@
 package io.beanmother.testmodel;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Person {
 
@@ -8,10 +8,23 @@ public class Person {
         MALE, FEMALE, BISEXUAL, ANY;
     }
 
+    private int id;
+
     private String name;
-    private LocalDate birth;
+
+    private Date birth;
+
     private Gender gender;
+
     private boolean dead;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -21,11 +34,11 @@ public class Person {
         this.name = name;
     }
 
-    public LocalDate getBirth() {
+    public Date getBirth() {
         return birth;
     }
 
-    public void setBirth(LocalDate birth) {
+    public void setBirth(Date birth) {
         this.birth = birth;
     }
 
