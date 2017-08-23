@@ -1,8 +1,5 @@
 package io.beanmother.core.mapper;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.beanmother.core.fixture.FixtureMap;
-import io.beanmother.testmodel.Person;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,17 +20,17 @@ public class DefaultFixtureMapperTest {
 
     @Test(expected = NoSuchMethodException.class)
     public void testExceptionWithoutNoArgumentConstructorClass() throws NoSuchMethodException {
-        fixtureMapper.map(new FixtureMap("test"), ArgumentConstructorClass.class);
+//        fixtureMapper.map(new FixtureMap("test"), ArgumentConstructorClass.class);
     }
 
     @Test
     public void testMap() throws InvocationTargetException, IllegalAccessException {
-        FixtureMap fixtureMap = new FixtureMap("test");
-        fixtureMap.put("id", 1);
-        fixtureMap.put("name", "Jessy");
-
-        ObjectMapper mapper = new ObjectMapper();
-        Person person = mapper.convertValue(fixtureMap, Person.class);
+//        FixtureMap fixtureMap = new FixtureMap("test");
+//        fixtureMap.put("id", 1);
+//        fixtureMap.put("name", "Jessy");
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        Person person = mapper.convertValue(fixtureMap, Person.class);
 
 //        Person person = fixtureMapper.map(fixtureMap, Person.class);
 //

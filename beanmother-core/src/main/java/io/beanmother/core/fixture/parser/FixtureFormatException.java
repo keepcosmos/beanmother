@@ -27,4 +27,11 @@ public class FixtureFormatException extends RuntimeException {
         super("Error creating fixture with name '" + fixtureName + "'", throwable);
     }
 
+    /**
+     * Create a new FixtureFormatException by throwable.
+     */
+    public FixtureFormatException(Throwable throwable) {
+        super(throwable);
+    }
+
 }

@@ -29,9 +29,9 @@ public class FixtureMapUtil {
      * Traverse each edges of fixtureMap and run {@link Processor} when it meets edge.
      */
     public static void traverse(FixtureMap fixtureMap, Processor processor) {
-        for (Map.Entry<String, Object> entry : fixtureMap.entrySet()) {
-            entry.setValue(_traverse(entry.getKey(), entry.getValue(), processor));
-        }
+//        for (Map.Entry<String, Object> entry : fixtureMap.entrySet()) {
+//            entry.setValue(_traverse(entry.getKey(), entry.getValue(), processor));
+//        }
     }
 
     /**

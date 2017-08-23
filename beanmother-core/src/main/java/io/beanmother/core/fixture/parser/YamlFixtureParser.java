@@ -3,7 +3,6 @@ package io.beanmother.core.fixture.parser;
 import io.beanmother.core.fixture.FixtureMap;
 import org.yaml.snakeyaml.Yaml;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,19 +15,20 @@ public class YamlFixtureParser implements FixtureParser {
 
     @Override
     public Map<String, FixtureMap> parse(String fixture) {
-        Map<String, Object> fixtures = buildYaml().loadAs(fixture, Map.class);
-        Map<String, FixtureMap> fixtureMaps = new HashMap<>();
+//        Map<String, Object> fixtures = buildYaml().loadAs(fixture, Map.class);
+//        Map<String, FixtureMap> fixtureMaps = new HashMap<>();
+//
+//        for (String key : fixtures.keySet()) {
+//            if (!(fixtures.get(key).getClass().isInstance(Map.class))) {
+//                fixtureMaps.put(key, new FixtureMap(key, (Map) fixtures.get(key)));
+//            } else {
+//                FixtureFormatException e = new FixtureFormatException(key, " the root of fixture data should be key - value");
+//                fixtureMaps.put(key, new FixtureMap(key, e));
+//            }
+//        }
 
-        for (String key : fixtures.keySet()) {
-            if (!(fixtures.get(key).getClass().isInstance(Map.class))) {
-                fixtureMaps.put(key, new FixtureMap(key, (Map) fixtures.get(key)));
-            } else {
-                FixtureFormatException e = new FixtureFormatException(key, " the root of fixture data should be key - value");
-                fixtureMaps.put(key, new FixtureMap(key, e));
-            }
-        }
-
-        return fixtureMaps;
+//        return fixtureMaps;
+        return null;
     }
 
     /**

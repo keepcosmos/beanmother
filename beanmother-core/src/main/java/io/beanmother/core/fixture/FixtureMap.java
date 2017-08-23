@@ -2,65 +2,28 @@ package io.beanmother.core.fixture;
 
 import io.beanmother.core.fixture.parser.FixtureFormatException;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
- * FixtureMap Structure.
- * It store a fixture data with name.
+ * FixtureMap decorates a map from fixture
  *
- * Generally, fixtureMap is a raw Map data just read from a fixture file.
+ * The source of FixtureMap generally {@link LinkedHashMap<String, Object>} that is parsed by {@link io.beanmother.core.fixture.parser.FixtureParser}.
+ * It can be the root fixture template.
  */
-public class FixtureMap extends LinkedHashMap<String, Object> {
+public class FixtureMap extends LinkedHashMap<String, FixtureTemplate> implements FixtureTemplate {
+
+    private FixtureMetadata metadata;
 
     /**
-     * The name of fixture.
+     * Create FixtureMap
      */
-    private String fixtureName;
-
-    /**
-     * For lazy thrown FixtureFormatException when it call data.
-     */
-    private FixtureFormatException fixtureFormatException;
-
-    public FixtureMap(String fixtureName) {
+    public FixtureMap() {
         super();
-        this.fixtureName = fixtureName;
-    }
-
-    public FixtureMap(String fixtureName, Map data) {
-        super(data);
-        this.fixtureName = fixtureName;
-    }
-
-    public FixtureMap(String fixtureName, FixtureFormatException e) {
-        super();
-        this.fixtureName = fixtureName;
-        this.fixtureFormatException = e;
-    }
-
-    /**
-     * Get fixture name.
-     */
-    public String getFixtureName() {
-        return fixtureName;
-    }
-
-    /**
-     * Get fixture format exception.
-     * @return
-     */
-    public FixtureFormatException getFixtureFormatException() {
-        return fixtureFormatException;
-    }
-
-    /**
-     * Check stored fixture data is valid or not.
-     * @return true if valid.
-     */
-    public boolean isInvalidFormat() {
-        return fixtureFormatException != null;
+        this.metadata = new FixtureMetadata(this);
     }
 
     /**
@@ -85,5 +48,40 @@ public class FixtureMap extends LinkedHashMap<String, Object> {
         } catch (Exception e) {
             throw new FixtureFormatException(getFixtureName(), e);
         }
+    }
+
+    @Override
+    public boolean isRoot() {
+        return metadata.isRoot();
+    }
+
+    @Override
+    public void setRoot(boolean root) {
+        metadata.setRoot(root);
+    }
+
+    @Override
+    public String getFixtureName() {
+        return metadata.getFixtureName();
+    }
+
+    @Override
+    public void setFixtureName(String fixtureName) {
+        metadata.setFixtureName(fixtureName);
+    }
+
+    @Override
+    public FixtureTemplate getParent() {
+        return metadata.getParent();
+    }
+
+    @Override
+    public void setParent(FixtureTemplate parent) {
+        metadata.setParent(parent);
+    }
+
+    @Override
+    public boolean hasParent() {
+        return metadata.hasParent();
     }
 }

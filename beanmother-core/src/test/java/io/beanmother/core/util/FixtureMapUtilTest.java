@@ -1,7 +1,7 @@
 package io.beanmother.core.util;
 
 import io.beanmother.core.fixture.FixtureMap;
-import io.beanmother.core.fixture.FixtureObject;
+import io.beanmother.core.fixture.FixtureValue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,17 +22,17 @@ public class FixtureMapUtilTest {
 
     @Before
     public void setup() {
-        fixtureMap = new FixtureMap("test");
-        fixtureMap.put("edge1", 1);
-        fixtureMap.put("edge2", 2);
-        List<Object> arr = new ArrayList<>();
-        arr.add(3);
-        arr.add(4);
-        Map<String, Object> map = new HashMap<>();
-        map.put("edge5", 5);
-        map.put("edge6", 6);
-        arr.add(map);
-        fixtureMap.put("list", arr);
+//        fixtureMap = new FixtureMap("test");
+//        fixtureMap.put("edge1", 1);
+//        fixtureMap.put("edge2", 2);
+//        List<Object> arr = new ArrayList<>();
+//        arr.add(3);
+//        arr.add(4);
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("edge5", 5);
+//        map.put("edge6", 6);
+//        arr.add(map);
+//        fixtureMap.put("list", arr);
     }
 
     @Test
@@ -81,8 +81,8 @@ public class FixtureMapUtilTest {
 
         FixtureMap fixtureMap = FixtureMapUtil.convertMapToFixtureMap(map);
 
-        assertTrue(fixtureMap.get("edge1") instanceof FixtureObject);
-        assertTrue(fixtureMap.get("edge2") instanceof FixtureObject);
+        assertTrue(fixtureMap.get("edge1") instanceof FixtureValue);
+        assertTrue(fixtureMap.get("edge2") instanceof FixtureValue);
 
     }
 
