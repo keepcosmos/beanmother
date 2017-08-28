@@ -1,5 +1,6 @@
 package io.beanmother.core.mapper;
 
+import io.beanmother.core.fixture.FixtureTemplate;
 import io.beanmother.core.mapper.converter.ConverterFactory;
 
 public class ObjectMappingResolver implements PropertyMapper {
@@ -44,17 +45,8 @@ public class ObjectMappingResolver implements PropertyMapper {
         this.fieldMapper = new FieldMapper(converterFactory);
     }
 
-//    @Override
-//    public Object map(Class targetType, Map<String, Object> value) {
-//        Object target = null;
-//        for (Map.Entry<String, Object> entry : value.entrySet()) {
-//            map(target, entry.getKey(), entry.getValue());
-//        }
-//        return target;
-//    }
-
     @Override
-    public void map(Object target, String key, Object value) {
+    public void map(Object target, String key, FixtureTemplate value) {
         if (isSetterMapping()) {
             setterMapper.map(target, key, value);
         } else if (isFieldMapping()) {

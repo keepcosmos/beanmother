@@ -1,9 +1,11 @@
 package io.beanmother.core.fixture;
 
+import java.io.Serializable;
+
 /**
  * The root interface for {@link FixtureValue}, {@link FixtureList} and {@link FixtureMap}
  */
-public interface FixtureTemplate {
+public interface FixtureTemplate extends Serializable {
 
     boolean isRoot();
 

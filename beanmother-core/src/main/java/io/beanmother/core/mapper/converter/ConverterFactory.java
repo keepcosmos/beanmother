@@ -1,42 +1,42 @@
 package io.beanmother.core.mapper.converter;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
+import com.google.common.reflect.TypeToken;
+import io.beanmother.core.mapper.converter.std.SameClassConverter;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ConverterFactory {
+    private static Converter sameClassConverter = new SameClassConverter();
 
-    private Map<String, Converter> converters = new HashMap<>();
+    private List<Converter> converters = new ArrayList<>();
 
-    public ConverterFactory() {
-        register(new NumberToIntegerConverter());
+    public ConverterFactory() { }
+
+    public ConverterFactory(Converter... converters) {
+        for (Converter converter : converters) {
+            this.converters.add(converter);
+            Collections.sort(this.converters);
+        }
     }
 
     public void register(Converter converter) {
-        converters.put(buildKey(converter), converter);
+        converters.add(converter);
+        Collections.sort(this.converters);
     }
 
-    public Converter get(Class<?> sourceType, Class<?> destType) {
-        return converters.get(buildKey(sourceType, destType));
-    }
-
-    private String buildKey(Class<?> sourceType, Class<?> destType) {
-        return sourceType.toString() + "-" + destType.toString();
-    }
-
-    private String buildKey(Converter converter) {
-        Type[] types = converter.getClass().getGenericInterfaces();
-        for (Type type : types) {
-            if (type instanceof ParameterizedType) {
-                ParameterizedType ptype = (ParameterizedType) type;
-                if(ptype.getRawType().equals(Converter.class)) {
-                    Type[] actual = ptype.getActualTypeArguments();
-                    return buildKey((Class<?>) actual[0], (Class<?>) actual[1]);
-                }
+    public Converter get(Object source, TypeToken<?> targetTokenType) {
+        for (Converter converter : converters) {
+            if (converter.canHandle(source, targetTokenType)) {
+                return converter;
             }
         }
-        throw new IllegalArgumentException(converter.toString() + " is not suitable type");
-    }
 
+        if (sameClassConverter.canHandle(source, targetTokenType)) {
+            return sameClassConverter;
+        }
+
+        return null;
+    }
 }

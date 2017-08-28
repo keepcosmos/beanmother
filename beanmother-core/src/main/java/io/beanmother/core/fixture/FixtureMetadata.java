@@ -1,6 +1,8 @@
 package io.beanmother.core.fixture;
 
-public class FixtureMetadata {
+import java.io.Serializable;
+
+public class FixtureMetadata implements Serializable {
 
     private FixtureTemplate owner;
 

@@ -1,4 +1,4 @@
-package io.beanmother.core.mapper;
+package io.beanmother.core.mapper.preprocessor;
 
 import io.beanmother.core.fixture.FixtureMap;
 

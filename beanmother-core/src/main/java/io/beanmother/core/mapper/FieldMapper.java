@@ -1,5 +1,6 @@
 package io.beanmother.core.mapper;
 
+import io.beanmother.core.fixture.FixtureTemplate;
 import io.beanmother.core.mapper.converter.ConverterFactory;
 
 public class FieldMapper extends AbstractPropertyMapper {
@@ -9,7 +10,7 @@ public class FieldMapper extends AbstractPropertyMapper {
     }
 
     @Override
-    public void map(Object target, String key, Object value) {
+    public void map(Object target, String key, FixtureTemplate value) {
 
     }
 }

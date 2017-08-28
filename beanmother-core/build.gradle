@@ -2,9 +2,9 @@ group 'io.beanmother'
 
 dependencies {
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.18'
-    // https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
-    compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.0'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'com.google.guava', name: 'guava', version: '20.0'
+
 
     testCompile project(':beanmother-testmodel')
 }

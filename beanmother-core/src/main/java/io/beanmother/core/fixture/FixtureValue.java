@@ -1,5 +1,7 @@
 package io.beanmother.core.fixture;
 
+import com.google.common.reflect.TypeToken;
+
 /**
  * FixtureValue decorates a value from a fixture
  *
@@ -12,7 +14,7 @@ public class FixtureValue extends Object implements FixtureTemplate {
      * Origin value
      */
     private Object value;
-
+    private TypeToken typeToken;
     private FixtureMetadata metadata;
 
     /**
@@ -21,6 +23,7 @@ public class FixtureValue extends Object implements FixtureTemplate {
      */
     public FixtureValue(Object value) {
         this.value = value;
+        this.typeToken = TypeToken.of(value.getClass());
         this.metadata = new FixtureMetadata(this);
     }
 
@@ -32,18 +35,12 @@ public class FixtureValue extends Object implements FixtureTemplate {
         return value;
     }
 
-    /**
-     * @return true if the value is Number
-     */
-    public boolean isNumber() {
-        return value instanceof Number;
+    public boolean isNull() {
+        return value == null;
     }
 
-    /**
-     * @return true if the value is String
-     */
-    public boolean isString() {
-        return value instanceof String;
+    public TypeToken getTypeToken() {
+        return typeToken;
     }
 
     @Override
@@ -79,5 +76,11 @@ public class FixtureValue extends Object implements FixtureTemplate {
     @Override
     public boolean hasParent() {
         return metadata.hasParent();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof FixtureValue)) return false;
+        return ((FixtureValue) obj).getValue().equals(this.getValue());
     }
 }

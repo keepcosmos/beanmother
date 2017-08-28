@@ -2,7 +2,6 @@ package io.beanmother.core.mapper;
 
 import io.beanmother.core.fixture.FixtureMap;
 import io.beanmother.core.mapper.converter.Converter;
-import io.beanmother.core.mapper.converter.ConverterFactory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -20,15 +19,7 @@ public class DefaultFixtureMapper implements FixtureMapper {
         } catch (Exception e) {
             throw new FixtureMappingException(e);
         }
-        map(fixtureMap, targetObject);
         return targetObject;
-    }
-
-    @Override
-    public <T> void map(FixtureMap fixtureMap, T targetObject) {
-        for (String key : fixtureMap.keySet()) {
-            assign(targetObject, key, fixtureMap.get(key));
-        }
     }
 
     private void assign(Object targetObject, String key, Object value) {
@@ -56,7 +47,7 @@ public class DefaultFixtureMapper implements FixtureMapper {
         Class targetType = targetTypes[0];
 
         if (targetType.isPrimitive()) {
-            targetType = getPrimitiveWrapper(targetType);
+//            targetType = getPrimitiveWrapper(targetType);
         }
 
         Class sourceType = value.getClass();
@@ -65,10 +56,10 @@ public class DefaultFixtureMapper implements FixtureMapper {
             sourceType = Number.class;
         }
 
-        Converter converter = new ConverterFactory().get(sourceType, targetType);
+        Converter converter = null;
         try {
             if (converter != null) {
-                targetMethod.invoke(targetObject, converter.convert(value));
+//                targetMethod.invoke(targetObject, converter.convert(value));
             } else if (sourceType.equals(targetType)) {
                 targetMethod.invoke(targetObject, value);
             } else {
@@ -78,28 +69,6 @@ public class DefaultFixtureMapper implements FixtureMapper {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
-        }
-    }
-
-    private Class<?> getPrimitiveWrapper(final Class<?> type) {
-        if (boolean.class.equals(type)) {
-            return Boolean.class;
-        } else if (float.class.equals(type)) {
-            return Float.class;
-        } else if (long.class.equals(type)) {
-            return Long.class;
-        } else if (int.class.equals(type)) {
-            return Integer.class;
-        } else if (short.class.equals(type)) {
-            return Short.class;
-        } else if (byte.class.equals(type)) {
-            return Byte.class;
-        } else if (double.class.equals(type)) {
-            return Double.class;
-        } else if (char.class.equals(type)) {
-            return Character.class;
-        } else {
-            throw new IllegalArgumentException(type.getName() + " is not supported primitive type");
         }
     }
 }

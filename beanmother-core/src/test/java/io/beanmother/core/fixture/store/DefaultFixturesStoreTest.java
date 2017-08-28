@@ -1,14 +1,13 @@
 package io.beanmother.core.fixture.store;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.beanmother.core.util.Location;
-import io.beanmother.testmodel.Person;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -44,18 +43,16 @@ public class DefaultFixturesStoreTest {
     @Test
     public void testAddMultipleLocations() throws IOException {
         fixtureStore.addLocation(new Location("fixtures/animals/pets"));
-        Set<String> keys = fixtureStore.getFixtureMap().keySet();
-        assertTrue(keys.contains("davi"));
-        assertTrue(keys.contains("rooney"));
-        assertTrue(keys.contains("ruru"));
+        assertTrue(fixtureStore.exits("davi"));
+        assertTrue(fixtureStore.exits("rooney"));
+        assertTrue(fixtureStore.exits("ruru"));
 
-        assertFalse(keys.contains("tiger"));  // tiger is not in pets/
+        assertFalse(fixtureStore.exits("tiger"));  // tiger is not in pets/
 
         // add location and refresh
         fixtureStore.addLocation(new Location("fixtures/animals"));
-        keys = fixtureStore.getFixtureMap().keySet();
-        assertTrue(keys.contains("davi"));
-        assertTrue(keys.contains("tiger"));
+        assertTrue(fixtureStore.exits("davi"));
+        assertTrue(fixtureStore.exits("tiger"));
     }
 
     @Test
@@ -65,16 +62,6 @@ public class DefaultFixturesStoreTest {
         fixtureStore.reset();
         assertTrue(fixtureStore.getFixtureLocations().isEmpty());
         assertTrue(fixtureStore.getFixtureFiles().isEmpty());
-        assertTrue(fixtureStore.getFixtureMap().isEmpty());
+        assertTrue(fixtureStore.getFixtureMaps().isEmpty());
     }
-
-    @Test
-    public void test() {
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> data = new HashMap<>();
-        data.put("name", "JJ");
-        Person person = mapper.convertValue(data, Person.class);
-        System.out.println("");
-    }
-
 }

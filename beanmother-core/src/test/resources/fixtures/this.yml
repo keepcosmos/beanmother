@@ -2,6 +2,8 @@ beanmother:
   id: 1
   title: beanmother
   desciption: The test library about ObjectMother pattern
-  author: Jaehyun Shin
+  authors:
+    - Jaehyun Shin
+    - Unknown
   createdAt: 2017-08-13
   url: https://github.com/keepcosmos/beanmother

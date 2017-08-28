@@ -9,8 +9,8 @@ import io.beanmother.core.fixture.store.DefaultFixturesStore;
 import io.beanmother.core.fixture.store.FixturesStore;
 import io.beanmother.core.mapper.DefaultFixtureMapper;
 import io.beanmother.core.mapper.FixtureMapper;
-import io.beanmother.core.mapper.FixtureMappingPostProcessor;
-import io.beanmother.core.mapper.FixtureMappingPreProcessor;
+import io.beanmother.core.mapper.postprocessor.FixtureMappingPostProcessor;
+import io.beanmother.core.mapper.preprocessor.FixtureMappingPreProcessor;
 import io.beanmother.core.util.ClassUtils;
 import io.beanmother.core.util.Location;
 
@@ -52,6 +52,5 @@ public class BeanMother {
 
     public <T> void bear(String fixture, T targetObj) {
         FixtureMap fixtureMap = fixturesStore.get(fixture);
-        fixtureMapper.map(fixtureMap, targetObj);
     }
 }

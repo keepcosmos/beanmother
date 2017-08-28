@@ -12,6 +12,7 @@ import java.io.IOException;
  */
 public interface FixturesStore {
     FixtureMap get(String fixtureKey);
+    boolean exits(String fixtureKey);
     void addLocation(Location location) throws IOException;
     void reset();
 }

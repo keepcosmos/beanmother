@@ -1,4 +1,4 @@
-package io.beanmother.core.mapper;
+package io.beanmother.core.mapper.postprocessor;
 
 public interface FixtureMappingPostProcessor {
 }

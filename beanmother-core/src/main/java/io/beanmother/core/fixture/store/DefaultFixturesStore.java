@@ -44,7 +44,7 @@ public class DefaultFixturesStore implements FixturesStore {
     private Set<File> fixtureFiles;
 
     /**
-     * Fixtures that are parsed.
+     * Fixtures
      */
     private Map<String, FixtureMap> fixtureMaps;
 
@@ -67,6 +67,11 @@ public class DefaultFixturesStore implements FixturesStore {
     @Override
     public FixtureMap get(String fixtureKey) {
         return this.fixtureMaps.get(fixtureKey);
+    }
+
+    @Override
+    public boolean exits(String fixtureKey) {
+        return this.fixtureMaps.containsKey(fixtureKey);
     }
 
     @Override
@@ -102,15 +107,27 @@ public class DefaultFixturesStore implements FixturesStore {
         fixtureMaps = new HashMap<>();
     }
 
+    /**
+     * Get registered fixture locations
+     * @return
+     */
     public Set<Location> getFixtureLocations() {
         return fixtureLocations;
     }
 
+    /**
+     * Get registered fixture files
+     * @return
+     */
     public Set<File> getFixtureFiles() {
         return fixtureFiles;
     }
 
-    public Map<String, FixtureMap> getFixtureMap() {
+    /**
+     * Get fixtureMap
+     * @return
+     */
+    public Map<String, FixtureMap> getFixtureMaps() {
         return fixtureMaps;
     }
 }
