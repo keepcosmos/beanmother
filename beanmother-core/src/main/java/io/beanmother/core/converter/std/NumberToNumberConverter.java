@@ -1,10 +1,11 @@
-package io.beanmother.core.mapper.converter.std;
+package io.beanmother.core.converter.std;
 
 import com.google.common.reflect.TypeToken;
-import io.beanmother.core.mapper.converter.AbstractConverter;
+import io.beanmother.core.converter.AbstractConverter;
 import io.beanmother.core.util.NumberUtils;
 
 public class NumberToNumberConverter extends AbstractConverter {
+    
     @Override
     public Object convert(Object source, TypeToken<?> typeToken) {
         return NumberUtils.convertNumberToTargetClass((Number) source, (Class) typeToken.getType());

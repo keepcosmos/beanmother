@@ -1,4 +1,4 @@
-package io.beanmother.core.mapper.converter;
+package io.beanmother.core.converter;
 
 import com.google.common.reflect.TypeToken;
 
@@ -17,10 +17,10 @@ public abstract class AbstractGenericConverter<S, D> extends AbstractConverter {
 
     @Override
     public Object convert(Object source, TypeToken<?> typeToken) {
-        return doConvert((S) source);
+        return convert((S) source);
     }
 
-    protected abstract D doConvert(S source);
+    protected abstract D convert(S source);
 
     @Override
     public boolean canHandle(Object source, TypeToken<?> typeToken) {

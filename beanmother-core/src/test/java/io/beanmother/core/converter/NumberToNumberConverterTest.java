@@ -1,7 +1,7 @@
-package io.beanmother.core.mapper.converter;
+package io.beanmother.core.converter;
 
 import com.google.common.reflect.TypeToken;
-import io.beanmother.core.mapper.converter.std.NumberToNumberConverter;
+import io.beanmother.core.converter.std.NumberToNumberConverter;
 import org.junit.Test;
 
 import java.math.BigDecimal;

@@ -1,8 +1,8 @@
-package io.beanmother.core.mapper.converter;
+package io.beanmother.core.converter;
 
-import io.beanmother.core.mapper.converter.std.DateToSQLDateConverter;
-import io.beanmother.core.mapper.converter.std.NumberToNumberConverter;
-import io.beanmother.core.mapper.converter.std.SameClassConverter;
+import io.beanmother.core.converter.std.DateToSQLDateConverter;
+import io.beanmother.core.converter.std.NumberToNumberConverter;
+import io.beanmother.core.converter.std.SameClassConverter;
 
 public class StandardConverterFactory extends ConverterFactory {
 

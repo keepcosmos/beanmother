@@ -1,14 +1,15 @@
 package io.beanmother.core.mapper;
 
+import io.beanmother.core.fixture.FixtureList;
 import io.beanmother.core.fixture.FixtureMap;
+import io.beanmother.core.fixture.FixtureTemplateConverter;
 import io.beanmother.core.fixture.FixtureValue;
-import io.beanmother.core.mapper.converter.StandardConverterFactory;
+import io.beanmother.core.converter.StandardConverterFactory;
+import io.beanmother.core.mapper.setter.SetterMapper;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -32,7 +33,7 @@ public class SetterMapperTest extends MapperTest {
     }
 
     @Test
-    public void testSimpleObject() {
+    public void testSimpleObjectMapping() {
         mapper.map(obj, "integer", new FixtureValue(10));
         assertEquals(obj.getInteger(), new Integer(10));
 
@@ -48,12 +49,103 @@ public class SetterMapperTest extends MapperTest {
     }
 
     @Test
-    public void testCastingSimpleJavaObject() {
+    public void testCastingAndMapping() {
         mapper.map(obj, "number", new FixtureValue(10));
         assertEquals(obj.getNumber(), new Integer(10));
 
         mapper.map(obj, "ploat", new FixtureValue(10));
         assertEquals(obj.getPloat(), new Float(10));
+    }
+
+    @Test
+    public void testListMapping() {
+        ListSetterObject listSetterObject = new ListSetterObject();
+        List<String> strs = new ArrayList<>();
+        strs.add("one");
+        strs.add("two");
+        FixtureList fixture = FixtureTemplateConverter.convert(strs, null, null);
+
+        mapper.map(listSetterObject, "strList", fixture);
+
+        assertEquals(listSetterObject.getStrList().size(), 2);
+        assertEquals(listSetterObject.getStrList().get(0), "one");
+        assertEquals(listSetterObject.getStrList().get(1), "two");
+    }
+
+    @Test
+    public void testArrayMapping() {
+        ListSetterObject listSetterObject = new ListSetterObject();
+        List<String> strs = new ArrayList<>();
+        strs.add("one");
+        strs.add("two");
+        FixtureList fixture = FixtureTemplateConverter.convert(strs, null, null);
+        mapper.map(listSetterObject, "strArray", fixture);
+
+        assertEquals(listSetterObject.getStrArray().length, 2);
+        assertEquals(listSetterObject.getStrArray()[0], "one");
+        assertEquals(listSetterObject.getStrArray()[1], "two");
+    }
+
+    @Test
+    public void testNonGenericListMapping() {
+        ListSetterObject listSetterObject = new ListSetterObject();
+        List<Integer> integers = new ArrayList<>();
+        integers.add(1);
+        integers.add(2);
+        FixtureList fixture = FixtureTemplateConverter.convert(integers, null, null);
+        mapper.map(listSetterObject, "objList", fixture);
+
+        assertEquals(listSetterObject.getObjList().size(), 2);
+        assertEquals(listSetterObject.getObjList().get(0), 1);
+        assertEquals(listSetterObject.getObjList().get(1), 2);
+    }
+
+    public static class ListSetterObject {
+        private List<String> strList;
+        private LinkedList<Integer> integerLinkedList;
+        private List objList;
+        private String[] strArray;
+        private int[] intArray;
+
+        public List<String> getStrList() {
+            return strList;
+        }
+
+        public void setStrList(List<String> strList) {
+            this.strList = strList;
+        }
+
+        public LinkedList<Integer> getIntegerLinkedList() {
+            return integerLinkedList;
+        }
+
+        public void setIntegerLinkedList(LinkedList<Integer> integerLinkedList) {
+            this.integerLinkedList = integerLinkedList;
+        }
+
+        public List getObjList() {
+            return objList;
+        }
+
+        public void setObjList(List objList) {
+            this.objList = objList;
+        }
+
+        public String[] getStrArray() {
+            return strArray;
+        }
+
+        public void setStrArray(String[] strArray) {
+            this.strArray = strArray;
+        }
+
+        public int[] getIntArray() {
+            return intArray;
+        }
+
+        public void setIntArray(int[] intArray) {
+            this.intArray = intArray;
+        }
     }
 
     public static class SetterObject {

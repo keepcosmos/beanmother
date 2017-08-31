@@ -1,7 +1,7 @@
-package io.beanmother.core.mapper.converter.std;
+package io.beanmother.core.converter.std;
 
 import com.google.common.reflect.TypeToken;
-import io.beanmother.core.mapper.converter.AbstractConverter;
+import io.beanmother.core.converter.AbstractConverter;
 
 public class SameClassConverter extends AbstractConverter {
 
@@ -19,6 +19,7 @@ public class SameClassConverter extends AbstractConverter {
 
     @Override
     public boolean canHandle(Object source, TypeToken<?> targetTypeToken) {
-        return targetTypeToken.equals(TypeToken.of(source.getClass()));
+        return targetTypeToken.equals(TypeToken.of(source.getClass())) ||
+                targetTypeToken.getRawType().isInstance(source);
     }
 }

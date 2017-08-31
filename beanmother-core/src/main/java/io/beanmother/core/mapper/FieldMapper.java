@@ -1,7 +1,7 @@
 package io.beanmother.core.mapper;
 
 import io.beanmother.core.fixture.FixtureTemplate;
-import io.beanmother.core.mapper.converter.ConverterFactory;
+import io.beanmother.core.converter.ConverterFactory;
 
 public class FieldMapper extends AbstractPropertyMapper {
 

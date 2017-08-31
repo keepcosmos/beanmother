@@ -44,7 +44,7 @@ public class FixtureTemplateConverter {
      * @param parent The parent FixtureTemplate who hold the source.
      * @return fixture list
      */
-    public static FixtureList convert(List<Object> source, String fixtureName, FixtureTemplate parent) {
+    public static FixtureList convert(List<? extends Object> source, String fixtureName, FixtureTemplate parent) {
         FixtureList fixtureList = new FixtureList();
         fixtureList.setFixtureName(fixtureName);
         fixtureList.setParent(parent);

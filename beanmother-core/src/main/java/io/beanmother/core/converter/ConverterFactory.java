@@ -1,7 +1,7 @@
-package io.beanmother.core.mapper.converter;
+package io.beanmother.core.converter;
 
 import com.google.common.reflect.TypeToken;
-import io.beanmother.core.mapper.converter.std.SameClassConverter;
+import io.beanmother.core.converter.std.SameClassConverter;
 
 import java.util.ArrayList;
 import java.util.Collections;

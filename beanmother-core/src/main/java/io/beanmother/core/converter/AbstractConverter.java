@@ -1,4 +1,4 @@
-package io.beanmother.core.mapper.converter;
+package io.beanmother.core.converter;
 
 public abstract class AbstractConverter implements Converter {
     private int priority;

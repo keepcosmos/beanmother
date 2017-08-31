@@ -1,6 +1,6 @@
 package io.beanmother.core.mapper;
 
-import io.beanmother.core.mapper.converter.ConverterFactory;
+import io.beanmother.core.converter.ConverterFactory;
 
 public abstract class AbstractPropertyMapper implements PropertyMapper {
     private ConverterFactory converterFactory;
