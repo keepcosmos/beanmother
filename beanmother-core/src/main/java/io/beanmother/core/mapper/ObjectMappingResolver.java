@@ -2,7 +2,7 @@ package io.beanmother.core.mapper;
 
 import io.beanmother.core.fixture.FixtureTemplate;
 import io.beanmother.core.converter.ConverterFactory;
-import io.beanmother.core.mapper.setter.SetterMapper;
+import io.beanmother.core.mapper.setter.SetterMapperMediator;
 
 public class ObjectMappingResolver implements PropertyMapper {
 
@@ -21,7 +21,7 @@ public class ObjectMappingResolver implements PropertyMapper {
 
     private ConverterFactory converterFactory;
 
-    private SetterMapper setterMapper;
+    private SetterMapperMediator setterMapperMediator;
 
     private FieldMapper fieldMapper;
 
@@ -42,19 +42,19 @@ public class ObjectMappingResolver implements PropertyMapper {
     public ObjectMappingResolver(MappingType mappingType, ConverterFactory converterFactory) {
         this.mappingType = mappingType;
         this.converterFactory = converterFactory;
-        this.setterMapper = new SetterMapper(converterFactory);
+        this.setterMapperMediator = new SetterMapperMediator(converterFactory);
         this.fieldMapper = new FieldMapper(converterFactory);
     }
 
     @Override
     public void map(Object target, String key, FixtureTemplate value) {
         if (isSetterMapping()) {
-            setterMapper.map(target, key, value);
+//            setterMapperMediator.map(target, key, value);
         } else if (isFieldMapping()) {
             fieldMapper.map(target, key, value);
         } else if (isSetterAndFieldMapping()) {
             try {
-                setterMapper.map(target, key, value);
+//                setterMapperMediator.map(target, key, value);
             } catch (FixtureMappingException e) {
                 fieldMapper.map(target, key, value);
             }
