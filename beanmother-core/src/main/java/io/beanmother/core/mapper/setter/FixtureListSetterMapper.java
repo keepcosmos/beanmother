@@ -24,17 +24,17 @@ public class FixtureListSetterMapper extends AbstractFixtureSetterMapper<Fixture
         List<Method> candidates = findSetterCandidates(target, key);
         for (Method candidate :candidates) {
             try {
-                ImmutableList<Parameter> params = Invokable.from(candidate).getParameters();
-                /**
-                 * TODO: Should I suppose to support only single parameter method?
-                 */
-                if (params.size() != 1) continue;
+                ImmutableList<Parameter> paramTypes = Invokable.from(candidate).getParameters();
+                if (paramTypes.size() != 1) continue;
 
-                TypeToken<?> paramType = params.get(0).getType();
+                TypeToken<?> paramType = paramTypes.get(0).getType();
                 Object candidateParam = convert(fixtureList, paramType);
+
                 if (candidateParam != null) {
                     candidate.invoke(target, candidateParam);
                     return;
+                } else {
+                    continue;
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

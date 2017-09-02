@@ -32,14 +32,14 @@ public class FixtureListSetterMapperTest {
 
         mapper.map(target, "strList", fixture);
 
-        assertEquals(target.getStrList().size(), 2);
-        assertEquals(target.getStrList().get(0), "one");
-        assertEquals(target.getStrList().get(1), "two");
+        assertEquals(2, target.getStrList().size());
+        assertEquals("one", target.getStrList().get(0));
+        assertEquals("two", target.getStrList().get(1));
 
         mapper.map(target, "strLinkedList", fixture);
-        assertEquals(target.getStrLinkedList().size(), 2);
-        assertEquals(target.getStrLinkedList().get(0), "one");
-        assertEquals(target.getStrLinkedList().get(1), "two");
+        assertEquals(2, target.getStrLinkedList().size());
+        assertEquals("one", target.getStrLinkedList().get(0));
+        assertEquals("two", target.getStrLinkedList().get(1));
     }
 
     @Test
@@ -51,9 +51,9 @@ public class FixtureListSetterMapperTest {
         FixtureList fixture = FixtureTemplateConverter.convert(integers, null, null);
         mapper.map(target, "objList", fixture);
 
-        assertEquals(target.getObjList().size(), 2);
-        assertEquals(target.getObjList().get(0), 1);
-        assertEquals(target.getObjList().get(1), 2);
+        assertEquals(2, target.getObjList().size());
+        assertEquals(1, target.getObjList().get(0));
+        assertEquals(2, target.getObjList().get(1));
     }
 
     @Test
@@ -65,9 +65,9 @@ public class FixtureListSetterMapperTest {
         FixtureList fixture = FixtureTemplateConverter.convert(strs, null, null);
         mapper.map(target, "strArray", fixture);
 
-        assertEquals(target.getStrArray().length, 2);
-        assertEquals(target.getStrArray()[0], "one");
-        assertEquals(target.getStrArray()[1], "two");
+        assertEquals(2, target.getStrArray().length);
+        assertEquals("one", target.getStrArray()[0]);
+        assertEquals("two", target.getStrArray()[1]);
     }
 
     @Test
@@ -79,9 +79,9 @@ public class FixtureListSetterMapperTest {
         FixtureList fixture = FixtureTemplateConverter.convert(integers, null, null);
 
         mapper.map(target, "intArray", fixture);
-        assertEquals(target.getIntArray().length, 2);
-        assertEquals(target.getIntArray()[0], 1);
-        assertEquals(target.getIntArray()[1], 2);
+        assertEquals(2, target.getIntArray().length);
+        assertEquals(1, target.getIntArray()[0]);
+        assertEquals(2, target.getIntArray()[1]);
     }
 
     @Test
@@ -101,18 +101,18 @@ public class FixtureListSetterMapperTest {
         ListSetterObject target = new ListSetterObject();
 
         mapper.map(target, "sampleList", fixture);
-        assertEquals(target.getSampleList().size(), 2);
-        assertEquals(target.getSampleList().get(0).getId(), 1);
-        assertEquals(target.getSampleList().get(0).getName(), "Hemingway");
-        assertEquals(target.getSampleList().get(1).getId(), 2);
-        assertEquals(target.getSampleList().get(1).getName(), "Tolstoy");
+        assertEquals(2, target.getSampleList().size());
+        assertEquals(1, target.getSampleList().get(0).getId());
+        assertEquals("Hemingway", target.getSampleList().get(0).getName());
+        assertEquals(2, target.getSampleList().get(1).getId());
+        assertEquals("Tolstoy", target.getSampleList().get(1).getName());
 
         mapper.map(target, "sampleArray", fixture);
-        assertEquals(target.getSampleArray().length, 2);
-        assertEquals(target.getSampleArray()[0].getId(), 1);
-        assertEquals(target.getSampleArray()[0].getName(), "Hemingway");
-        assertEquals(target.getSampleArray()[1].getId(), 2);
-        assertEquals(target.getSampleArray()[1].getName(), "Tolstoy");
+        assertEquals(2, target.getSampleArray().length);
+        assertEquals(1, target.getSampleArray()[0].getId());
+        assertEquals("Hemingway", target.getSampleArray()[0].getName());
+        assertEquals(2, target.getSampleArray()[1].getId());
+        assertEquals("Tolstoy", target.getSampleArray()[1].getName());
     }
 
     @Test
@@ -131,25 +131,25 @@ public class FixtureListSetterMapperTest {
         ListSetterObject target = new ListSetterObject();
 
         mapper.map(target, "listOfList", fixture);
-        assertEquals(target.getListOfList().size(), 2);
-        assertEquals(target.getListOfList().get(0).get(0), "a");
-        assertEquals(target.getListOfList().get(0).get(1), "b");
-        assertEquals(target.getListOfList().get(1).get(0), "c");
-        assertEquals(target.getListOfList().get(1).get(1), "d");
+        assertEquals(2, target.getListOfList().size());
+        assertEquals("a", target.getListOfList().get(0).get(0));
+        assertEquals("b", target.getListOfList().get(0).get(1));
+        assertEquals("c", target.getListOfList().get(1).get(0));
+        assertEquals("d", target.getListOfList().get(1).get(1));
 
         mapper.map(target, "listOfArray", fixture);
-        assertEquals(target.getListOfArray().size(), 2);
-        assertEquals(target.getListOfArray().get(0)[0], "a");
-        assertEquals(target.getListOfArray().get(0)[1], "b");
-        assertEquals(target.getListOfArray().get(1)[0], "c");
-        assertEquals(target.getListOfArray().get(1)[1], "d");
+        assertEquals(2, target.getListOfArray().size());
+        assertEquals("a", target.getListOfArray().get(0)[0]);
+        assertEquals("b", target.getListOfArray().get(0)[1]);
+        assertEquals("c", target.getListOfArray().get(1)[0]);
+        assertEquals("d", target.getListOfArray().get(1)[1]);
 
         mapper.map(target, "arrayOfList", fixture);
-        assertEquals(target.getArrayOfList().length, 2);
-        assertEquals(target.getArrayOfList()[0].get(0), "a");
-        assertEquals(target.getArrayOfList()[0].get(1), "b");
-        assertEquals(target.getArrayOfList()[1].get(0), "c");
-        assertEquals(target.getArrayOfList()[1].get(1), "d");
+        assertEquals(2, target.getArrayOfList().length);
+        assertEquals("a", target.getArrayOfList()[0].get(0));
+        assertEquals("b", target.getArrayOfList()[0].get(1));
+        assertEquals("c", target.getArrayOfList()[1].get(0));
+        assertEquals("d", target.getArrayOfList()[1].get(1));
     }
 
     public static class ListSetterObject {

@@ -12,22 +12,18 @@ import io.beanmother.core.util.PrimitiveTypeUtils;
 import io.beanmother.core.util.TypeTokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractFixtureSetterMapper<T extends FixtureTemplate> extends AbstractPropertyMapper<T> {
     private static Logger logger = LoggerFactory.getLogger(AbstractFixtureSetterMapper.class);
 
-    private static String SETTER_PREFIX = "set";
+    private final static String SETTER_PREFIX = "set";
 
     private SetterMapperMediator setterMapperMediator;
 
-    public AbstractFixtureSetterMapper(SetterMapperMediator setterMapperMediator) {
+    protected AbstractFixtureSetterMapper(SetterMapperMediator setterMapperMediator) {
         super(setterMapperMediator.getConverterFactory());
         this.setterMapperMediator = setterMapperMediator;
     }
@@ -140,22 +136,41 @@ public abstract class AbstractFixtureSetterMapper<T extends FixtureTemplate> ext
      */
     public Object convert(FixtureMap fixtureMap, TypeToken<?> typeToken) throws IllegalAccessException, InstantiationException {
         if (typeToken.isSubtypeOf(Map.class)) {
-            throw new NotImplementedException();
-        } else {
-            Object obj = typeToken.getRawType().newInstance();
-
-            for (Map.Entry<String, FixtureTemplate> entry : fixtureMap.entrySet()) {
-                if (entry.getValue() instanceof FixtureMap) {
-                    setterMapperMediator.getFixtureMapPropertyMapper().map(obj, entry.getKey(), (FixtureMap) entry.getValue());
-                } else if (entry.getValue() instanceof FixtureList) {
-                    setterMapperMediator.getFixtureListPropertyMapper().map(obj, entry.getKey(), (FixtureList) entry.getValue());
-                } else if (entry.getValue() instanceof FixtureValue) {
-                    setterMapperMediator.getFixtureValuePropertyMapper().map(obj, entry.getKey(), (FixtureValue) entry.getValue());
-                } else {
-                    logger.error("can not find fixture template type");
-                }
+            final TypeToken<?> keyTypeToken;
+            final TypeToken<?> valueTypeToken;
+            List<TypeToken<?>> keyValueTypeTokens = TypeTokenUtils.extractGenericTypeTokens(typeToken);
+            if (keyValueTypeTokens.size() == 2) {
+                keyTypeToken = keyValueTypeTokens.get(0);
+                valueTypeToken = keyValueTypeTokens.get(1);
+            } else {
+                keyTypeToken = TypeToken.of(Object.class);
+                valueTypeToken = TypeToken.of(Object.class);
             }
 
+
+            Map convertedMap;
+            if (typeToken.getRawType().isInterface()) {
+                convertedMap = new LinkedHashMap();
+            } else {
+                convertedMap = (Map) typeToken.getRawType().newInstance();
+            }
+
+            for ( Map.Entry<String, FixtureTemplate> entry : fixtureMap.entrySet()) {
+                Object key = convert(new FixtureValue(entry.getKey()), keyTypeToken);
+                Object value = null;
+                if (entry.getValue() instanceof FixtureMap) {
+                    value = convert((FixtureMap) entry.getValue(), valueTypeToken);
+                } else if (entry.getValue() instanceof FixtureList) {
+                    value = convert((FixtureList) entry.getValue(), valueTypeToken);
+                } else if (entry.getValue() instanceof FixtureValue) {
+                    value = convert((FixtureValue) entry.getValue(), valueTypeToken);
+                }
+                convertedMap.put(key, value);
+            }
+            return convertedMap;
+        } else {
+            Object obj = typeToken.getRawType().newInstance();
+            getSetterMapperMediator().map(obj, fixtureMap);
             return obj;
         }
     }

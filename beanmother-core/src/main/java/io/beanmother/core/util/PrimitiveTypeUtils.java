@@ -1,6 +1,7 @@
 package io.beanmother.core.util;
 
 import com.google.common.primitives.*;
+import com.google.common.reflect.TypeToken;
 
 import java.util.List;
 
@@ -34,6 +35,14 @@ public class PrimitiveTypeUtils {
         } else {
             throw new IllegalArgumentException(primitiveType.getName() + " is not supported primitive type");
         }
+    }
+
+    public static Class<?> toWrapper(final TypeToken<?> primitiveTypeToken) {
+        return toWrapper((Class<?>) primitiveTypeToken.getType());
+    }
+
+    public static TypeToken<?> toWrapperTypeToken(final TypeToken<?> primitiveTypeToken) {
+        return TypeToken.of(toWrapper(primitiveTypeToken));
     }
 
     public static Object toWrapperListToPrimitiveArray(final List wrapperList, Class<?> primitiveType) {

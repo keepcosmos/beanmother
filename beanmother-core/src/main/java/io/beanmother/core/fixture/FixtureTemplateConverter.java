@@ -17,12 +17,12 @@ public class FixtureTemplateConverter {
      * @param parent The parent FixtureTemplate who hold the source.
      * @return fixture map
      */
-    public static FixtureMap convert(Map<String, Object> source, String fixtureName, FixtureTemplate parent) {
+    public static FixtureMap convert(Map<String, ? extends Object> source, String fixtureName, FixtureTemplate parent) {
         FixtureMap fixtureMap = new FixtureMap();
         fixtureMap.setFixtureName(fixtureName);
         fixtureMap.setParent(parent);
 
-        for (Map.Entry<String, Object> entry : source.entrySet()) {
+        for (Map.Entry<String, ? extends Object> entry : source.entrySet()) {
             String key = entry.getKey();
             if (entry.getValue() instanceof Map) {
                 fixtureMap.put(entry.getKey(), convert((Map) entry.getValue(), key, fixtureMap));

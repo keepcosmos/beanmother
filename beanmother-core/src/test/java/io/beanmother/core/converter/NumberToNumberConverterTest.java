@@ -43,6 +43,5 @@ public class NumberToNumberConverterTest {
 
         assertEquals(converter.convert(integer, TypeToken.of(AtomicInteger.class)).getClass(), AtomicInteger.class);
         assertEquals(converter.convert(integer, TypeToken.of(AtomicLong.class)).getClass(), AtomicLong.class);
-
     }
 }

@@ -16,7 +16,7 @@ public interface Converter extends Comparable<Converter> {
      *
      * @return converted object
      */
-    Object convert(Object source, TypeToken<?> typeToken);
+    Object convert(Object source, TypeToken<?> targetTypeToken);
 
     /**
      * Check that source can convert to given type
@@ -26,7 +26,7 @@ public interface Converter extends Comparable<Converter> {
      *
      * @return true if it can convert
      */
-    boolean canHandle(Object source, TypeToken<?> typeToken);
+    boolean canHandle(Object source, TypeToken<?> targetTypeToken);
 
     /**
      * Executing priority. Low value is high priority.

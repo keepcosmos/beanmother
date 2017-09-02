@@ -3,6 +3,7 @@ package io.beanmother.core.util;
 import io.beanmother.core.fixture.FixtureMap;
 import io.beanmother.core.fixture.FixtureValue;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Test for {@link FixtureMapUtil}
  */
+@Ignore
 public class FixtureMapUtilTest {
 
     FixtureMap fixtureMap;
