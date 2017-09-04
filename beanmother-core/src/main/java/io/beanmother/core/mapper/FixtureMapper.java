@@ -8,8 +8,15 @@ import io.beanmother.core.fixture.FixtureMap;
 public interface FixtureMapper {
 
     /**
-     * map data to instance of T.
+     * map data by the given type.
      * @return instance of T
      */
     <T> T map(FixtureMap fixtureMap, Class<T> targetType);
+
+    /**
+     * map data to target object.
+     * @param fixtureMap
+     * @param target
+     */
+    void map(FixtureMap fixtureMap, Object target);
 }

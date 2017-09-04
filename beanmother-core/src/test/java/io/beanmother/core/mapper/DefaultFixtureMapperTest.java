@@ -1,5 +1,6 @@
 package io.beanmother.core.mapper;
 
+import io.beanmother.core.converter.StandardConverterFactory;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class DefaultFixtureMapperTest {
 
     @Before
     public void setup() {
-        fixtureMapper = new DefaultFixtureMapper();
+        fixtureMapper = new DefaultFixtureMapper(new StandardConverterFactory());
     }
 
 

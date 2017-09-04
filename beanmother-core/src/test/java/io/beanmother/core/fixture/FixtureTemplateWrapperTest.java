@@ -7,16 +7,16 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 /**
- * Test for {@link FixtureTemplateConverter}
+ * Test for {@link FixtureTemplateWrapper}
  */
-public class FixtureTemplateConverterTest {
+public class FixtureTemplateWrapperTest {
 
     @Test
     public void testConvertObject() {
         FixtureMap parent = new FixtureMap();
 
         Date date = new Date();
-        FixtureValue value = FixtureTemplateConverter.convert(date, "test", parent);
+        FixtureValue value = FixtureTemplateWrapper.wrap(date, "test", parent);
 
         assertEquals(date, value.getValue());
         assertEquals("test", value.getFixtureName());
@@ -24,7 +24,7 @@ public class FixtureTemplateConverterTest {
 
         String string = "string";
 
-        FixtureValue value2 = FixtureTemplateConverter.convert(string, "test", parent);
+        FixtureValue value2 = FixtureTemplateWrapper.wrap(string, "test", parent);
         assertEquals("string", value2.getValue());
         assertEquals("test", value2.getFixtureName());
         assertEquals(parent, value2.getParent());
@@ -33,13 +33,13 @@ public class FixtureTemplateConverterTest {
     @Test(expected = IllegalArgumentException.class)
     public void testFailConvertValueIsInstanceOfMap() {
         Object data = new HashMap();
-        FixtureTemplateConverter.convert(data, null, null);
+        FixtureTemplateWrapper.wrap(data, null, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testFailConvertValueIsInstanceOfList() {
         Object data = new ArrayList();
-        FixtureTemplateConverter.convert(data, null, null);
+        FixtureTemplateWrapper.wrap(data, null, null);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class FixtureTemplateConverterTest {
         list.add(value1);
         list.add(value2);
 
-        FixtureList fixtureList = FixtureTemplateConverter.convert(list, "test", parent);
+        FixtureList fixtureList = FixtureTemplateWrapper.wrap(list, "test", parent);
 
         assertEquals("test", fixtureList.getFixtureName());
         assertEquals(parent, fixtureList.getParent());
@@ -78,7 +78,7 @@ public class FixtureTemplateConverterTest {
         map.put("value1", value1);
         map.put("value2", value2);
 
-        FixtureMap fixtureMap = FixtureTemplateConverter.convert(map, "test", null);
+        FixtureMap fixtureMap = FixtureTemplateWrapper.wrap(map, "test", null);
 
         assertEquals("test", fixtureMap.getFixtureName());
         assertNull(fixtureMap.getParent());
@@ -114,7 +114,7 @@ public class FixtureTemplateConverterTest {
 
         map.put("list", list);
 
-        FixtureMap fixtureMap = FixtureTemplateConverter.convert(map, null, null);
+        FixtureMap fixtureMap = FixtureTemplateWrapper.wrap(map, null, null);
 
         assertTrue(fixtureMap.get("date") instanceof FixtureValue);
         assertTrue(fixtureMap.get("string") instanceof FixtureValue);

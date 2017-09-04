@@ -1,7 +1,7 @@
 package io.beanmother.core.fixture.parser;
 
 import io.beanmother.core.fixture.FixtureMap;
-import io.beanmother.core.fixture.FixtureTemplateConverter;
+import io.beanmother.core.fixture.FixtureTemplateWrapper;
 import org.yaml.snakeyaml.Yaml;
 
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class YamlFixtureParser implements FixtureParser {
 
         for (String key : fixtures.keySet()) {
             if (fixtures.get(key) instanceof Map) {
-                FixtureMap fixtureMap = FixtureTemplateConverter.convert((Map) fixtures.get(key), key, null);
+                FixtureMap fixtureMap = FixtureTemplateWrapper.wrap((Map) fixtures.get(key), key, null);
                 fixtureMap.setRoot(true);
                 fixtureMaps.put(key, fixtureMap);
             } else {

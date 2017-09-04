@@ -1,74 +1,38 @@
 package io.beanmother.core.mapper;
 
+import io.beanmother.core.converter.ConverterFactory;
 import io.beanmother.core.fixture.FixtureMap;
-import io.beanmother.core.converter.Converter;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+public class DefaultFixtureMapper implements FixtureMapper, MapperMediator {
 
-public class DefaultFixtureMapper implements FixtureMapper {
+    private ConverterFactory converterFactory;
+    private MapperMediator mapperMediator;
+
+    public DefaultFixtureMapper(ConverterFactory converterFactory) {
+        this.mapperMediator = new SetterMapperMediator(converterFactory);
+    }
 
     @Override
     public <T> T map(FixtureMap fixtureMap, Class<T> targetType) {
-        Constructor constructor = null;
-        T targetObject;
-        try {
-            constructor = targetType.getConstructor();
-            targetObject = (T) constructor.newInstance();
-        } catch (Exception e) {
-            throw new FixtureMappingException(e);
-        }
-        return targetObject;
+        return getFixtureMapper().map(fixtureMap, targetType);
     }
 
-    private void assign(Object targetObject, String key, Object value) {
-        if (targetObject == null || key == null || key.isEmpty() || value == null) {
-            return;
-        }
+    @Override
+    public void map(FixtureMap fixtureMap, Object target) {
+        getFixtureMapper().map(fixtureMap, target);
+    }
 
-        Method targetMethod = null;
+    public ConverterFactory getConverterFactory() {
+        return converterFactory;
+    }
 
-        for (Method method : targetObject.getClass().getMethods()) {
-            if (method.getName().replaceFirst("set", "").equalsIgnoreCase(key)) {
-                targetMethod = method;
-                break;
-            }
-        }
+    @Override
+    public FixtureMapper getFixtureMapper() {
+        return mapperMediator.getFixtureMapper();
+    }
 
-        if (targetMethod == null) return;
-
-        Class<?>[] targetTypes = targetMethod.getParameterTypes();
-
-        if (targetTypes.length != 1) {
-            throw new IllegalArgumentException("multiple parameter types");
-        }
-
-        Class targetType = targetTypes[0];
-
-        if (targetType.isPrimitive()) {
-//            targetType = getPrimitiveWrapper(targetType);
-        }
-
-        Class sourceType = value.getClass();
-
-        if (sourceType.isInstance(Number.class)) {
-            sourceType = Number.class;
-        }
-
-        Converter converter = null;
-        try {
-            if (converter != null) {
-//                targetMethod.invoke(targetObject, converter.convert(value));
-            } else if (sourceType.equals(targetType)) {
-                targetMethod.invoke(targetObject, value);
-            } else {
-
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public FixtureConverter getFixtureConverter() {
+        return mapperMediator.getFixtureConverter();
     }
 }

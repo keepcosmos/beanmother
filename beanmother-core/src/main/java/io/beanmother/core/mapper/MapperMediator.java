@@ -1,13 +1,22 @@
 package io.beanmother.core.mapper;
 
-import io.beanmother.core.fixture.FixtureList;
-import io.beanmother.core.fixture.FixtureMap;
-import io.beanmother.core.fixture.FixtureValue;
-
+/**
+ * Mediator for {@link FixtureMapper}.
+ *
+ * Generally, FixtureMapper has a {@link FixtureConverter} and FixtureConverter has a FixtureMapper.
+ * MapperMediator solves circular reference problem between FixtureMapper and FixtureConverter.
+ */
 public interface MapperMediator {
-    void map(Object target, FixtureMap fixtureMap);
 
-    PropertyMapper<FixtureValue> getFixtureValuePropertyMapper();
-    PropertyMapper<FixtureList> getFixtureListPropertyMapper();
-    PropertyMapper<FixtureMap> getFixtureMapPropertyMapper();
+    /**
+     * Get FixtureMapper
+     * @return
+     */
+    FixtureMapper getFixtureMapper();
+
+    /**
+     * Get FixtureConverter
+     * @return
+     */
+    FixtureConverter getFixtureConverter();
 }

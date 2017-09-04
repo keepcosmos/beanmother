@@ -2,11 +2,12 @@ package io.beanmother.core.mapper.setter;
 
 import io.beanmother.core.converter.StandardConverterFactory;
 import io.beanmother.core.fixture.FixtureMap;
-import io.beanmother.core.fixture.FixtureTemplateConverter;
+import io.beanmother.core.fixture.FixtureTemplateWrapper;
+import io.beanmother.core.mapper.FixtureSetterMapper;
+import io.beanmother.core.mapper.SetterMapperMediator;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,37 +15,50 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test for {@link FixtureMapSetterMapper}
+ * Test for {@link FixtureSetterMapper}
  */
 public class FixtureMapSetterMapperTest {
 
-    FixtureMapSetterMapper mapper;
+    FixtureSetterMapper mapper;
 
     @Before
     public void setup() {
-        mapper = (FixtureMapSetterMapper) new SetterMapperMediator(new StandardConverterFactory()).getFixtureMapPropertyMapper();
+        mapper = (FixtureSetterMapper) new SetterMapperMediator(new StandardConverterFactory()).getFixtureMapper();
     }
 
     @Test
-    public void testSimpleMap() {
-        MapSetterObject target = new MapSetterObject();
-
+    public void testSimpleMapping() {
         Map<String, Integer> stringIntegerMap = new LinkedHashMap<>();
         stringIntegerMap.put("one", 1);
         stringIntegerMap.put("two", 2);
-        FixtureMap fixture = FixtureTemplateConverter.convert(stringIntegerMap, null, null);
 
+        FixtureMap fixture = FixtureTemplateWrapper.wrap(stringIntegerMap, null, null);
+        MapSetterObject target = new MapSetterObject();
         mapper.map(target, "stringToInteger", fixture);
 
         assertEquals(2, target.getStringToInteger().size());
         assertEquals(new Integer(1), target.getStringToInteger().get("one"));
         assertEquals(new Integer(2), target.getStringToInteger().get("two"));
 
+        mapper.map(target, "noGenericMap", fixture);
+        assertEquals(2, target.getNoGenericMap().size());
+        assertEquals(new Integer(1), target.getNoGenericMap().get("one"));
+        assertEquals(new Integer(2), target.getNoGenericMap().get("two"));
+
+        mapper.map(target, "stringToStringLinkedHashMap", fixture);
+        assertEquals(2, target.getStringToStringLinkedHashMap().size());
+        assertEquals("1", target.getStringToStringLinkedHashMap().get("one"));
+        assertEquals("2", target.getStringToStringLinkedHashMap().get("two"));
+    }
+
+    @Test
+    public void testNonStringKeyMapping() {
         Map<String, String> integerStringMap = new LinkedHashMap<>();
         integerStringMap.put("1", "one");
         integerStringMap.put("2", "two");
-        fixture = FixtureTemplateConverter.convert(integerStringMap, null, null);
 
+        FixtureMap fixture = FixtureTemplateWrapper.wrap(integerStringMap, null, null);
+        MapSetterObject target = new MapSetterObject();
         mapper.map(target, "integerToString", fixture);
 
         assertEquals(2, target.getIntegerToString().size());
@@ -53,10 +67,37 @@ public class FixtureMapSetterMapperTest {
     }
 
 
-    static class MapSetterObject {
+    @Test
+    public void testBeanMapping(){
+        Map<String, Object> beanMap = new LinkedHashMap<>();
+
+        Map<String, Object> bean1 = new LinkedHashMap<>();
+        bean1.put("id", 1);
+        bean1.put("name", "Hemingway");
+        beanMap.put("bean1", bean1);
+
+        Map<String, Object> bean2 = new LinkedHashMap<>();
+        bean2.put("id", 2);
+        bean2.put("name", "Tolstoy");
+        beanMap.put("bean2", bean2);
+
+        FixtureMap fixture = FixtureTemplateWrapper.wrap(beanMap, null, null);
+        MapSetterObject target = new MapSetterObject();
+        mapper.map(target, "stringToBean", fixture);
+
+        assertEquals(target.getStringToBean().size(), 2);
+        assertEquals(target.getStringToBean().get("bean1").getId(), 1);
+        assertEquals(target.getStringToBean().get("bean1").getName(), "Hemingway");
+        assertEquals(target.getStringToBean().get("bean2").getId(), 2);
+        assertEquals(target.getStringToBean().get("bean2").getName(), "Tolstoy");
+
+    }
+
+
+    public static class MapSetterObject {
         private Map<String, Integer> stringToInteger;
         private Map<Integer, String> integerToString;
-        private HashMap<String, String> stringToStringLinkedHashMap;
+        private LinkedHashMap<String, String> stringToStringLinkedHashMap;
         private Map<String, List<String>> stringToIntegerList;
         private Map<String, String[]> stringToStringArray;
         private Map<String, Map<String, String>> stringToStringMap;
@@ -79,11 +120,11 @@ public class FixtureMapSetterMapperTest {
             this.integerToString = integerToString;
         }
 
-        public HashMap<String, String> getStringToStringLinkedHashMap() {
+        public LinkedHashMap<String, String> getStringToStringLinkedHashMap() {
             return stringToStringLinkedHashMap;
         }
 
-        public void setStringToStringLinkedHashMap(HashMap<String, String> stringToStringLinkedHashMap) {
+        public void setStringToStringLinkedHashMap(LinkedHashMap<String, String> stringToStringLinkedHashMap) {
             this.stringToStringLinkedHashMap = stringToStringLinkedHashMap;
         }
 
@@ -128,7 +169,7 @@ public class FixtureMapSetterMapperTest {
         }
     }
 
-    static class Bean {
+    public static class Bean {
         int id;
         String name;
 

@@ -1,49 +1,76 @@
-package io.beanmother.core.mapper.setter;
+package io.beanmother.core.mapper;
 
 import com.google.common.reflect.TypeToken;
 import io.beanmother.core.converter.Converter;
+import io.beanmother.core.converter.ConverterFactory;
 import io.beanmother.core.fixture.FixtureList;
 import io.beanmother.core.fixture.FixtureMap;
 import io.beanmother.core.fixture.FixtureTemplate;
 import io.beanmother.core.fixture.FixtureValue;
-import io.beanmother.core.mapper.AbstractPropertyMapper;
-import io.beanmother.core.mapper.FixtureMappingException;
 import io.beanmother.core.util.PrimitiveTypeUtils;
 import io.beanmother.core.util.TypeTokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Method;
 import java.util.*;
 
-public abstract class AbstractFixtureSetterMapper<T extends FixtureTemplate> extends AbstractPropertyMapper<T> {
-    private static Logger logger = LoggerFactory.getLogger(AbstractFixtureSetterMapper.class);
+/**
+ * Default implementation of {@link FixtureConverter}
+ */
+public class FixtureConverterImpl implements FixtureConverter {
+    private final static Logger logger = LoggerFactory.getLogger(FixtureConverterImpl.class);
 
-    private final static String SETTER_PREFIX = "set";
+    private MapperMediator mapperMediator;
+    private ConverterFactory converterFactory;
 
-    private SetterMapperMediator setterMapperMediator;
-
-    protected AbstractFixtureSetterMapper(SetterMapperMediator setterMapperMediator) {
-        super(setterMapperMediator.getConverterFactory());
-        this.setterMapperMediator = setterMapperMediator;
+    /**
+     * Create a FixtureConverterImpl
+     * @param mapperMediator
+     * @param converterFactory
+     */
+    public FixtureConverterImpl(MapperMediator mapperMediator, ConverterFactory converterFactory) {
+        this.mapperMediator = mapperMediator;
+        this.converterFactory = converterFactory;
     }
 
-    public SetterMapperMediator getSetterMapperMediator() {
-        return setterMapperMediator;
-    }
-
-    protected List<Method> findSetterCandidates(Object target, String key) {
-        Method[] methods = target.getClass().getMethods();
-        List<Method> result = new ArrayList<>();
-        for (Method method : methods) {
-            String name = method.getName();
-            if(name.indexOf(SETTER_PREFIX) == 0) {
-                if (name.substring(SETTER_PREFIX.length(), name.length()).equalsIgnoreCase(key)) {
-                    result.add(method);
-                }
+    @Override
+    public Object convert(FixtureTemplate fixtureTemplate, TypeToken<?> typeToken) {
+        try {
+            if (fixtureTemplate instanceof FixtureMap) {
+                return convert((FixtureMap) fixtureTemplate, typeToken);
+            } else if (fixtureTemplate instanceof FixtureList) {
+                return convert((FixtureList) fixtureTemplate, typeToken);
+            } else if (fixtureTemplate instanceof FixtureValue) {
+                return convert((FixtureValue) fixtureTemplate, typeToken);
             }
+        } catch (Exception e) {
+            throw new FixtureMappingException(e);
         }
-        return result;
+        return null;
+    }
+
+    /**
+     * Get converterFactory
+     * @return
+     */
+    public ConverterFactory getConverterFactory() {
+        return converterFactory;
+    }
+
+    /**
+     * Get mapperMediator
+     * @return
+     */
+    public MapperMediator getMapperMediator() {
+        return mapperMediator;
+    }
+
+    /**
+     * Get fixtureMapper
+     * @return
+     */
+    public FixtureMapper getFixtureMapper() {
+        return getMapperMediator().getFixtureMapper();
     }
 
     /**
@@ -52,7 +79,7 @@ public abstract class AbstractFixtureSetterMapper<T extends FixtureTemplate> ext
      * @param typeToken
      * @return converted object from fixtureValue.
      */
-    protected Object convert(final FixtureValue fixtureValue, TypeToken<?> typeToken) {
+    protected Object convert(FixtureValue fixtureValue, TypeToken<?> typeToken) {
         if (typeToken.isPrimitive()) {
             Class<?> wrapperClass = PrimitiveTypeUtils.toWrapper((Class<?>) typeToken.getType());
             typeToken = TypeToken.of(wrapperClass);
@@ -134,7 +161,7 @@ public abstract class AbstractFixtureSetterMapper<T extends FixtureTemplate> ext
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public Object convert(FixtureMap fixtureMap, TypeToken<?> typeToken) throws IllegalAccessException, InstantiationException {
+    protected Object convert(FixtureMap fixtureMap, TypeToken<?> typeToken) throws IllegalAccessException, InstantiationException {
         if (typeToken.isSubtypeOf(Map.class)) {
             final TypeToken<?> keyTypeToken;
             final TypeToken<?> valueTypeToken;
@@ -155,7 +182,7 @@ public abstract class AbstractFixtureSetterMapper<T extends FixtureTemplate> ext
                 convertedMap = (Map) typeToken.getRawType().newInstance();
             }
 
-            for ( Map.Entry<String, FixtureTemplate> entry : fixtureMap.entrySet()) {
+            for (Map.Entry<String, FixtureTemplate> entry : fixtureMap.entrySet()) {
                 Object key = convert(new FixtureValue(entry.getKey()), keyTypeToken);
                 Object value = null;
                 if (entry.getValue() instanceof FixtureMap) {
@@ -170,7 +197,7 @@ public abstract class AbstractFixtureSetterMapper<T extends FixtureTemplate> ext
             return convertedMap;
         } else {
             Object obj = typeToken.getRawType().newInstance();
-            getSetterMapperMediator().map(obj, fixtureMap);
+            getFixtureMapper().map(fixtureMap, obj);
             return obj;
         }
     }

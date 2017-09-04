@@ -1,9 +1,6 @@
 package io.beanmother.core.converter;
 
-import io.beanmother.core.converter.std.DateToSQLDateConverter;
-import io.beanmother.core.converter.std.NumberToNumberConverter;
-import io.beanmother.core.converter.std.SameClassConverter;
-import io.beanmother.core.converter.std.StringToNumberConverter;
+import io.beanmother.core.converter.std.*;
 
 public class StandardConverterFactory extends ConverterFactory {
 
@@ -13,6 +10,7 @@ public class StandardConverterFactory extends ConverterFactory {
         standardConverters = new Converter[]{
             new SameClassConverter(Integer.MAX_VALUE),
             new NumberToNumberConverter(),
+            new NumberToStringConverter(),
             new StringToNumberConverter(),
             new DateToSQLDateConverter()
         };

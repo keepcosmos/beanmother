@@ -2,7 +2,9 @@ package io.beanmother.core.mapper.setter;
 
 import io.beanmother.core.converter.StandardConverterFactory;
 import io.beanmother.core.fixture.FixtureList;
-import io.beanmother.core.fixture.FixtureTemplateConverter;
+import io.beanmother.core.fixture.FixtureTemplateWrapper;
+import io.beanmother.core.mapper.FixtureSetterMapper;
+import io.beanmother.core.mapper.SetterMapperMediator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,24 +13,24 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test for {@link FixtureListSetterMapper}
+ * Test for {@link FixtureSetterMapper}
  */
 public class FixtureListSetterMapperTest {
 
-    FixtureListSetterMapper mapper;
+    FixtureSetterMapper mapper;
 
     @Before
     public void setup() {
-        mapper = (FixtureListSetterMapper) new SetterMapperMediator(new StandardConverterFactory()).getFixtureListPropertyMapper();
+        mapper = (FixtureSetterMapper) new SetterMapperMediator(new StandardConverterFactory()).getFixtureMapper();
     }
 
     @Test
     public void testListMapping() {
         ListSetterObject target = new ListSetterObject();
-        List<String> strs = new ArrayList<>();
-        strs.add("one");
-        strs.add("two");
-        FixtureList fixture = FixtureTemplateConverter.convert(strs, null, null);
+        List<String> strList = new ArrayList<>();
+        strList.add("one");
+        strList.add("two");
+        FixtureList fixture = FixtureTemplateWrapper.wrap(strList, null, null);
 
         mapper.map(target, "strList", fixture);
 
@@ -48,7 +50,7 @@ public class FixtureListSetterMapperTest {
         List<Integer> integers = new ArrayList<>();
         integers.add(1);
         integers.add(2);
-        FixtureList fixture = FixtureTemplateConverter.convert(integers, null, null);
+        FixtureList fixture = FixtureTemplateWrapper.wrap(integers, null, null);
         mapper.map(target, "objList", fixture);
 
         assertEquals(2, target.getObjList().size());
@@ -59,10 +61,10 @@ public class FixtureListSetterMapperTest {
     @Test
     public void testArrayMapping() {
         ListSetterObject target = new ListSetterObject();
-        List<String> strs = new ArrayList<>();
-        strs.add("one");
-        strs.add("two");
-        FixtureList fixture = FixtureTemplateConverter.convert(strs, null, null);
+        List<String> strList = new ArrayList<>();
+        strList.add("one");
+        strList.add("two");
+        FixtureList fixture = FixtureTemplateWrapper.wrap(strList, null, null);
         mapper.map(target, "strArray", fixture);
 
         assertEquals(2, target.getStrArray().length);
@@ -76,7 +78,7 @@ public class FixtureListSetterMapperTest {
         List<Integer> integers = new ArrayList<>();
         integers.add(1);
         integers.add(2);
-        FixtureList fixture = FixtureTemplateConverter.convert(integers, null, null);
+        FixtureList fixture = FixtureTemplateWrapper.wrap(integers, null, null);
 
         mapper.map(target, "intArray", fixture);
         assertEquals(2, target.getIntArray().length);
@@ -97,7 +99,7 @@ public class FixtureListSetterMapperTest {
         samples.add(sample1);
         samples.add(sample2);
 
-        FixtureList fixture = FixtureTemplateConverter.convert(samples, null, null);
+        FixtureList fixture = FixtureTemplateWrapper.wrap(samples, null, null);
         ListSetterObject target = new ListSetterObject();
 
         mapper.map(target, "sampleList", fixture);
@@ -127,7 +129,7 @@ public class FixtureListSetterMapperTest {
         strList.add(nested1);
         strList.add(nested2);
 
-        FixtureList fixture = FixtureTemplateConverter.convert(strList, null, null);
+        FixtureList fixture = FixtureTemplateWrapper.wrap(strList, null, null);
         ListSetterObject target = new ListSetterObject();
 
         mapper.map(target, "listOfList", fixture);
@@ -245,7 +247,7 @@ public class FixtureListSetterMapperTest {
         }
     }
 
-    static class Sample {
+    public static class Sample {
         int id;
         String name;
 

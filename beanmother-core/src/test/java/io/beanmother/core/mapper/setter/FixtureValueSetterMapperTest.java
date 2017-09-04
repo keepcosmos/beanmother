@@ -2,6 +2,8 @@ package io.beanmother.core.mapper.setter;
 
 import io.beanmother.core.converter.StandardConverterFactory;
 import io.beanmother.core.fixture.FixtureValue;
+import io.beanmother.core.mapper.FixtureSetterMapper;
+import io.beanmother.core.mapper.SetterMapperMediator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,15 +12,15 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test for {@link FixtureValueSetterMapper}
+ * Test for {@link FixtureSetterMapper}
  */
 public class FixtureValueSetterMapperTest {
 
-    FixtureValueSetterMapper mapper;
+    FixtureSetterMapper  mapper;
 
     @Before
     public void setup() {
-        mapper = (FixtureValueSetterMapper) new SetterMapperMediator(new StandardConverterFactory()).getFixtureValuePropertyMapper();
+        mapper = (FixtureSetterMapper) new SetterMapperMediator(new StandardConverterFactory()).getFixtureMapper();
     }
 
     @Test
