@@ -3,10 +3,7 @@ package io.beanmother.core.mapper;
 import com.google.common.reflect.TypeToken;
 import io.beanmother.core.converter.Converter;
 import io.beanmother.core.converter.ConverterFactory;
-import io.beanmother.core.fixture.FixtureList;
-import io.beanmother.core.fixture.FixtureMap;
-import io.beanmother.core.fixture.FixtureTemplate;
-import io.beanmother.core.fixture.FixtureValue;
+import io.beanmother.core.fixture.*;
 import io.beanmother.core.util.PrimitiveTypeUtils;
 import io.beanmother.core.util.TypeTokenUtils;
 import org.slf4j.Logger;
@@ -34,19 +31,25 @@ public class FixtureConverterImpl implements FixtureConverter {
     }
 
     @Override
-    public Object convert(FixtureTemplate fixtureTemplate, TypeToken<?> typeToken) {
-        try {
-            if (fixtureTemplate instanceof FixtureMap) {
-                return convert((FixtureMap) fixtureTemplate, typeToken);
-            } else if (fixtureTemplate instanceof FixtureList) {
-                return convert((FixtureList) fixtureTemplate, typeToken);
-            } else if (fixtureTemplate instanceof FixtureValue) {
-                return convert((FixtureValue) fixtureTemplate, typeToken);
+    public Object convert(FixtureTemplate fixtureTemplate, final TypeToken<?> typeToken) {
+        final Object[] converted = new Object[1];
+        new FixtureTemplateSubTypeHandler() {
+            @Override
+            protected void handleIf(FixtureMap fixtureMap) {
+                converted[0] = convert(fixtureMap, typeToken);
             }
-        } catch (Exception e) {
-            throw new FixtureMappingException(e);
-        }
-        return null;
+
+            @Override
+            protected void handleIf(FixtureList fixtureList) {
+                converted[0] = convert(fixtureList, typeToken);
+            }
+
+            @Override
+            protected void handleIf(FixtureValue fixtureValue) {
+                converted[0] = convert(fixtureValue, typeToken);
+            }
+        }.handle(fixtureTemplate);
+        return converted[0];
     }
 
     /**
@@ -103,7 +106,7 @@ public class FixtureConverterImpl implements FixtureConverter {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    protected Object convert(FixtureList fixtureList, TypeToken<?> typeToken) throws IllegalAccessException, InstantiationException {
+    protected Object convert(FixtureList fixtureList, TypeToken<?> typeToken) {
         boolean isArray = typeToken.isArray();
         boolean isList = typeToken.isSubtypeOf(TypeToken.of(List.class));
 
@@ -115,23 +118,17 @@ public class FixtureConverterImpl implements FixtureConverter {
         if (isArray || typeToken.getRawType().isInterface()) {
             convertedList = new ArrayList();
         } else {
-            convertedList = (List) typeToken.getRawType().newInstance();
+            try {
+                convertedList = (List) typeToken.getRawType().newInstance();
+            } catch (Exception e) {
+                throw new FixtureMappingException(e);
+            }
         }
         TypeToken<?> elementTypeToken = TypeTokenUtils.extractElementTypeToken(typeToken);
 
 
         for (FixtureTemplate template : fixtureList) {
-            Object converted;
-            if (template instanceof FixtureMap) {
-                converted = convert((FixtureMap) template, elementTypeToken);
-            } else if (template instanceof FixtureList) {
-                converted = convert((FixtureList) template, elementTypeToken);
-            } else if (template instanceof FixtureValue) {
-                converted = convert((FixtureValue) template, elementTypeToken);
-            } else {
-                converted = null;
-            }
-
+            Object converted = convert(template, elementTypeToken);
             if (converted != null) {
                 convertedList.add(converted);
             } else {
@@ -161,7 +158,7 @@ public class FixtureConverterImpl implements FixtureConverter {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    protected Object convert(FixtureMap fixtureMap, TypeToken<?> typeToken) throws IllegalAccessException, InstantiationException {
+    protected Object convert(FixtureMap fixtureMap, TypeToken<?> typeToken) {
         if (typeToken.isSubtypeOf(Map.class)) {
             final TypeToken<?> keyTypeToken;
             final TypeToken<?> valueTypeToken;
@@ -179,24 +176,26 @@ public class FixtureConverterImpl implements FixtureConverter {
             if (typeToken.getRawType().isInterface()) {
                 convertedMap = new LinkedHashMap();
             } else {
-                convertedMap = (Map) typeToken.getRawType().newInstance();
+                try {
+                    convertedMap = (Map) typeToken.getRawType().newInstance();
+                } catch (Exception e) {
+                    throw new FixtureMappingException(e);
+                }
             }
 
             for (Map.Entry<String, FixtureTemplate> entry : fixtureMap.entrySet()) {
                 Object key = convert(new FixtureValue(entry.getKey()), keyTypeToken);
-                Object value = null;
-                if (entry.getValue() instanceof FixtureMap) {
-                    value = convert((FixtureMap) entry.getValue(), valueTypeToken);
-                } else if (entry.getValue() instanceof FixtureList) {
-                    value = convert((FixtureList) entry.getValue(), valueTypeToken);
-                } else if (entry.getValue() instanceof FixtureValue) {
-                    value = convert((FixtureValue) entry.getValue(), valueTypeToken);
-                }
-                convertedMap.put(key, value);
+                Object converted = convert(entry.getValue(), valueTypeToken);
+                convertedMap.put(key, converted);
             }
             return convertedMap;
         } else {
-            Object obj = typeToken.getRawType().newInstance();
+            Object obj = null;
+            try {
+                obj = typeToken.getRawType().newInstance();
+            } catch (Exception e) {
+                throw new FixtureMappingException(e);
+            }
             getFixtureMapper().map(fixtureMap, obj);
             return obj;
         }

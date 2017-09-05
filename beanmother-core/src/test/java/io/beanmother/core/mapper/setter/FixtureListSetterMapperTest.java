@@ -3,7 +3,7 @@ package io.beanmother.core.mapper.setter;
 import io.beanmother.core.converter.StandardConverterFactory;
 import io.beanmother.core.fixture.FixtureList;
 import io.beanmother.core.fixture.FixtureTemplateWrapper;
-import io.beanmother.core.mapper.FixtureSetterMapper;
+import io.beanmother.core.mapper.SetterFixtureMapper;
 import io.beanmother.core.mapper.SetterMapperMediator;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,15 +13,15 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test for {@link FixtureSetterMapper}
+ * Test for {@link SetterFixtureMapper}
  */
 public class FixtureListSetterMapperTest {
 
-    FixtureSetterMapper mapper;
+    SetterFixtureMapper mapper;
 
     @Before
     public void setup() {
-        mapper = (FixtureSetterMapper) new SetterMapperMediator(new StandardConverterFactory()).getFixtureMapper();
+        mapper = (SetterFixtureMapper) new SetterMapperMediator(new StandardConverterFactory()).getFixtureMapper();
     }
 
     @Test

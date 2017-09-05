@@ -4,10 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.reflect.Invokable;
 import com.google.common.reflect.Parameter;
 import com.google.common.reflect.TypeToken;
-import io.beanmother.core.fixture.FixtureList;
-import io.beanmother.core.fixture.FixtureMap;
-import io.beanmother.core.fixture.FixtureTemplate;
-import io.beanmother.core.fixture.FixtureValue;
+import io.beanmother.core.fixture.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * FixtureSetterMapper is a implementation of {@link FixtureMapper}. It maps target object properties by setter.
+ * SetterFixtureMapper is a implementation of {@link FixtureMapper}. It maps target object properties by setter.
  */
-public class FixtureSetterMapper implements FixtureMapper {
-    private final static Logger logger = LoggerFactory.getLogger(FixtureSetterMapper.class);
+public class SetterFixtureMapper implements FixtureMapper {
+    private final static Logger logger = LoggerFactory.getLogger(SetterFixtureMapper.class);
 
     /**
      * A prefix of setter names
@@ -30,10 +27,10 @@ public class FixtureSetterMapper implements FixtureMapper {
     private MapperMediator mapperMediator;
 
     /**
-     * Create a FixtureSetterMapper
+     * Create a SetterFixtureMapper
      * @param mapperMediator
      */
-    public FixtureSetterMapper(MapperMediator mapperMediator) {
+    public SetterFixtureMapper(MapperMediator mapperMediator) {
         this.mapperMediator = mapperMediator;
     }
 
@@ -64,21 +61,30 @@ public class FixtureSetterMapper implements FixtureMapper {
      * @param key
      * @param fixtureTemplate
      */
-    public void map(Object target, String key, FixtureTemplate fixtureTemplate) {
-        if (fixtureTemplate instanceof FixtureMap) {
-            map(target, key, (FixtureMap) fixtureTemplate);
-        } else if (fixtureTemplate instanceof FixtureList) {
-            map(target, key, (FixtureList) fixtureTemplate);
-        } else if (fixtureTemplate instanceof FixtureValue) {
-            map(target, key, (FixtureValue) fixtureTemplate);
-        }
+    public void map(final Object target, final String key, FixtureTemplate fixtureTemplate) {
+        new FixtureTemplateSubTypeHandler() {
+            @Override
+            protected void handleIf(FixtureMap fixtureMap) {
+                map(target, key, fixtureMap);
+            }
+
+            @Override
+            protected void handleIf(FixtureList fixtureList) {
+                map(target, key, fixtureList);
+            }
+
+            @Override
+            protected void handleIf(FixtureValue fixtureValue) {
+                map(target, key, fixtureValue);
+            }
+        }.handle(fixtureTemplate);
     }
 
     public FixtureConverter getFixtureConverter() {
         return mapperMediator.getFixtureConverter();
     }
 
-    protected void map(Object target, String key, FixtureMap fixtureMap) {
+    private void map(Object target, String key, FixtureMap fixtureMap) {
         List<Method> candidates = findSetterCandidates(target, key);
         for (Method candidate : candidates) {
             ImmutableList<Parameter> paramTypes = Invokable.from(candidate).getParameters();
@@ -99,7 +105,7 @@ public class FixtureSetterMapper implements FixtureMapper {
         }
     }
 
-    protected void map(Object target, String key, FixtureList fixtureList) {
+    private void map(Object target, String key, FixtureList fixtureList) {
         List<Method> candidates = findSetterCandidates(target, key);
         for (Method candidate :candidates) {
             try {
@@ -121,7 +127,7 @@ public class FixtureSetterMapper implements FixtureMapper {
         }
     }
 
-    protected void map(Object target, String key, FixtureValue fixtureValue) {
+    private void map(Object target, String key, FixtureValue fixtureValue) {
         if (fixtureValue == null || fixtureValue.isNull()) return;
         List<Method> candidates = findSetterCandidates(target, key);
 
