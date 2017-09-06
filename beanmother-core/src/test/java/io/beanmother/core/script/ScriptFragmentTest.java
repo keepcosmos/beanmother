@@ -1,0 +1,55 @@
+package io.beanmother.core.script;
+
+import io.beanmother.core.fixture.FixtureValue;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+/**
+ * Test for {@link ScriptFragment}
+ */
+public class ScriptFragmentTest {
+
+    @Test
+    public void testCheckScriptFixtureValue() {
+        assertFalse(ScriptFragment.isScript(new FixtureValue("test")));
+        assertFalse(ScriptFragment.isScript(new FixtureValue(1)));
+        assertFalse(ScriptFragment.isScript(new FixtureValue("{test}")));
+        assertFalse(ScriptFragment.isScript(new FixtureValue("${test")));
+
+        assertTrue(ScriptFragment.isScript(new FixtureValue("${test}")));
+        assertTrue(ScriptFragment.isScript(new FixtureValue("${test.example}")));
+        assertTrue(ScriptFragment.isScript(new FixtureValue("${test.example.abc()}")));
+    }
+
+    @Test
+    public void testBuildScriptFragment() {
+        ScriptFragment fragment = ScriptFragment.of(new FixtureValue("${test.example}"));
+        assertEquals("test", fragment.getMethodName());
+        assertFalse(fragment.hasArguments());
+        assertEquals("example", fragment.getNext().getMethodName());
+        assertFalse(fragment.getNext().hasArguments());
+    }
+
+    @Test
+    public void testBuildArgumentsScriptFragment() {
+        ScriptFragment fragment = ScriptFragment.of(new FixtureValue("${test('a', \"b\", 3).example.script()}"));
+        assertEquals("test", fragment.getMethodName());
+        assertTrue(fragment.hasArguments());
+        assertEquals("a", fragment.getArguments().get(0));
+        assertEquals("b", fragment.getArguments().get(1));
+        assertEquals("3", fragment.getArguments().get(2));
+
+        fragment = fragment.getNext();
+        assertEquals("example", fragment.getMethodName());
+        assertFalse(fragment.hasArguments());
+
+        fragment = fragment.getNext();
+        assertEquals("script", fragment.getMethodName());
+        assertFalse(fragment.hasArguments());
+
+
+    }
+}

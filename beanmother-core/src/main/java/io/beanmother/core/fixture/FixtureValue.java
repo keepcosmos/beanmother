@@ -1,5 +1,8 @@
 package io.beanmother.core.fixture;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * FixtureValue decorates a value from a fixture
  *
@@ -83,5 +86,12 @@ public class FixtureValue extends Object implements FixtureTemplate {
     @Override
     public String toString() {
         return String.valueOf(value);
+    }
+
+    public static void main(String[] args) {
+        Pattern patter = Pattern.compile("(?<=\\$\\{)(.+?)(?=})");
+        Matcher matcher = patter.matcher("abcd${abc}abc");
+        System.out.println(matcher.find());
+        System.out.println(matcher.group(0));
     }
 }

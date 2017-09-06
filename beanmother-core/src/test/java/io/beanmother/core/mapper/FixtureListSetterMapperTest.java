@@ -1,10 +1,8 @@
-package io.beanmother.core.mapper.setter;
+package io.beanmother.core.mapper;
 
 import io.beanmother.core.converter.StandardConverterFactory;
 import io.beanmother.core.fixture.FixtureList;
 import io.beanmother.core.fixture.FixtureTemplateWrapper;
-import io.beanmother.core.mapper.SetterFixtureMapper;
-import io.beanmother.core.mapper.SetterMapperMediator;
 import org.junit.Before;
 import org.junit.Test;
 
