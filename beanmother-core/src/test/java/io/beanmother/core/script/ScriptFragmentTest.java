@@ -49,7 +49,17 @@ public class ScriptFragmentTest {
         fragment = fragment.getNext();
         assertEquals("script", fragment.getMethodName());
         assertFalse(fragment.hasArguments());
+    }
 
+    @Test
+    public void testGetAllScript() {
+        ScriptFragment fragment = ScriptFragment.of(new FixtureValue("${test('a', 'b', 'c')}"));
+        assertEquals("test('a','b','c')", fragment.toScriptString());
 
+        fragment = ScriptFragment.of(new FixtureValue("${test.example.script}"));
+        assertEquals("test.example.script", fragment.toScriptString());
+
+        fragment = ScriptFragment.of(new FixtureValue("${test(1, '2', '3').example.script('a')}"));
+        assertEquals("test('1','2','3').example.script('a')", fragment.toScriptString());
     }
 }

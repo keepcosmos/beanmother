@@ -12,6 +12,7 @@ public class StandardConverterFactory extends ConverterFactory {
             new NumberToNumberConverter(),
             new NumberToStringConverter(),
             new StringToNumberConverter(),
+            new StringToDateConverter(),
             new DateToSQLDateConverter()
         };
     }

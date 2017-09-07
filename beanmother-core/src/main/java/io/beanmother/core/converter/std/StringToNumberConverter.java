@@ -9,6 +9,10 @@ public class StringToNumberConverter extends AbstractConverter {
 
     @Override
     public Object convert(Object source, TypeToken<?> targetTypeToken) {
+        if (targetTypeToken.isPrimitive()) {
+            targetTypeToken = PrimitiveTypeUtils.toWrapperTypeToken(targetTypeToken);
+        }
+
         if (canHandle(source, targetTypeToken)) {
             return NumberUtils.parseNumber((String) source, (Class) targetTypeToken.getType());
         } else {

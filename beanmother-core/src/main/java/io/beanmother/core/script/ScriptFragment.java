@@ -7,25 +7,51 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The fragment from a script string.
+ *
+ * Each script fragment has method name, arguments and trailing script fragment(or not), like a linked-list structure.
+ */
 public class ScriptFragment {
 
+    /**
+     * Script pattern of the value inside of {@link FixtureValue}
+     */
     private final static Pattern FIXTURE_VALUE_SCRIPT_PATTERN = Pattern.compile("(?<=\\$\\{)(.+?)(?=})");
 
+    /**
+     * Script Arguments pattern
+     */
     private final static Pattern ARGUMENTS_PATTERN = Pattern.compile("(?<=\\()(.*?)(?=\\))");
 
-    private final static String FRAGMENT_CHAIN_CHAR = "\\.";
 
+    private final static String FRAGMENT_DELIM = "\\.";
+
+    /**
+     * Script method name
+     */
     private String methodName;
 
+    /**
+     * Arguments
+     */
     private List<String> arguments = new ArrayList<>();
 
+    /**
+     * Trailing script fragment
+     */
     private ScriptFragment next;
 
+    /**
+     * Parse a FixtueValue to ScriptFragments
+     * @param fixtureValue
+     * @return
+     */
     public static ScriptFragment of(FixtureValue fixtureValue) {
         if (fixtureValue.getValue() instanceof String) {
             Matcher matcher = FIXTURE_VALUE_SCRIPT_PATTERN.matcher((CharSequence) fixtureValue.getValue());
             if (matcher.find()) {
-                String[] scripts = matcher.group(0).split(FRAGMENT_CHAIN_CHAR);
+                String[] scripts = matcher.group(0).split(FRAGMENT_DELIM);
 
                 ScriptFragment scriptFragment = null;
                 for (String script : scripts) {
@@ -38,10 +64,10 @@ public class ScriptFragment {
                 return scriptFragment;
             }
         }
-        throw new IllegalArgumentException(fixtureValue.toString() + "is not a script");
+        throw new IllegalArgumentException(fixtureValue.toString() + " is not a script");
     }
 
-    public static ScriptFragment of(String script) {
+    private static ScriptFragment of(String script) {
         Matcher argumentMatcher = ARGUMENTS_PATTERN.matcher(script);
         if (argumentMatcher.find()) {
             String[] arguments = argumentMatcher.group(0).split(",");
@@ -62,10 +88,19 @@ public class ScriptFragment {
                 && FIXTURE_VALUE_SCRIPT_PATTERN.matcher((CharSequence) fixtureValue.getValue()).find();
     }
 
+    /**
+     * Create a ScriptFragment
+     * @param methodName
+     */
     public ScriptFragment(String methodName) {
         this.methodName = methodName.trim();
     }
 
+    /**
+     * Create a ScriptFragment.
+     * @param methodName
+     * @param arguments
+     */
     public ScriptFragment(String methodName, String ... arguments) {
         this(methodName);
         for (String argument :arguments) {
@@ -73,27 +108,73 @@ public class ScriptFragment {
         }
     }
 
+    /**
+     * Get script method name.
+     * @return
+     */
     public String getMethodName() {
         return methodName;
     }
 
+    /**
+     * Get script arguments.
+     * @return
+     */
     public List<String> getArguments() {
         return arguments;
     }
 
+    /**
+     * Check existence of arguments.
+     * @return
+     */
     public boolean hasArguments() {
         return (arguments != null) && !arguments.isEmpty();
     }
 
+    /**
+     * Get next(trailing) ScriptFragment.
+     * @return
+     */
     public ScriptFragment getNext() {
         return next;
     }
 
+    /**
+     * Append ScriptFragment to tail.
+     * @param scriptFragment
+     */
     public void appendToTail(ScriptFragment scriptFragment) {
         if (next == null) {
             next = scriptFragment;
         } else {
             next.appendToTail(scriptFragment);
         }
+    }
+
+    /**
+     * Get string of all trailing script.
+     * @return
+     */
+    public String toScriptString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(methodName);
+
+        if (arguments != null && !arguments.isEmpty()) {
+            builder.append("(");
+            for (int i = 0 ; i < arguments.size() ; i++) {
+                builder.append("'" + arguments.get(i) + "'");
+                if (i < arguments.size() - 1) {
+                    builder.append(",");
+                }
+            }
+            builder.append(")");
+        }
+
+        if (getNext() != null) {
+            builder.append(".").append(getNext().toScriptString());
+        }
+
+        return builder.toString();
     }
 }

@@ -4,6 +4,12 @@ dependencies {
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.18'
     compile group: 'com.google.guava', name: 'guava', version: '20.0'
 
+    // For String to date converter
+    compile group: 'com.joestelmach', name: 'natty', version: '0.13'
+
+    // For FakerScriptProcessor
+    compile group: 'com.github.javafaker', name: 'javafaker', version: '0.13'
+
 
     testCompile project(':beanmother-testmodel')
 }
