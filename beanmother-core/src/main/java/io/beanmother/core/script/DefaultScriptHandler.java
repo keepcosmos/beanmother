@@ -2,6 +2,7 @@ package io.beanmother.core.script;
 
 import io.beanmother.core.fixture.FixtureValue;
 import io.beanmother.core.script.std.FakerScriptProcessor;
+import io.beanmother.core.script.std.SequenceScriptProcessor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ public class DefaultScriptHandler implements ScriptRunner {
 
     public DefaultScriptHandler() {
         scriptProcessors.add(new FakerScriptProcessor());
+        scriptProcessors.add(new SequenceScriptProcessor());
     }
 
     @Override
@@ -24,8 +26,9 @@ public class DefaultScriptHandler implements ScriptRunner {
         fixtureValue.setValue(process.process(fragment));
     }
 
-    public void regiester(ScriptProcessor processor) {
-        this.scriptProcessors.add(processor);
+    @Override
+    public void register(ScriptProcessor scriptProcessor) {
+        this.scriptProcessors.add(scriptProcessor);
     }
 
     public ScriptProcessor get(ScriptFragment scriptFragment) {

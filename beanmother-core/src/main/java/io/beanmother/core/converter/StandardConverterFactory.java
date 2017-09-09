@@ -9,11 +9,17 @@ public class StandardConverterFactory extends ConverterFactory {
     static {
         standardConverters = new Converter[]{
                 new SameClassConverter(Integer.MAX_VALUE),
+                new ObjectToStringConverter(Integer.MAX_VALUE),
                 new NumberToNumberConverter(),
-                new NumberToStringConverter(),
                 new StringToNumberConverter(),
                 new StringToDateConverter(),
+                new StringToSQLDateConverter(),
+                new StringToCalendarConverter(),
+                new StringToFileConverter(),
+                new StringToURIConverter(),
+                new StringToURLConverter(),
                 new DateToSQLDateConverter(),
+                new DateToCalendarConverter(),
                 new StringToEnumConverter()
         };
     }

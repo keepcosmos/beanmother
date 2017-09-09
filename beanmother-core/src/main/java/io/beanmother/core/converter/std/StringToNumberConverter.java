@@ -5,6 +5,9 @@ import io.beanmother.core.converter.AbstractConverter;
 import io.beanmother.core.util.NumberUtils;
 import io.beanmother.core.util.PrimitiveTypeUtils;
 
+/**
+ * Converter used to convert a String to a Number
+ */
 public class StringToNumberConverter extends AbstractConverter {
 
     @Override

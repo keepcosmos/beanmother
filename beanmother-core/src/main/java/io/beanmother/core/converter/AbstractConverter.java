@@ -1,6 +1,10 @@
 package io.beanmother.core.converter;
 
+/**
+ * Abstract converter
+ */
 public abstract class AbstractConverter implements Converter {
+
     private int priority;
 
     public AbstractConverter() {

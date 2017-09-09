@@ -12,7 +12,7 @@ public interface Converter extends Comparable<Converter> {
      * Convert to given type
      *
      * @param source
-     * @param typeToken
+     * @param targetTypeToken
      *
      * @return converted object
      */
@@ -22,7 +22,7 @@ public interface Converter extends Comparable<Converter> {
      * Check that source can convert to given type
      *
      * @param source
-     * @param typeToken
+     * @param targetTypeToken
      *
      * @return true if it can convert
      */

@@ -19,13 +19,22 @@ import java.util.List;
 
 public abstract class AbstractBeanMother implements BeanMother {
 
-    private FixturesStore fixturesStore = new DefaultFixturesStore();
+    private FixturesStore fixturesStore;
 
-    private ConverterFactory converterFactory = new StandardConverterFactory();
+    private ConverterFactory converterFactory;
 
-    private FixtureMapper fixtureMapper = new DefaultFixtureMapper(converterFactory);
+    private FixtureMapper fixtureMapper;
 
-    private ScriptRunner scriptRunner = new DefaultScriptHandler();
+    private ScriptRunner scriptRunner;
+
+    public AbstractBeanMother() {
+        fixturesStore = new DefaultFixturesStore();
+        converterFactory = new StandardConverterFactory();
+        fixtureMapper = new DefaultFixtureMapper(converterFactory);
+        scriptRunner = new DefaultScriptHandler();
+
+        initialize();
+    }
 
     @Override
     public <T> T bear(String fixtureName, T target) {
@@ -81,5 +90,25 @@ public abstract class AbstractBeanMother implements BeanMother {
     public BeanMother addFixtureLocation(String path) {
         fixturesStore.addLocation(new Location(path));
         return this;
+    }
+
+    public String[] defaultFixturePaths() {
+        return new String[] { "fixtures" };
+    }
+
+    protected void configureConverterFactory(ConverterFactory converterFactory) {
+        // Do nothing.
+    }
+
+    protected void configureScriptRunner(ScriptRunner scriptRunner) {
+        // Do nothing.
+    }
+
+    protected void initialize() {
+        for ( String path : defaultFixturePaths()) {
+            this.fixturesStore.addLocation(new Location(path));
+        }
+        configureConverterFactory(converterFactory);
+        configureScriptRunner(scriptRunner);
     }
 }

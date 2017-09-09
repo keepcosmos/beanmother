@@ -4,6 +4,9 @@ import io.beanmother.core.converter.AbstractGenericConverter;
 
 import java.util.Date;
 
+/**
+ * Converter used to convert a Date to a sql Date
+ */
 public class DateToSQLDateConverter extends AbstractGenericConverter<Date, java.sql.Date> {
     @Override
     protected java.sql.Date convert(Date source) {

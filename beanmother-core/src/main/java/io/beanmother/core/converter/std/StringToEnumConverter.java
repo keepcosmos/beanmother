@@ -4,6 +4,9 @@ import com.google.common.reflect.TypeToken;
 import io.beanmother.core.converter.AbstractConverter;
 import io.beanmother.core.converter.ConverterException;
 
+/**
+ * Converter used to convert a String to a Enum
+ */
 public class StringToEnumConverter extends AbstractConverter {
     @Override
     public Object convert(Object source, TypeToken<?> targetTypeToken) {

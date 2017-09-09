@@ -43,16 +43,16 @@ public class DefaultFixturesStoreTest {
     @Test
     public void testAddMultipleLocations() throws IOException {
         fixtureStore.addLocation(new Location("fixtures/animals/pets"));
-        assertTrue(fixtureStore.exits("davi"));
-        assertTrue(fixtureStore.exits("rooney"));
-        assertTrue(fixtureStore.exits("ruru"));
+        assertTrue(fixtureStore.exists("davi"));
+        assertTrue(fixtureStore.exists("rooney"));
+        assertTrue(fixtureStore.exists("ruru"));
 
-        assertFalse(fixtureStore.exits("tiger"));  // tiger is not in pets/
+        assertFalse(fixtureStore.exists("tiger"));  // tiger is not in pets/
 
         // add location and refresh
         fixtureStore.addLocation(new Location("fixtures/animals"));
-        assertTrue(fixtureStore.exits("davi"));
-        assertTrue(fixtureStore.exits("tiger"));
+        assertTrue(fixtureStore.exists("davi"));
+        assertTrue(fixtureStore.exists("tiger"));
     }
 
     @Test

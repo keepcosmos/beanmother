@@ -3,6 +3,9 @@ package io.beanmother.core.converter.std;
 import com.google.common.reflect.TypeToken;
 import io.beanmother.core.converter.AbstractConverter;
 
+/**
+ * Converter used to convert to a same type or a sub type.
+ */
 public class SameClassConverter extends AbstractConverter {
 
     public SameClassConverter() {

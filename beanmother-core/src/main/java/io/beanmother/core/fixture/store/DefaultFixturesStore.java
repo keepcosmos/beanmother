@@ -78,7 +78,7 @@ public class DefaultFixturesStore implements FixturesStore {
     }
 
     @Override
-    public boolean exits(String fixtureKey) {
+    public boolean exists(String fixtureKey) {
         return this.fixtureMaps.containsKey(fixtureKey);
     }
 

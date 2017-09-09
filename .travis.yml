@@ -4,10 +4,6 @@ jdk:
   - oraclejdk7
   - oraclejdk8
 
-env:
-  - JAVA_OPTS="-Xmx512m"
-  - TERM=dumb
-
 sudo: false
 
 before_script:
