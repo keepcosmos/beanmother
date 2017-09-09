@@ -1,8 +1,9 @@
-package io.beanmother.core.script;
+package io.beanmother.core.script.std;
 
 import com.github.javafaker.Faker;
+import io.beanmother.core.script.MethodReflectionEvalScriptProcessor;
 
-public class FakerScriptProcessor extends MethodReflectionScriptProcessor {
+public class FakerScriptProcessor extends MethodReflectionEvalScriptProcessor {
 
     private final static String SCRIPT_NAMESPACE = "faker";
 

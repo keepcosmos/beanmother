@@ -1,13 +1,18 @@
 package io.beanmother.core.script;
 
 import io.beanmother.core.fixture.FixtureValue;
+import io.beanmother.core.script.std.FakerScriptProcessor;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class DefaultScriptHandler implements ScriptHandler {
+public class DefaultScriptHandler implements ScriptRunner {
 
     private Set<ScriptProcessor> scriptProcessors = new HashSet<>();
+
+    public DefaultScriptHandler() {
+        scriptProcessors.add(new FakerScriptProcessor());
+    }
 
     @Override
     public void runScript(FixtureValue fixtureValue) {

@@ -1,0 +1,16 @@
+unknown_work: &unknown_work
+  title: ${faker.book.title}
+  language: en
+  publishedAt: ${faker.date.between('2000-01-01', '2010-01-01')}
+
+unknown_author:
+  id: 1
+  name: ${faker.book.author}
+  birth: ${faker.date.between('1990-01-01', '2000-01-01')}
+  gender: MALE
+  dead: ${faker.bool.bool}
+  introduction: ${faker.lorem.paragraph}
+  works:
+    - <<: *unknown_work
+    - <<: *unknown_work
+    - <<: *unknown_work

@@ -8,12 +8,13 @@ public class StandardConverterFactory extends ConverterFactory {
 
     static {
         standardConverters = new Converter[]{
-            new SameClassConverter(Integer.MAX_VALUE),
-            new NumberToNumberConverter(),
-            new NumberToStringConverter(),
-            new StringToNumberConverter(),
-            new StringToDateConverter(),
-            new DateToSQLDateConverter()
+                new SameClassConverter(Integer.MAX_VALUE),
+                new NumberToNumberConverter(),
+                new NumberToStringConverter(),
+                new StringToNumberConverter(),
+                new StringToDateConverter(),
+                new DateToSQLDateConverter(),
+                new StringToEnumConverter()
         };
     }
 

@@ -5,15 +5,17 @@ import io.beanmother.core.fixture.parser.FixtureParser;
 import io.beanmother.core.fixture.parser.YamlFixtureParser;
 import io.beanmother.core.fixture.scanner.FixtureScanner;
 import io.beanmother.core.fixture.scanner.YamlFixtureScanner;
+import io.beanmother.core.mapper.DefaultFixtureMapper;
 import io.beanmother.core.util.ClassUtils;
 import io.beanmother.core.util.Location;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * Default fixture store.
@@ -21,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class DefaultFixturesStore implements FixturesStore {
 
-    private static Logger logger = Logger.getLogger(DefaultFixturesStore.class.getName());
+    private final static Logger logger = LoggerFactory.getLogger(DefaultFixtureMapper.class);
 
     /**
      * Scanner to load fixture files.
@@ -70,28 +72,39 @@ public class DefaultFixturesStore implements FixturesStore {
     }
 
     @Override
+    public FixtureMap reproduce(String fixtureKey) {
+        FixtureMap fixtureMap = get(fixtureKey);
+        return fixtureMap == null ? null : fixtureMap.reproduce();
+    }
+
+    @Override
     public boolean exits(String fixtureKey) {
         return this.fixtureMaps.containsKey(fixtureKey);
     }
 
     @Override
-    public void addLocation(Location location) throws IOException {
+    public void addLocation(Location location) {
         if (fixtureLocations.contains(location)) {
-            logger.warning(location.getDescriptor() + " is already added.");
+            logger.debug(location.getDescriptor() + " is already added.");
             return;
         }
 
         List<File> files = fixtureScanner.scan(location);
 
         if (files.size() == 0) {
-            logger.warning("can not find any fixture file in " + location.getDescriptor());
+            logger.warn("can not find any fixture file in " + location.getDescriptor());
             return;
         }
 
         Map<String, FixtureMap> parsed = new HashMap<>();
         for (File file : files) {
             if (fixtureFiles.contains(file)) continue;
-            String fixtureStr = new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
+            String fixtureStr = null;
+            try {
+                fixtureStr = new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
+            } catch (IOException e) {
+                throw new RuntimeException("can not read " + file.getAbsolutePath(), e);
+            }
             parsed.putAll(fixtureParser.parse(fixtureStr));
         }
 

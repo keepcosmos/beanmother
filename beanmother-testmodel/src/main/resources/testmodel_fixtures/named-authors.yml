@@ -1,8 +1,8 @@
-hemingway:
+ hemingway:
   id: 1
   name: Ernest Hemingway
   birth: 1899-07-21
-  gener: MALE
+  gender: MALE
   dead: true
   introduction: |
     Ernest Miller Hemingway was an American novelist, short story writer, and journalist. His economical and understated style had a strong influence on 20th-century fiction, while his life of adventure and his public image influenced later generations. Wikipedia

@@ -7,6 +7,10 @@ import io.beanmother.core.converter.AbstractGenericConverter;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * {@link String} to {@link Date} converter.
+ * The converter uses natty library {@see http://natty.joestelmach.com}.
+ */
 public class StringToDateConverter extends AbstractGenericConverter<String, Date> {
     private final static Parser dateParser = new Parser();
 

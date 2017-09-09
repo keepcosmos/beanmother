@@ -1,4 +1,4 @@
 package io.beanmother.core;
 
-public class ObjectMother {
+public class ObjectMother extends AbstractBeanMother {
 }

@@ -2,7 +2,10 @@ package io.beanmother.core.script;
 
 import com.github.javafaker.Faker;
 import io.beanmother.core.fixture.FixtureValue;
+import io.beanmother.core.script.std.FakerScriptProcessor;
 import org.junit.Test;
+
+import java.util.Date;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -49,5 +52,21 @@ public class FakerScriptProcessorTest extends ScriptProcessorTest {
 
         assertTrue(process(processor, "faker.number.randomDigit") instanceof Integer);
         assertTrue(process(processor, "faker.number.randomNumber") instanceof Long);
+    }
+
+    @Test
+    public void testDate() {
+        Date date = process(processor, "faker.date.between('2017-01-03', '2017-01-31')", Date.class);
+        assertTrue(date.getTime() > 1483282800000l && date.getTime() < 1485874800000l);
+
+        date = process(processor, "faker.date.future(1, 'hours')", Date.class);
+        assertTrue(date.compareTo(new Date()) == 1);
+        date = process(processor, "faker.date.future(1, 'days')", Date.class);
+        assertTrue(date.compareTo(new Date()) == 1);
+
+        date = process(processor, "faker.date.past(1, 'hours')", Date.class);
+        assertTrue(date.compareTo(new Date()) == -1);
+        date = process(processor, "faker.date.past(1, 'days')", Date.class);
+        assertTrue(date.compareTo(new Date()) == -1);
     }
 }

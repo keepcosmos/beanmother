@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MethodReflectionScriptProcessor implements ScriptProcessor {
+public abstract class MethodReflectionEvalScriptProcessor implements ScriptProcessor {
 
     private final static ConverterFactory converterFactory = new StandardConverterFactory();
 

@@ -3,8 +3,6 @@ package io.beanmother.core.fixture.store;
 import io.beanmother.core.fixture.FixtureMap;
 import io.beanmother.core.util.Location;
 
-import java.io.IOException;
-
 /**
  * The root interface for storing fixtureMap data.
  *
@@ -12,7 +10,8 @@ import java.io.IOException;
  */
 public interface FixturesStore {
     FixtureMap get(String fixtureKey);
+    FixtureMap reproduce(String fixtureKey);
     boolean exits(String fixtureKey);
-    void addLocation(Location location) throws IOException;
+    void addLocation(Location location);
     void reset();
 }

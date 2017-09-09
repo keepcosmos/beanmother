@@ -10,7 +10,7 @@ public class FixtureMapTraversal {
     /**
      * The interface that runs when visit edges.
      */
-    interface Processor {
+    public interface Processor {
         /**
          * Run when visiting a edge.
          * @param edge
