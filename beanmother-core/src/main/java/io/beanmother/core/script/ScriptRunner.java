@@ -1,8 +1,6 @@
 package io.beanmother.core.script;
 
-import io.beanmother.core.fixture.FixtureValue;
-
 public interface ScriptRunner {
-    void runScript(FixtureValue fixtureValue);
-    void register(ScriptProcessor scriptProcessor);
+    Object run(ScriptFragment scriptFragment);
+    boolean canHandle(ScriptFragment scriptFragment);
 }

@@ -1,7 +1,7 @@
 package io.beanmother.core.mapper;
 
-import io.beanmother.core.converter.StandardConverterFactory;
-import io.beanmother.core.fixture.FixtureValue;
+import io.beanmother.core.converter.ConverterFactory;
+import io.beanmother.core.common.FixtureValue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class FixtureValueSetterMapperTest {
 
     @Before
     public void setup() {
-        mapper = (SetterFixtureMapper) new SetterMapperMediator(new StandardConverterFactory()).getFixtureMapper();
+        mapper = (SetterFixtureMapper) new SetterMapperMediator(new ConverterFactory()).getFixtureMapper();
     }
 
     @Test

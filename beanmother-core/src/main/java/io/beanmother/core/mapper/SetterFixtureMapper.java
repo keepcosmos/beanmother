@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.reflect.Invokable;
 import com.google.common.reflect.Parameter;
 import com.google.common.reflect.TypeToken;
-import io.beanmother.core.fixture.*;
+import io.beanmother.core.common.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,12 +37,10 @@ public class SetterFixtureMapper implements FixtureMapper {
     @Override
     public <T> T map(FixtureMap fixtureMap, Class<T> targetType) {
         try {
-            T target = targetType.newInstance();
+            T target = (T) ConstructHelper.construct(targetType, fixtureMap);
             map(fixtureMap, target);
             return target;
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (FixtureMappingException e) {
             e.printStackTrace();
         }
         return null;

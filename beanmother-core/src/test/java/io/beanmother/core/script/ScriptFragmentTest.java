@@ -1,6 +1,6 @@
 package io.beanmother.core.script;
 
-import io.beanmother.core.fixture.FixtureValue;
+import io.beanmother.core.common.FixtureValue;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

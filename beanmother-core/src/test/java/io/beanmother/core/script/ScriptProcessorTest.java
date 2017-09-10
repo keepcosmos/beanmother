@@ -1,17 +1,17 @@
 package io.beanmother.core.script;
 
-import io.beanmother.core.fixture.FixtureValue;
+import io.beanmother.core.common.FixtureValue;
 
 /**
- * Abstract test for implementations of {@link ScriptProcessor}
+ * Abstract test for implementations of {@link ScriptRunner}
  */
 public abstract class ScriptProcessorTest {
-    protected <T> T process(ScriptProcessor processor, String script, Class<T> type) {
+    protected <T> T run(ScriptRunner runner, String script, Class<T> type) {
         FixtureValue fixture = new FixtureValue("${" +script + "}");
-        return (T) processor.process(ScriptFragment.of(fixture));
+        return (T) runner.run(ScriptFragment.of(fixture));
     }
 
-    protected Object process(ScriptProcessor processor, String script) {
-        return process(processor, script, Object.class);
+    protected Object run(ScriptRunner runner, String script) {
+        return run(runner, script, Object.class);
     }
 }

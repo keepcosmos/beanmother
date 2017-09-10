@@ -1,6 +1,6 @@
 package io.beanmother.core.mapper;
 
-import io.beanmother.core.fixture.FixtureMap;
+import io.beanmother.core.common.FixtureMap;
 
 /**
  * The root interface for mapping {@link FixtureMap} to target instance.

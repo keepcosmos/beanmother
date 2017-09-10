@@ -1,8 +1,8 @@
 package io.beanmother.core.mapper;
 
-import io.beanmother.core.fixture.store.DefaultFixturesStore;
-import io.beanmother.core.fixture.store.FixturesStore;
-import io.beanmother.core.util.Location;
+import io.beanmother.core.loader.store.DefaultFixturesStore;
+import io.beanmother.core.loader.store.FixturesStore;
+import io.beanmother.core.loader.Location;
 
 import java.io.IOException;
 

@@ -1,38 +1,48 @@
 package io.beanmother.core.script;
 
-import io.beanmother.core.fixture.FixtureValue;
-import io.beanmother.core.script.std.FakerScriptProcessor;
-import io.beanmother.core.script.std.SequenceScriptProcessor;
+import io.beanmother.core.common.FixtureValue;
+import io.beanmother.core.script.std.FakerScriptRunner;
+import io.beanmother.core.script.std.SequenceScriptRunner;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
-public class DefaultScriptHandler implements ScriptRunner {
+public class DefaultScriptHandler implements ScriptHandler {
 
-    private Set<ScriptProcessor> scriptProcessors = new HashSet<>();
+    private Set<ScriptRunner> scriptRunners = new HashSet<>();
 
     public DefaultScriptHandler() {
-        scriptProcessors.add(new FakerScriptProcessor());
-        scriptProcessors.add(new SequenceScriptProcessor());
+        scriptRunners.add(new FakerScriptRunner());
+        scriptRunners.add(new SequenceScriptRunner());
     }
 
     @Override
     public void runScript(FixtureValue fixtureValue) {
         ScriptFragment fragment = ScriptFragment.of(fixtureValue);
-        ScriptProcessor process = get(fragment);
+        ScriptRunner process = get(fragment);
         if (process == null) {
-            throw new RuntimeException("can not find ScriptProcessor for " + fixtureValue);
+            throw new RuntimeException("can not find ScriptRunner for " + fixtureValue);
         }
-        fixtureValue.setValue(process.process(fragment));
+        fixtureValue.setValue(process.run(fragment));
     }
 
     @Override
-    public void register(ScriptProcessor scriptProcessor) {
-        this.scriptProcessors.add(scriptProcessor);
+    public void register(ScriptRunnerModule scriptRunnerModule) {
+        Iterator<ScriptRunner> elements = scriptRunnerModule.getScriptRunners().iterator();
+
+        while (elements.hasNext()) {
+            register(elements.next());
+        }
     }
 
-    public ScriptProcessor get(ScriptFragment scriptFragment) {
-        for (ScriptProcessor processor : scriptProcessors) {
+    @Override
+    public void register(ScriptRunner scriptRunner) {
+        this.scriptRunners.add(scriptRunner);
+    }
+
+    public ScriptRunner get(ScriptFragment scriptFragment) {
+        for (ScriptRunner processor : scriptRunners) {
             if (processor.canHandle(scriptFragment)) {
                 return processor;
             }

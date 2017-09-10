@@ -1,6 +1,6 @@
 package io.beanmother.core.script;
 
-import io.beanmother.core.fixture.FixtureValue;
+import io.beanmother.core.common.FixtureValue;
 
 import java.util.ArrayList;
 import java.util.List;

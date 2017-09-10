@@ -1,7 +1,7 @@
 package io.beanmother.core.mapper;
 
 import com.google.common.reflect.TypeToken;
-import io.beanmother.core.fixture.FixtureTemplate;
+import io.beanmother.core.common.FixtureTemplate;
 
 /**
  * The root interface for converting {@link FixtureTemplate} to the given type.

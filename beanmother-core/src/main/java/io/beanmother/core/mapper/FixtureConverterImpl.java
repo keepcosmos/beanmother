@@ -1,9 +1,9 @@
 package io.beanmother.core.mapper;
 
 import com.google.common.reflect.TypeToken;
+import io.beanmother.core.common.*;
 import io.beanmother.core.converter.Converter;
 import io.beanmother.core.converter.ConverterFactory;
-import io.beanmother.core.fixture.*;
 import io.beanmother.core.util.PrimitiveTypeUtils;
 import io.beanmother.core.util.TypeTokenUtils;
 import org.slf4j.Logger;
@@ -192,7 +192,7 @@ public class FixtureConverterImpl implements FixtureConverter {
         } else {
             Object obj = null;
             try {
-                obj = typeToken.getRawType().newInstance();
+                obj = ConstructHelper.construct(typeToken.getRawType(), fixtureMap);
             } catch (Exception e) {
                 throw new FixtureMappingException(e);
             }
