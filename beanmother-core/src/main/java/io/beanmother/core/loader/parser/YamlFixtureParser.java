@@ -15,9 +15,10 @@ import java.util.Map;
  */
 public class YamlFixtureParser implements FixtureParser {
 
+    @SuppressWarnings("unchecked")
     @Override
     public Map<String, FixtureMap> parse(String fixture) {
-        Map<String, Object> fixtures = buildYaml().loadAs(fixture, Map.class);;
+        Map<String, ? extends Object> fixtures = buildYaml().loadAs(fixture, Map.class);;
         Map<String, FixtureMap> fixtureMaps = new HashMap<>();
 
         for (String key : fixtures.keySet()) {

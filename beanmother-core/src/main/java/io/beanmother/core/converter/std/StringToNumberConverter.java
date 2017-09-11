@@ -8,6 +8,7 @@ import io.beanmother.core.util.PrimitiveTypeUtils;
 /**
  * Converter used to convert a String to a Number
  */
+@SuppressWarnings("unchecked")
 public class StringToNumberConverter extends AbstractConverter {
 
     @Override

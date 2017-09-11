@@ -15,7 +15,7 @@ public class StringToDateConverter extends AbstractGenericConverter<String, Date
     private final static Parser dateParser = new Parser();
 
     @Override
-    protected Date convert(String source) {
+    public Date convert(String source) {
         List<DateGroup> groups = dateParser.parse(source);
         if (groups.size() > 0 && groups.get(0).getDates().size() > 0) {
             return groups.get(0).getDates().get(0);

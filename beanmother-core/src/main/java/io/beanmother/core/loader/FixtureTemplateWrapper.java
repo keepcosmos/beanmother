@@ -22,6 +22,7 @@ public class FixtureTemplateWrapper {
      * @param parent The parent FixtureTemplate who hold the source.
      * @return fixture map
      */
+    @SuppressWarnings("unchecked")
     public static FixtureMap wrap(Map<String, ? extends Object> source, String fixtureName, FixtureTemplate parent) {
         FixtureMap fixtureMap = new FixtureMap();
         fixtureMap.setFixtureName(fixtureName);
@@ -49,6 +50,7 @@ public class FixtureTemplateWrapper {
      * @param parent The parent FixtureTemplate who hold the source.
      * @return fixture list
      */
+    @SuppressWarnings("unchecked")
     public static FixtureList wrap(List<? extends Object> source, String fixtureName, FixtureTemplate parent) {
         FixtureList fixtureList = new FixtureList();
         fixtureList.setFixtureName(fixtureName);

@@ -13,7 +13,7 @@ public class StringToCalendarConverter extends AbstractGenericConverter<String, 
     private final static DateToCalendarConverter dateToCalendarConverter = new DateToCalendarConverter();
 
     @Override
-    protected Calendar convert(String source) {
+    public Calendar convert(String source) {
         return dateToCalendarConverter.convert(stringToDateConverter.convert(source));
     }
 }

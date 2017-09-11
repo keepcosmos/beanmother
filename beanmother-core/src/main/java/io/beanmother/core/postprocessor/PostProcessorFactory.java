@@ -16,6 +16,7 @@ public class PostProcessorFactory {
         postProcessors.add(postProcessor);
     }
 
+    @SuppressWarnings("unchecked")
     public <T> List<PostProcessor<T>> get(Class<T> targetType) {
         List<PostProcessor<T>> selected = new ArrayList<>();
 

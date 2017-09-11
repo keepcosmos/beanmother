@@ -34,6 +34,7 @@ public class SetterFixtureMapper implements FixtureMapper {
         this.mapperMediator = mapperMediator;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T map(FixtureMap fixtureMap, Class<T> targetType) {
         try {
@@ -78,7 +79,7 @@ public class SetterFixtureMapper implements FixtureMapper {
         }.handle(fixtureTemplate);
     }
 
-    public FixtureConverter getFixtureConverter() {
+    private FixtureConverter getFixtureConverter() {
         return mapperMediator.getFixtureConverter();
     }
 
@@ -94,8 +95,6 @@ public class SetterFixtureMapper implements FixtureMapper {
                 if (candidateParam != null) {
                     candidate.invoke(target, candidateParam);
                     return;
-                } else {
-                    continue;
                 }
             } catch (Exception e) {
                 throw new FixtureMappingException(e);
@@ -116,8 +115,6 @@ public class SetterFixtureMapper implements FixtureMapper {
                 if (candidateParam != null) {
                     candidate.invoke(target, candidateParam);
                     return;
-                } else {
-                    continue;
                 }
             } catch (Exception e) {
                 throw new FixtureMappingException(e);

@@ -27,7 +27,7 @@ public class YamlFixtureScannerTest {
     public void testFixtureFilesInDirectory() {
         FixtureScanner scanner = new YamlFixtureScanner(classLoader);
         List<File> files = scanner.scan(new Location("fixtures/animals/"));
-        List<String> fileNames = new ArrayList();
+        List<String> fileNames = new ArrayList<>();
         for (File file : files) {
             fileNames.add(file.getName());
         }
@@ -40,7 +40,7 @@ public class YamlFixtureScannerTest {
     public void testOnlyLoadYAMLFile() {
         FixtureScanner scanner = new YamlFixtureScanner(classLoader);
         List<File> files = scanner.scan(new Location("fixtures"));
-        List<String> fileNames = new ArrayList();
+        List<String> fileNames = new ArrayList<>();
         for (File file : files) {
             fileNames.add(file.getName());
         }

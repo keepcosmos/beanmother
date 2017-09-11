@@ -2,14 +2,10 @@
 .gradle
 /build/
 /out/
-/beanmother-core/build/
-/beanmother-core/out/
-/beanmother-modelmapper/build/
-/beanmother-modelmapper/out/
-/beanmother-testmodel/build/
-/beanmother-testmodel/out/
-/object-mother/build/
-/object-mother/out/
+/target/
+*/build/
+*/out/
+*/target/
 .idea
 
 # Ignore Gradle GUI config

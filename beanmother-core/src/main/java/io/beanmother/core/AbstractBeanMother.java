@@ -19,6 +19,7 @@ import io.beanmother.core.script.ScriptHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public abstract class AbstractBeanMother implements BeanMother {
 
     private FixturesStore fixturesStore;

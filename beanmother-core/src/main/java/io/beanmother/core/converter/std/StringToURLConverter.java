@@ -12,7 +12,7 @@ import java.net.URL;
 public class StringToURLConverter extends AbstractGenericConverter<String, URL> {
 
     @Override
-    protected URL convert(String source) {
+    public URL convert(String source) {
         try {
             return new URL(source);
         } catch (MalformedURLException e) {

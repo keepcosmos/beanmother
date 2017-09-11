@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
  */
 public class DateToCalendarConverter extends AbstractGenericConverter<Date, Calendar> {
     @Override
-    protected Calendar convert(Date source) {
+    public Calendar convert(Date source) {
         Calendar cal = new GregorianCalendar();
         cal.setTime(source);
         return cal;

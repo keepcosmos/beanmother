@@ -13,7 +13,7 @@ public class StringToSQLDateConverter extends AbstractGenericConverter<String, D
     private final static DateToSQLDateConverter dateToSQLDateConverter = new DateToSQLDateConverter();
 
     @Override
-    protected Date convert(String source) {
+    public Date convert(String source) {
         return dateToSQLDateConverter.convert(stringToDateConverter.convert(source));
     }
 }

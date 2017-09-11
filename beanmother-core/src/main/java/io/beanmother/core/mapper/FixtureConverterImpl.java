@@ -14,6 +14,7 @@ import java.util.*;
 /**
  * Default implementation of {@link FixtureConverter}
  */
+@SuppressWarnings("unchecked")
 public class FixtureConverterImpl implements FixtureConverter {
     private final static Logger logger = LoggerFactory.getLogger(FixtureConverterImpl.class);
 

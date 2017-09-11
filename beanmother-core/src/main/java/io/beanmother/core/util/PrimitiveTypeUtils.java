@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Utils about primitive type
  */
+@SuppressWarnings("unchecked")
 public class PrimitiveTypeUtils {
 
     /**

@@ -20,13 +20,14 @@ public abstract class AbstractGenericConverter<S, D> extends AbstractConverter {
         super(priority);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Object convert(Object source, TypeToken<?> typeToken) {
         if (!canHandle(source, typeToken)) throw new ConverterException(source, typeToken.getRawType(), null);
         return convert((S) source);
     }
 
-    protected abstract D convert(S source);
+    public abstract D convert(S source);
 
     @Override
     public boolean canHandle(Object source, TypeToken<?> typeToken) {

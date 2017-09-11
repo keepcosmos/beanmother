@@ -10,7 +10,7 @@ import java.io.File;
 public class StringToFileConverter extends AbstractGenericConverter<String, File> {
 
     @Override
-    protected File convert(String source) {
+    public File convert(String source) {
         return new File(source);
     }
 }

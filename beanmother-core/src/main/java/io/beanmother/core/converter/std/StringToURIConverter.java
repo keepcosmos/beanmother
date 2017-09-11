@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 public class StringToURIConverter extends AbstractGenericConverter<String, URI> {
 
     @Override
-    protected URI convert(String source) {
+    public URI convert(String source) {
         try {
             return new URI(source);
         } catch (URISyntaxException e) {

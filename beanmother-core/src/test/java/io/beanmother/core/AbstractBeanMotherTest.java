@@ -1,7 +1,10 @@
 package io.beanmother.core;
 
-import org.junit.Ignore;
+import io.beanmother.testmodel.Author;
 import org.junit.Test;
+
+import java.net.URISyntaxException;
+import java.util.List;
 
 public class AbstractBeanMotherTest {
 
@@ -19,19 +22,15 @@ public class AbstractBeanMotherTest {
 
         @Override
         public String[] defaultFixturePaths() {
-            return new String[]{ "testmodel_fixtures" };
+            return new String[]{"testmodel_fixtures"};
         }
     }
 
     TestObjectMother beanMother = TestObjectMother.getInstance();
 
     @Test
-    @Ignore
-    public void testMapping() {
-//        Author author = beanMother.bear("hemingway", Author.class);
-//        System.out.println(author);
-
-//        List<Author> authors = beanMother.bear("unknown_author", Author.class, 5);
-//        System.out.println(authors);
+    public void testMapping() throws URISyntaxException {
+        List<Author> authors = beanMother.bear("unknown_author", Author.class, 5);
+        System.out.println(authors);
     }
 }

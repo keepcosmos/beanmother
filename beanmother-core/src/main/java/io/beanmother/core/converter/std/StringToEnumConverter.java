@@ -8,10 +8,13 @@ import io.beanmother.core.converter.ConverterException;
  * Converter used to convert a String to a Enum
  */
 public class StringToEnumConverter extends AbstractConverter {
+
+    @SuppressWarnings("unchecked")
     @Override
     public Object convert(Object source, TypeToken<?> targetTypeToken) {
-        Class enumClass = targetTypeToken.getRawType();
+        if (!canHandle(source, targetTypeToken)) throw new ConverterException(source, targetTypeToken.getRawType(), null);
 
+        Class enumClass = targetTypeToken.getRawType();
         for (Object enumConstant : enumClass.getEnumConstants()) {
             String enumStr = enumConstant.toString().replaceAll("\\_", "");
             String sourceStr = ((String) source).replaceAll("\\-", "").replaceAll("\\_", "").replaceAll("\\s", "");

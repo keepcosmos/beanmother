@@ -29,7 +29,7 @@ public class StringToBooleanConverter extends AbstractGenericConverter<String, B
     }
 
     @Override
-    protected Boolean convert(String source) {
+    public Boolean convert(String source) {
         String normalize = source.trim().toLowerCase();
         if (TRUE_STRING.contains(normalize)) {
             return true;
