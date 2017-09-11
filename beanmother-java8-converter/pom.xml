@@ -8,7 +8,7 @@
     <parent>
         <artifactId>beanmother</artifactId>
         <groupId>io.beanmother</groupId>
-        <version>0.9.0-SNAPSHOT</version>
+        <version>0.7.0</version>
     </parent>
 
     <artifactId>beanmother-java8-converter</artifactId>
