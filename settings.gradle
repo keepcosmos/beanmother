@@ -1,4 +1,0 @@
-rootProject.name = 'beanmother'
-
-include 'beanmother-core'
-include 'beanmother-testmodel'
