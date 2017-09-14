@@ -1,5 +1,8 @@
 # beanmother
 
+[![Build Status](https://travis-ci.org/keepcosmos/beanmother.svg?branch=master)](https://travis-ci.org/keepcosmos/beanmother)  [![Coverage Status](https://coveralls.io/repos/github/keepcosmos/beanmother/badge.svg?branch=ci-setting)](https://coveralls.io/github/keepcosmos/beanmother?branch=ci-setting)  
+
+
 Beanmother is a kind of class used in testing to help create example objects that you use for testing.
 
 [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html)

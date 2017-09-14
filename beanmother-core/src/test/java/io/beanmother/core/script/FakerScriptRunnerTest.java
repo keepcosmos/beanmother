@@ -47,8 +47,8 @@ public class FakerScriptRunnerTest extends ScriptProcessorTest {
 
     @Test
     public void testNumber() {
-        Long num = (Long) run(scriptRunner, "faker.number.numberBetween(1, 3)");
-        assertTrue(num.intValue() >= 1 && num.intValue() <= 3);
+        int num = ((Number) run(scriptRunner, "faker.number.numberBetween(1, 3)")).intValue();
+        assertTrue(num >= 1 && num <= 3);
 
         assertTrue(run(scriptRunner, "faker.number.randomDigit") instanceof Integer);
         assertTrue(run(scriptRunner, "faker.number.randomNumber") instanceof Long);
