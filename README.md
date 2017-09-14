@@ -1,6 +1,10 @@
 # beanmother
 
-[![Build Status](https://travis-ci.org/keepcosmos/beanmother.svg?branch=master)](https://travis-ci.org/keepcosmos/beanmother)  [![Coverage Status](https://coveralls.io/repos/github/keepcosmos/beanmother/badge.svg?branch=ci-setting)](https://coveralls.io/github/keepcosmos/beanmother?branch=ci-setting)  
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.beanmother/beanmother-core/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Cio.beanmother)
+[![Build Status](https://travis-ci.org/keepcosmos/beanmother.svg?branch=master)](https://travis-ci.org/keepcosmos/beanmother)
+[![Coverage Status](https://coveralls.io/repos/github/keepcosmos/beanmother/badge.svg?branch=ci-setting)](https://coveralls.io/github/keepcosmos/beanmother?branch=ci-setting)
+[![Javadocs](http://javadoc.io/badge/io.beanmother/beanmother-core.svg)](http://javadoc.io/doc/io.beanmother/beanmother-core)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  
 
 
 Beanmother is a kind of class used in testing to help create example objects that you use for testing.
