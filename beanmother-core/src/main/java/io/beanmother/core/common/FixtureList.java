@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * FixtureList decorates a list from fixture
  *
- * The source of FixtureList generally {@link ArrayList<Object>} that is parsed by {@link io.beanmother.core.loader.parser.FixtureParser}
+ * The source of FixtureList generally {@link ArrayList} that is parsed by {@link io.beanmother.core.loader.parser.FixtureParser}
  */
 public class FixtureList extends ArrayList<FixtureTemplate> implements FixtureTemplate {
 

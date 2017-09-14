@@ -6,6 +6,7 @@
 */build/
 */out/
 */target/
+settings.xml
 .idea
 
 # Ignore Gradle GUI config

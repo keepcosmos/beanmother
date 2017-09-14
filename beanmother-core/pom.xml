@@ -37,14 +37,6 @@
             <artifactId>javafaker</artifactId>
             <version>0.13</version>
         </dependency>
-
     </dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>bintray-beanmother-beanmother</id>
-            <name>beanmother-beanmother</name>
-            <url>https://api.bintray.com/maven/beanmother/maven-repo/beanmother-core/;publish=1</url>
-        </repository>
-    </distributionManagement>
 </project>

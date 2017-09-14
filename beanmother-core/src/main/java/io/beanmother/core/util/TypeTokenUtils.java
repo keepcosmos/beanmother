@@ -14,7 +14,7 @@ public class TypeTokenUtils {
 
     /**
      * Extract TypeToken of generic type or Array component type.
-     * @param typeToken
+     * @param typeToken Target TypeToken
      * @return generic TypeToken if typeToken is array or component TypeToken if typeToken is Array
      */
     public static TypeToken<?> extractElementTypeToken(TypeToken<?> typeToken) {
@@ -33,9 +33,9 @@ public class TypeTokenUtils {
     }
 
     /**
-     * Extract TypeTokens
-     * @param typeToken
-     * @return
+     * Extract TypeTokens of Generics.
+     * @param typeToken Target TypeToken
+     * @return TypeTokens of generic types in given type.
      */
     public static List<TypeToken<?>> extractGenericTypeTokens(TypeToken<?> typeToken) {
         List<TypeToken<?>> typeTokens = new ArrayList<>();

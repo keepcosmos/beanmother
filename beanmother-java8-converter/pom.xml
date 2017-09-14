@@ -9,6 +9,7 @@
         <artifactId>beanmother</artifactId>
         <groupId>io.beanmother</groupId>
         <version>0.7.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>beanmother-java8-converter</artifactId>
