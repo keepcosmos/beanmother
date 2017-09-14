@@ -14,6 +14,8 @@
 
     <artifactId>beanmother-java8-converter</artifactId>
 
+    <name>beanmother-java8-converter</name>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>

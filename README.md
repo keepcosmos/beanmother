@@ -36,12 +36,14 @@ author:
 
 @Test
 public void testSingleObject() {
+    Book book = ObjectMother.getInstance().bear("book", Book.class);
     Author author = ObjectMother.getInstance().bear("author", Author.class);    
 }
 
 @Test
 public void testMultipleObjects() {
-    List<Author> authors = Object.mother.getInstance().bear("author", Author.class, 10);
+    List<Book> books = ObjectMother.getInstance().bear("book", Book.class, 10);
+    List<Author> authors = ObjectMother.getInstance().bear("author", Author.class, 10);
 }
 
 ```
