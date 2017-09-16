@@ -11,6 +11,10 @@ public class YamlFixtureScanner extends AbstractFixtureScanner {
 
     private static Pattern extensionPattern = Pattern.compile("(\\.)(yml|yaml)$", Pattern.CASE_INSENSITIVE);
 
+    /**
+     * Create a YamlFixtureScanner wiath a ClassLoader.
+     * @param classLoader
+     */
     public YamlFixtureScanner(ClassLoader classLoader) {
         super(classLoader);
     }

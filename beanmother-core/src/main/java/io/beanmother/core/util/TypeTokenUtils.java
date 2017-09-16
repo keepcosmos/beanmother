@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Util class for {@link com.google.common.reflect.TypeToken}
  */
-public class TypeTokenUtils {
+public abstract class TypeTokenUtils {
 
     /**
      * Extract TypeToken of generic type or Array component type.

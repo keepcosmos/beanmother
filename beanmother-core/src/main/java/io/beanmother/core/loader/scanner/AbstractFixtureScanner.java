@@ -22,7 +22,7 @@ public abstract class AbstractFixtureScanner implements FixtureScanner {
      */
     private ClassLoader classLoader;
 
-    public AbstractFixtureScanner(ClassLoader classLoader) {
+    AbstractFixtureScanner(ClassLoader classLoader) {
         this.classLoader = classLoader;
     }
 

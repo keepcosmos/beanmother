@@ -44,30 +44,40 @@ public class ScriptFragment {
 
     /**
      * Parse a FixtueValue to ScriptFragments
-     * @param fixtureValue
+     * @param fixtureValue the FixtureValue
      * @return
      */
     public static ScriptFragment of(FixtureValue fixtureValue) {
         if (fixtureValue.getValue() instanceof String) {
             Matcher matcher = FIXTURE_VALUE_SCRIPT_PATTERN.matcher((CharSequence) fixtureValue.getValue());
             if (matcher.find()) {
-                String[] scripts = matcher.group(0).split(FRAGMENT_DELIM);
-
-                ScriptFragment scriptFragment = null;
-                for (String script : scripts) {
-                    if (scriptFragment == null) {
-                        scriptFragment = of(script);
-                    } else {
-                        scriptFragment.appendToTail(of(script));
-                    }
-                }
-                return scriptFragment;
+                String script = matcher.group(0);
+                return of(script);
             }
         }
         throw new IllegalArgumentException(fixtureValue.toString() + " is not a script");
     }
 
-    private static ScriptFragment of(String script) {
+    /**
+     * Parse a String to ScriptFragments
+     * @param script the string of script
+     * @return
+     */
+    public static ScriptFragment of(String script) {
+        String[] fragmentStrings = script.split(FRAGMENT_DELIM);
+
+        ScriptFragment scriptFragment = null;
+        for (String fragmentString : fragmentStrings) {
+            if (scriptFragment == null) {
+                scriptFragment = build(fragmentString);
+            } else {
+                scriptFragment.appendToTail(build(fragmentString));
+            }
+        }
+        return scriptFragment;
+    }
+
+    private static ScriptFragment build(String script) {
         Matcher argumentMatcher = ARGUMENTS_PATTERN.matcher(script);
         if (argumentMatcher.find()) {
             String[] arguments = argumentMatcher.group(0).split(",");

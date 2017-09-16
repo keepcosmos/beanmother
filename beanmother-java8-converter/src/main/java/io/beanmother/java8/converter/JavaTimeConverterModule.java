@@ -31,7 +31,7 @@ public class JavaTimeConverterModule implements ConverterModule {
     }
 
     @Override
-    public Iterable<Converter> getConverters() {
+    public Set<Converter> getConverters() {
         return converters;
     }
 

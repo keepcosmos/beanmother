@@ -6,13 +6,16 @@ import io.beanmother.core.script.ScriptRunner;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * A SequenceScriptRunner returns sequential number (increase 1) when it runs.
+ */
 public class SequenceScriptRunner implements ScriptRunner {
 
     private final static String NAMESPACE = "sequence";
 
     private final static String NUMBER_SEQUENCE_METHOD_NAME = "number";
 
-    private static AtomicLong longSequence = new AtomicLong(0);
+    private AtomicLong longSequence = new AtomicLong(0);
 
     @Override
     public Object run(ScriptFragment scriptFragment) {

@@ -16,7 +16,7 @@ public abstract class AbstractFixtureMapper implements FixtureMapper {
      * Create a implementation of FixtureMapper
      * @param mapperMediator
      */
-    public AbstractFixtureMapper(MapperMediator mapperMediator) {
+    AbstractFixtureMapper(MapperMediator mapperMediator) {
         this.mapperMediator = mapperMediator;
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
  * Utils about primitive type
  */
 @SuppressWarnings("unchecked")
-public class PrimitiveTypeUtils {
+public abstract class PrimitiveTypeUtils {
 
     /**
      * Convert primitive type to Wrapper type

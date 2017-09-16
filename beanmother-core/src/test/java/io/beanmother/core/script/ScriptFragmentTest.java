@@ -62,4 +62,9 @@ public class ScriptFragmentTest {
         fragment = ScriptFragment.of(new FixtureValue("${test(1, '2', '3').example.script('a')}"));
         assertEquals("test('1','2','3').example.script('a')", fragment.toScriptString());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFailParse() {
+        ScriptFragment.of(new FixtureValue(1));
+    }
 }

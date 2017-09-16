@@ -16,7 +16,7 @@ public class ConverterFactory {
     private List<Converter> converters = new ArrayList<>();
 
     public ConverterFactory() {
-        register(new StandardConverterModule());
+        registerDefaultConverterModules();
     }
 
     public void register(ConverterModule converterModule) {
@@ -44,5 +44,13 @@ public class ConverterFactory {
         }
 
         return null;
+    }
+
+    protected void registerDefaultConverterModules() {
+        register(new StandardConverterModule());
+        List<ConverterModule> knownModules = KnownConverterModuleLoader.load();
+        for (ConverterModule module : knownModules) {
+            register(module);
+        }
     }
 }

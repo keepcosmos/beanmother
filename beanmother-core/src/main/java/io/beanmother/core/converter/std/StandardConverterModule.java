@@ -29,7 +29,7 @@ public class StandardConverterModule implements ConverterModule {
 
 
     @Override
-    public Iterable<Converter> getConverters() {
+    public Set<Converter> getConverters() {
         return standardConverters;
     }
 }

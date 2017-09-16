@@ -1,6 +1,9 @@
 package io.beanmother.core.util;
 
-public class ClassUtils {
+/**
+ * Util class about Class
+ */
+public abstract class ClassUtils {
     /**
      * Return the default ClassLoader
      * @return classloader
