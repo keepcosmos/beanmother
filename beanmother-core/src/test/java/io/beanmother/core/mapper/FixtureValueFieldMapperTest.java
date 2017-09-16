@@ -10,15 +10,15 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test for {@link FieldFixtureMapper}
+ * Test for {@link SetterAndFieldFixtureMapper}
  */
 public class FixtureValueFieldMapperTest {
 
-    FieldFixtureMapper mapper;
+    SetterAndFieldFixtureMapper mapper;
 
     @Before
     public void setup() {
-        mapper = (FieldFixtureMapper) new FieldMapperMediator(new ConverterFactory()).getFixtureMapper();
+        mapper = (SetterAndFieldFixtureMapper) new SetterMapperMediator(new ConverterFactory()).getFixtureMapper();
     }
 
     @Test
@@ -50,15 +50,11 @@ public class FixtureValueFieldMapperTest {
     }
 
     public static class FieldObject {
-        int primitiveInt;
-        Integer integer;
-        Number number;
-        Float ploat;
-        Date date;
-        String string;
-    }
-
-    public static void main(String[] args) throws NoSuchFieldException {
-        System.out.println(FieldObject.class.getField("integer"));
+        public int primitiveInt;
+        public Integer integer;
+        public Number number;
+        public Float ploat;
+        public Date date;
+        public String string;
     }
 }

@@ -6,19 +6,21 @@ import com.google.common.reflect.Parameter;
 import com.google.common.reflect.TypeToken;
 import io.beanmother.core.common.FixtureList;
 import io.beanmother.core.common.FixtureMap;
+import io.beanmother.core.common.FixtureTemplate;
 import io.beanmother.core.common.FixtureValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SetterFixtureMapper is a implementation of {@link FixtureMapper}. It maps target object properties by setter.
+ * SetterAndFieldFixtureMapper is a implementation of {@link FixtureMapper}. It maps target object properties by setter.
  */
-public class SetterFixtureMapper extends AbstractFixtureMapper implements FixtureMapper {
-    private final static Logger logger = LoggerFactory.getLogger(SetterFixtureMapper.class);
+public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implements FixtureMapper {
+    private final static Logger logger = LoggerFactory.getLogger(SetterAndFieldFixtureMapper.class);
 
     /**
      * A prefix of setter names
@@ -26,17 +28,18 @@ public class SetterFixtureMapper extends AbstractFixtureMapper implements Fixtur
     private final static String SETTER_PREFIX = "set";
 
     /**
-     * Create a SetterFixtureMapper
+     * Create a SetterAndFieldFixtureMapper
      *
      * @param mapperMediator
      */
-    public SetterFixtureMapper(MapperMediator mapperMediator) {
+    public SetterAndFieldFixtureMapper(MapperMediator mapperMediator) {
         super(mapperMediator);
     }
 
     @Override
     protected void bind(Object target, String key, FixtureMap fixtureMap) {
         List<Method> candidates = findSetterCandidates(target, key);
+
         for (Method candidate : candidates) {
             ImmutableList<Parameter> paramTypes = Invokable.from(candidate).getParameters();
             if (paramTypes.size() != 1) continue;
@@ -52,11 +55,14 @@ public class SetterFixtureMapper extends AbstractFixtureMapper implements Fixtur
                 throw new FixtureMappingException(e);
             }
         }
+
+        bindByField(target, key, fixtureMap);
     }
 
     @Override
     protected void bind(Object target, String key, FixtureList fixtureList) {
         List<Method> candidates = findSetterCandidates(target, key);
+
         for (Method candidate :candidates) {
             try {
                 ImmutableList<Parameter> paramTypes = Invokable.from(candidate).getParameters();
@@ -73,6 +79,8 @@ public class SetterFixtureMapper extends AbstractFixtureMapper implements Fixtur
                 throw new FixtureMappingException(e);
             }
         }
+
+        bindByField(target, key, fixtureList);
     }
 
     @Override
@@ -93,6 +101,8 @@ public class SetterFixtureMapper extends AbstractFixtureMapper implements Fixtur
                 throw new FixtureMappingException(e);
             }
         }
+
+        bindByField(target, key, fixtureValue);
     }
 
     private List<Method> findSetterCandidates(Object target, String key) {
@@ -107,5 +117,32 @@ public class SetterFixtureMapper extends AbstractFixtureMapper implements Fixtur
             }
         }
         return result;
+    }
+
+    private void bindByField(Object target, String key, FixtureTemplate template) {
+        Field field = findField(target.getClass(), key);
+        if (field == null) return;
+
+        TypeToken<?> targetType = TypeToken.of(field.getType());
+        Object value = getFixtureConverter().convert(template, targetType);
+        if (value == null) return;
+
+        try {
+            field.set(target, value);
+        } catch (IllegalAccessException e) {
+            throw new FixtureMappingException(e);
+        }
+    }
+
+    private Field findField(Class<?> targetClass, String key) {
+        try {
+            return targetClass.getField(key);
+        } catch (NoSuchFieldException e) {
+            Class<?> superClass = targetClass.getSuperclass();
+            if (superClass == null || superClass == Object.class) {
+                return null;
+            }
+            return findField(targetClass.getSuperclass(), key);
+        }
     }
 }

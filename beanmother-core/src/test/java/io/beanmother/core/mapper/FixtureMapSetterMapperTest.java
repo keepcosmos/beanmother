@@ -13,15 +13,15 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test for {@link SetterFixtureMapper}
+ * Test for {@link SetterAndFieldFixtureMapper}
  */
 public class FixtureMapSetterMapperTest {
 
-    SetterFixtureMapper mapper;
+    SetterAndFieldFixtureMapper mapper;
 
     @Before
     public void setup() {
-        mapper = (SetterFixtureMapper) new SetterMapperMediator(new ConverterFactory()).getFixtureMapper();
+        mapper = (SetterAndFieldFixtureMapper) new SetterMapperMediator(new ConverterFactory()).getFixtureMapper();
     }
 
     @Test

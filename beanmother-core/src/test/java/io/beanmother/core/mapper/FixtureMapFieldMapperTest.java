@@ -13,14 +13,15 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test for {@link FieldFixtureMapper}
+ * Test for {@link SetterAndFieldFixtureMapper}
  */
 public class FixtureMapFieldMapperTest {
-    FieldFixtureMapper mapper;
+
+    SetterAndFieldFixtureMapper mapper;
 
     @Before
     public void setup() {
-        mapper = (FieldFixtureMapper) new FieldMapperMediator(new ConverterFactory()).getFixtureMapper();
+        mapper = (SetterAndFieldFixtureMapper) new SetterMapperMediator(new ConverterFactory()).getFixtureMapper();
     }
 
     @Test
@@ -92,18 +93,18 @@ public class FixtureMapFieldMapperTest {
 
 
     public static class MapSetterObject {
-        Map<String, Integer> stringToInteger;
-        Map<Integer, String> integerToString;
-        LinkedHashMap<String, String> stringToStringLinkedHashMap;
-        Map<String, List<String>> stringToIntegerList;
-        Map<String, String[]> stringToStringArray;
-        Map<String, Map<String, String>> stringToStringMap;
-        Map<String, FixtureMapSetterMapperTest.Bean> stringToBean;
-        Map noGenericMap;
+        public Map<String, Integer> stringToInteger;
+        public Map<Integer, String> integerToString;
+        public LinkedHashMap<String, String> stringToStringLinkedHashMap;
+        public Map<String, List<String>> stringToIntegerList;
+        public Map<String, String[]> stringToStringArray;
+        public Map<String, Map<String, String>> stringToStringMap;
+        public Map<String, FixtureMapSetterMapperTest.Bean> stringToBean;
+        public Map noGenericMap;
     }
 
     public static class Bean {
-        int id;
-        String name;
+        public int id;
+        public String name;
     }
 }

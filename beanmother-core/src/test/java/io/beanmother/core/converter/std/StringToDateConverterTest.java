@@ -1,5 +1,6 @@
 package io.beanmother.core.converter.std;
 
+import io.beanmother.core.converter.ConverterException;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -39,6 +40,11 @@ public class StringToDateConverterTest {
         assertEquals(2017, getCalFiled(date, Calendar.YEAR));
         assertEquals(Calendar.SEPTEMBER, getCalFiled(date, Calendar.MONTH));
         assertEquals(8, getCalFiled(date, Calendar.DAY_OF_MONTH));
+    }
+
+    @Test(expected = ConverterException.class)
+    public void testRaiseException() {
+        converter.convert("hi there");
     }
 
     private int getCalFiled(Date date, int calendarUnit) {

@@ -3,6 +3,7 @@ package io.beanmother.core.converter.std;
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 import io.beanmother.core.converter.AbstractGenericConverter;
+import io.beanmother.core.converter.ConverterException;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,6 @@ public class StringToDateConverter extends AbstractGenericConverter<String, Date
         if (groups.size() > 0 && groups.get(0).getDates().size() > 0) {
             return groups.get(0).getDates().get(0);
         }
-        throw new IllegalArgumentException("can not convert '" + source + "' to Date");
+        throw new ConverterException("can not convert '" + source + "' to Date");
     }
 }

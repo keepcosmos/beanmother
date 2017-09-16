@@ -17,7 +17,7 @@ public class SetterMapperMediator implements MapperMediator {
      */
     public SetterMapperMediator(ConverterFactory converterFactory) {
         this.fixtureConverter = new FixtureConverterImpl(this, converterFactory);
-        this.fixtureMapper = new SetterFixtureMapper(this);
+        this.fixtureMapper = new SetterAndFieldFixtureMapper(this);
     }
 
     @Override

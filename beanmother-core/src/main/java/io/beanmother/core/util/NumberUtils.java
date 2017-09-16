@@ -19,9 +19,6 @@ package io.beanmother.core.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,7 +36,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Rob Harrop
  * @since 1.1.2
  */
-public abstract class NumberUtils {
+public class NumberUtils {
 
     private static final BigInteger LONG_MIN = BigInteger.valueOf(Long.MIN_VALUE);
 
@@ -231,52 +228,6 @@ public abstract class NumberUtils {
         else {
             throw new IllegalArgumentException(
                     "Cannot convert String [" + text + "] to target class [" + targetClass.getName() + "]");
-        }
-    }
-
-    /**
-     * Parse the given {@code text} into a {@link Number} instance of the
-     * given target class, using the supplied {@link NumberFormat}.
-     * <p>Trims the input {@code String} before attempting to parse the number.
-     * @param text the text to convert
-     * @param targetClass the target class to parse into
-     * @param numberFormat the {@code NumberFormat} to use for parsing (if
-     * {@code null}, this method falls back to {@link #parseNumber(String, Class)})
-     * @return the parsed number
-     * @throws IllegalArgumentException if the target class is not supported
-     * (i.e. not a standard Number subclass as included in the JDK)
-     * @see java.text.NumberFormat#parse
-     * @see #convertNumberToTargetClass
-     * @see #parseNumber(String, Class)
-     */
-    public static <T extends Number> T parseNumber(
-            String text, Class<T> targetClass, NumberFormat numberFormat) {
-
-        if (numberFormat != null) {
-            DecimalFormat decimalFormat = null;
-            boolean resetBigDecimal = false;
-            if (numberFormat instanceof DecimalFormat) {
-                decimalFormat = (DecimalFormat) numberFormat;
-                if (BigDecimal.class == targetClass && !decimalFormat.isParseBigDecimal()) {
-                    decimalFormat.setParseBigDecimal(true);
-                    resetBigDecimal = true;
-                }
-            }
-            try {
-                Number number = numberFormat.parse(trimAllWhitespace(text));
-                return convertNumberToTargetClass(number, targetClass);
-            }
-            catch (ParseException ex) {
-                throw new IllegalArgumentException("Could not parse number: " + ex.getMessage());
-            }
-            finally {
-                if (resetBigDecimal) {
-                    decimalFormat.setParseBigDecimal(false);
-                }
-            }
-        }
-        else {
-            return parseNumber(text, targetClass);
         }
     }
 

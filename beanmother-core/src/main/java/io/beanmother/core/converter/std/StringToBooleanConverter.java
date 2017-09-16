@@ -11,7 +11,14 @@ import java.util.Set;
  */
 public class StringToBooleanConverter extends AbstractGenericConverter<String, Boolean> {
 
+    /**
+     * Strings that represent true value.
+     */
     private final static Set<String> TRUE_STRING;
+
+    /**
+     * Strings that represent false value.
+     */
     private final static Set<String> FALSE_STRING;
 
     static {
@@ -20,12 +27,14 @@ public class StringToBooleanConverter extends AbstractGenericConverter<String, B
         TRUE_STRING.add("t");
         TRUE_STRING.add("yes");
         TRUE_STRING.add("y");
+        TRUE_STRING.add("ok");
 
         FALSE_STRING = new HashSet<>();
         FALSE_STRING.add("false");
         FALSE_STRING.add("f");
         FALSE_STRING.add("no");
         FALSE_STRING.add("n");
+        TRUE_STRING.add("fail");
     }
 
     @Override

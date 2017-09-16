@@ -20,7 +20,7 @@ public class NumberToNumberConverterTest {
     NumberToNumberConverter converter = new NumberToNumberConverter();
 
     @Test
-    public void testMatches() {
+    public void testCanHandle() {
         assertTrue(converter.canHandle(10, TypeToken.of(Float.class)));
         assertTrue(converter.canHandle(5f, TypeToken.of(Integer.class)));
         assertTrue(converter.canHandle(1, TypeToken.of(BigDecimal.class)));
@@ -40,6 +40,12 @@ public class NumberToNumberConverterTest {
         assertEquals(integer.doubleValue(), converter.convert(integer, TypeToken.of(Double.class)));
         assertEquals(integer.intValue(), converter.convert(integer, TypeToken.of(Integer.class)));
         assertEquals(integer.shortValue(), converter.convert(integer, TypeToken.of(Short.class)));
+
+        assertEquals(integer.byteValue(), converter.convert(integer, TypeToken.of(byte.class)));
+        assertEquals(integer.floatValue(), converter.convert(integer, TypeToken.of(float.class)));
+        assertEquals(integer.doubleValue(), converter.convert(integer, TypeToken.of(double.class)));
+        assertEquals(integer.intValue(), converter.convert(integer, TypeToken.of(int.class)));
+        assertEquals(integer.shortValue(), converter.convert(integer, TypeToken.of(short.class)));
 
         assertEquals(converter.convert(integer, TypeToken.of(AtomicInteger.class)).getClass(), AtomicInteger.class);
         assertEquals(converter.convert(integer, TypeToken.of(AtomicLong.class)).getClass(), AtomicLong.class);

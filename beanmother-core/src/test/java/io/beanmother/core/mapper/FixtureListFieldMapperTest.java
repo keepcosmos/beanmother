@@ -11,14 +11,14 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test for {@link FieldFixtureMapper}
+ * Test for {@link SetterAndFieldFixtureMapper}
  */
 public class FixtureListFieldMapperTest {
-    FieldFixtureMapper mapper;
+    SetterAndFieldFixtureMapper mapper;
 
     @Before
     public void setup() {
-        mapper = (FieldFixtureMapper) new FieldMapperMediator(new ConverterFactory()).getFixtureMapper();
+        mapper = (SetterAndFieldFixtureMapper) new SetterMapperMediator(new ConverterFactory()).getFixtureMapper();
     }
 
     @Test
@@ -152,20 +152,20 @@ public class FixtureListFieldMapperTest {
     }
 
     public static class ListSetterObject {
-        List<String> strList;
-        LinkedList<String> strLinkedList;
-        List objList;
-        String[] strArray;
-        int[] intArray;
-        List<FixtureListSetterMapperTest.Sample> sampleList;
-        FixtureListSetterMapperTest.Sample[] sampleArray;
-        List<List<String>> listOfList;
-        List<String[]> listOfArray;
-        List<String>[] arrayOfList;
+        public List<String> strList;
+        public LinkedList<String> strLinkedList;
+        public List objList;
+        public String[] strArray;
+        public int[] intArray;
+        public List<FixtureListSetterMapperTest.Sample> sampleList;
+        public FixtureListSetterMapperTest.Sample[] sampleArray;
+        public List<List<String>> listOfList;
+        public List<String[]> listOfArray;
+        public List<String>[] arrayOfList;
     }
 
     public static class Sample {
-        int id;
-        String name;
+        public int id;
+        public String name;
     }
 }

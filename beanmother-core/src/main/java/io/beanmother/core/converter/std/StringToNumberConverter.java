@@ -2,6 +2,7 @@ package io.beanmother.core.converter.std;
 
 import com.google.common.reflect.TypeToken;
 import io.beanmother.core.converter.AbstractConverter;
+import io.beanmother.core.converter.ConverterException;
 import io.beanmother.core.util.NumberUtils;
 import io.beanmother.core.util.PrimitiveTypeUtils;
 
@@ -20,7 +21,7 @@ public class StringToNumberConverter extends AbstractConverter {
         if (canHandle(source, targetTypeToken)) {
             return NumberUtils.parseNumber((String) source, (Class) targetTypeToken.getType());
         } else {
-            throw new IllegalArgumentException("can not convert '" + source + "' to " + targetTypeToken.getRawType());
+            throw new ConverterException("can not convert '" + source + "' to " + targetTypeToken.getRawType());
         }
     }
 

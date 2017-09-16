@@ -13,6 +13,24 @@ public class PrimitiveTypeUtils {
 
     /**
      * Convert primitive type to Wrapper type
+     * @param primitiveTypeToken
+     * @return Wrapper type
+     */
+    public static Class<?> toWrapper(final TypeToken<?> primitiveTypeToken) {
+        return toWrapper((Class<?>) primitiveTypeToken.getType());
+    }
+
+    /**
+     * Convert primitive type token to Wrapper type token
+     * @param primitiveTypeToken
+     * @return Wrapper type
+     */
+    public static TypeToken<?> toWrapperTypeToken(final TypeToken<?> primitiveTypeToken) {
+        return TypeToken.of(toWrapper(primitiveTypeToken));
+    }
+
+    /**
+     * Convert primitive type to Wrapper type
      * @param primitiveType
      * @return Wrapper type
      */
@@ -38,14 +56,12 @@ public class PrimitiveTypeUtils {
         }
     }
 
-    public static Class<?> toWrapper(final TypeToken<?> primitiveTypeToken) {
-        return toWrapper((Class<?>) primitiveTypeToken.getType());
-    }
-
-    public static TypeToken<?> toWrapperTypeToken(final TypeToken<?> primitiveTypeToken) {
-        return TypeToken.of(toWrapper(primitiveTypeToken));
-    }
-
+    /**
+     * Convert primitive array to Wrapper type list
+     * @param wrapperList
+     * @param primitiveType
+     * @return
+     */
     public static Object toWrapperListToPrimitiveArray(final List wrapperList, Class<?> primitiveType) {
         if (primitiveType.isArray()) {
             primitiveType = primitiveType.getComponentType();

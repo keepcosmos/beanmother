@@ -50,17 +50,17 @@ public abstract class AbstractFixtureMapper implements FixtureMapper {
         new FixtureTemplateSubTypeHandler() {
             @Override
             protected void handleIf(FixtureMap fixtureMap) {
-                map(target, key, fixtureMap);
+                bind(target, key, fixtureMap);
             }
 
             @Override
             protected void handleIf(FixtureList fixtureList) {
-                map(target, key, fixtureList);
+                bind(target, key, fixtureList);
             }
 
             @Override
             protected void handleIf(FixtureValue fixtureValue) {
-                map(target, key, fixtureValue);
+                bind(target, key, fixtureValue);
             }
         }.handle(fixtureTemplate);
     }

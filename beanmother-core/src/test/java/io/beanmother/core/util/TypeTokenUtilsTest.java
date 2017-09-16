@@ -3,7 +3,6 @@ package io.beanmother.core.util;
 import com.google.common.reflect.TypeToken;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +12,6 @@ import static org.junit.Assert.assertEquals;
  * Test for {@link TypeTokenUtils}
  */
 public class TypeTokenUtilsTest {
-
-    public List<String> strList = new ArrayList<String>();
 
     @Test
     public void testGetGenericTypeTokens() {
@@ -35,4 +32,8 @@ public class TypeTokenUtilsTest {
         assertEquals(typeTokens.get(1), TypeToken.of(Integer.class));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testRaiseException_extractElementTypeToken() {
+        TypeTokenUtils.extractElementTypeToken(TypeToken.of(Integer.class));
+    }
 }
