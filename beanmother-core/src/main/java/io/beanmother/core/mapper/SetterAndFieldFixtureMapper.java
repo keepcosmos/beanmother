@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SetterAndFieldFixtureMapper is a implementation of {@link FixtureMapper}. It maps target object properties by setter.
+ * SetterAndFieldFixtureMapper is a implementation of {@link FixtureMapper}.
+ *
+ * It maps target object properties by setter and maps public field as a fallback.
  */
 public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implements FixtureMapper {
     private final static Logger logger = LoggerFactory.getLogger(SetterAndFieldFixtureMapper.class);

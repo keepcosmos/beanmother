@@ -15,6 +15,7 @@ import java.util.Map;
  */
 public class YamlFixtureParser implements FixtureParser {
 
+
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, FixtureMap> parse(String fixture) {

@@ -3,6 +3,9 @@ package io.beanmother.core.mapper;
 import io.beanmother.core.converter.ConverterFactory;
 import io.beanmother.core.common.FixtureMap;
 
+/**
+ * A DefaultFixtureMapper.
+ */
 public class DefaultFixtureMapper implements FixtureMapper, MapperMediator {
 
     private ConverterFactory converterFactory;
