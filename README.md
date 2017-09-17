@@ -2,7 +2,7 @@
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.beanmother/beanmother-core/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Cio.beanmother)
 [![Build Status](https://travis-ci.org/keepcosmos/beanmother.svg?branch=master)](https://travis-ci.org/keepcosmos/beanmother)
-[![Coverage Status](https://coveralls.io/repos/github/keepcosmos/beanmother/badge.svg?branch=ci-setting)](https://coveralls.io/github/keepcosmos/beanmother?branch=ci-setting)
+[![Coverage Status](https://coveralls.io/repos/github/keepcosmos/beanmother/badge.svg?branch=master)](https://coveralls.io/github/keepcosmos/beanmother?branch=master)
 [![Javadocs](http://javadoc.io/badge/io.beanmother/beanmother-core.svg)](http://javadoc.io/doc/io.beanmother/beanmother-core)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  
 
