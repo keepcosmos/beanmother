@@ -6,7 +6,6 @@
 [![Javadocs](http://javadoc.io/badge/io.beanmother/beanmother-core.svg)](http://javadoc.io/doc/io.beanmother/beanmother-core)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  
 
-
 Beanmother is a kind of class used in testing to help create example objects that you use for testing.
 
 [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html)
@@ -68,16 +67,17 @@ author:
 
 ```java
 
+ObjectMother objectMother = ObjectMother.getInstance();
+
 @Test
 public void testSingleObject() {
-    Book book = ObjectMother.getInstance().bear("book", Book.class);
-    Author author = ObjectMother.getInstance().bear("author", Author.class);    
+    Book book = objectMother.bear("book", Book.class);
+    Author author = objectMother.bear("author", Author.class);    
 }
 
 @Test
 public void testMultipleObjects() {
-    List<Book> books = ObjectMother.getInstance().bear("book", Book.class, 10);
-    List<Author> authors = ObjectMother.getInstance().bear("author", Author.class, 10);
+    List<Author> authors = objectMother.bear("author", Author.class, 10);
 }
 
 ```
@@ -93,13 +93,13 @@ author:
 
 Currently, `FakerScriptRunner` and `SeqenceScriptRunner` are registered.
 
-* `FakerScriptRunner` works with `faker` namespace. This script runner is from [java-faker](https://github.com/DiUS/java-faker). you can find the ScriptRunner usage.
+* `FakerScriptRunner` works with `faker` namespace. This script runner is from [java-faker](https://github.com/DiUS/java-faker). you can find the ScriptRunner usage. If a method has no arguments, you can ignore parentheses.
 
 * `SequenceScriptRunner` works with `${sequence.number}`. This script return a number that is increased 1 everytime it called globally.
 
 ## Customize
 
-Extend `AbstractBeanMother` for customize. Highly recommended build ObjectMother as a Singleton instance.  
+For customization, simply extend `AbstractBeanMother`. Highly recommended build ObjectMother as a Singleton instance.  
 
 ```java
 public class MyObjectMother extends AbstractBeanMother {
@@ -109,28 +109,29 @@ public class MyObjectMother extends AbstractBeanMother {
     private MyObjectMother() {
         super();
     }
-
+    
+    
+    // Override for adding your default fixture directory paths
     @Override
     public String[] defaultFixturePaths() {
-        // Add your default fixture dic path
         return new String[]{ 'test-models', 'fixtures' };
     }
-
+    
+    // Override for adding your custom Converter.
     @Override
     protected void configureConverterFactory(ConverterFactory converterFactory) {
-        // Add your custom Converter.
         converterFactory.register(new MyConverter());
     }
-
+    
+    // Override for adding your custom ScriptRunner.
     @Override
     protected void configureScriptHandler(ScriptHandler scriptHandler) {
-        // Add your custom ScriptRunner.
         scriptHandler.register(new MyScriptRunner);     
     }
-
+    
+    // Override for adding your custom PostProcessor.
     @Override
     protected void configurePostProcessorFactory(PostProcessorFactory postProcessorFactory) {
-        // Add your custom PostProcessor.
         postProcessorFactory.register(new MyPostProcessor);
     }
 }
