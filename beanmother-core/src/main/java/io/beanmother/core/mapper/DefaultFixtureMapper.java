@@ -9,7 +9,7 @@ public class DefaultFixtureMapper implements FixtureMapper, MapperMediator {
     private MapperMediator mapperMediator;
 
     public DefaultFixtureMapper(ConverterFactory converterFactory) {
-        this.mapperMediator = new SetterMapperMediator(converterFactory);
+        this.mapperMediator = new MapperMediatorImpl(converterFactory);
     }
 
     @Override

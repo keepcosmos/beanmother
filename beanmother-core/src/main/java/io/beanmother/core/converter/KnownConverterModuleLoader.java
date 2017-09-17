@@ -14,6 +14,7 @@ public abstract class KnownConverterModuleLoader {
 
     static {
         knownConverterModules = new String[]{
+                "io.beanmother.core.converter.std.StandardConverterModule",
                 "io.beanmother.java8.converter.JavaTimeConverterModule",
                 "io.beanmother.core.DummyConverterModule" // for test
         };

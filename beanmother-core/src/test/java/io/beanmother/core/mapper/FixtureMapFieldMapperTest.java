@@ -21,7 +21,7 @@ public class FixtureMapFieldMapperTest {
 
     @Before
     public void setup() {
-        mapper = (SetterAndFieldFixtureMapper) new SetterMapperMediator(new ConverterFactory()).getFixtureMapper();
+        mapper = (SetterAndFieldFixtureMapper) new MapperMediatorImpl(new ConverterFactory()).getFixtureMapper();
     }
 
     @Test

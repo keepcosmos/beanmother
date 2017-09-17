@@ -9,6 +9,7 @@ import io.beanmother.core.loader.store.DefaultFixturesStore;
 import io.beanmother.core.loader.store.FixturesStore;
 import io.beanmother.core.mapper.ConstructHelper;
 import io.beanmother.core.mapper.DefaultFixtureMapper;
+import io.beanmother.core.mapper.FixtureConverter;
 import io.beanmother.core.mapper.FixtureMapper;
 import io.beanmother.core.postprocessor.PostProcessor;
 import io.beanmother.core.postprocessor.PostProcessorFactory;
@@ -28,6 +29,8 @@ public abstract class AbstractBeanMother implements BeanMother {
 
     private FixtureMapper fixtureMapper;
 
+    private FixtureConverter fixtureConverter;
+
     private ScriptHandler scriptHandler;
 
     private PostProcessorFactory postProcessorFactory;
@@ -36,6 +39,7 @@ public abstract class AbstractBeanMother implements BeanMother {
         fixturesStore = new DefaultFixturesStore();
         converterFactory = new ConverterFactory();
         fixtureMapper = new DefaultFixtureMapper(converterFactory);
+        fixtureConverter = ((DefaultFixtureMapper) fixtureMapper).getFixtureConverter();
         scriptHandler = new DefaultScriptHandler();
         postProcessorFactory = new PostProcessorFactory();
 
@@ -55,7 +59,7 @@ public abstract class AbstractBeanMother implements BeanMother {
         assertFixtureMapExists(fixtureName);
         FixtureMap fixtureMap = fixturesStore.reproduce(fixtureName);
 
-        T inst = (T) ConstructHelper.construct(targetClass, fixtureMap);
+        T inst = (T) ConstructHelper.construct(targetClass, fixtureMap, fixtureConverter);
         return bear(fixtureName, inst);
     }
 

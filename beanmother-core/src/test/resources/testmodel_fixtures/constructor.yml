@@ -1,0 +1,25 @@
+price-with-constructor:
+  _construct:
+    - 10.5
+    - USD
+
+single-constructor-as-array:
+  _construct:
+    - test
+
+single-arg-constructor:
+  _construct: test
+
+multiple-args-constructor:
+  _construct:
+    - test
+    - 1
+
+price-for-constructor: &price-for-constructor
+  _construct:
+    - 1
+    - USD
+
+bean-constructor:
+  _construct:
+    - <<: *price-for-constructor

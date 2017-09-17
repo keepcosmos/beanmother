@@ -8,10 +8,9 @@ import java.util.Set;
 
 public class StandardConverterModule implements ConverterModule {
 
-    private static final Set<Converter> standardConverters;
+    private static final Set<Converter> standardConverters = new HashSet<>();
 
     static {
-        standardConverters = new HashSet<>();
         standardConverters.add(new SameClassConverter(Integer.MAX_VALUE));
         standardConverters.add(new ObjectToStringConverter(Integer.MAX_VALUE));
         standardConverters.add(new NumberToNumberConverter());

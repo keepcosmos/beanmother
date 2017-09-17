@@ -5,17 +5,17 @@ import io.beanmother.core.converter.ConverterFactory;
 /**
  * The implementation of {@link MapperMediator}
  */
-public class SetterMapperMediator implements MapperMediator {
+public class MapperMediatorImpl implements MapperMediator {
 
     private FixtureMapper fixtureMapper;
 
     private FixtureConverter fixtureConverter;
 
     /**
-     * Create a SetterMapperMediator.
+     * Create a MapperMediatorImpl.
      * @param converterFactory
      */
-    public SetterMapperMediator(ConverterFactory converterFactory) {
+    public MapperMediatorImpl(ConverterFactory converterFactory) {
         this.fixtureConverter = new FixtureConverterImpl(this, converterFactory);
         this.fixtureMapper = new SetterAndFieldFixtureMapper(this);
     }

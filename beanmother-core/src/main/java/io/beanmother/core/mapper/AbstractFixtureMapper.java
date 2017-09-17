@@ -24,7 +24,7 @@ public abstract class AbstractFixtureMapper implements FixtureMapper {
     @Override
     public <T> T map(FixtureMap fixtureMap, Class<T> targetType) {
         try {
-            T target = (T) ConstructHelper.construct(targetType, fixtureMap);
+            T target = (T) ConstructHelper.construct(targetType, fixtureMap, getFixtureConverter());
             map(fixtureMap, target);
             return target;
         } catch (FixtureMappingException e) {

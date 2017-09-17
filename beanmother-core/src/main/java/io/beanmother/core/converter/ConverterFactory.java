@@ -2,11 +2,9 @@ package io.beanmother.core.converter;
 
 import com.google.common.reflect.TypeToken;
 import io.beanmother.core.converter.std.SameClassConverter;
-import io.beanmother.core.converter.std.StandardConverterModule;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public class ConverterFactory {
@@ -20,9 +18,10 @@ public class ConverterFactory {
     }
 
     public void register(ConverterModule converterModule) {
-        Iterator<Converter> elements = converterModule.getConverters().iterator();
-        while (elements.hasNext()) {
-            converters.add(elements.next());
+        if (converterModule == null) return;
+
+        for (Converter converter :converterModule.getConverters()) {
+            converters.add(converter);
         }
         Collections.sort(this.converters);
     }
@@ -47,7 +46,6 @@ public class ConverterFactory {
     }
 
     protected void registerDefaultConverterModules() {
-        register(new StandardConverterModule());
         List<ConverterModule> knownModules = KnownConverterModuleLoader.load();
         for (ConverterModule module : knownModules) {
             register(module);

@@ -1,12 +1,14 @@
 package io.beanmother.core.mapper;
 
+import io.beanmother.core.common.FixtureMap;
+
 /**
  * A FixtureMappingExcpetion is thrown by an FixtureMapper if it has an unexpected problem.
  */
 public class FixtureMappingException extends RuntimeException {
 
     /**
-     * Create an FixtureMappingException with a specific message.
+     * Create a FixtureMappingException with a specific message.
      * @param message the message
      */
     public FixtureMappingException(String message) {
@@ -14,7 +16,17 @@ public class FixtureMappingException extends RuntimeException {
     }
 
     /**
-     * Create an FixtureMappingException with a specific message and cause.
+     * Create a FixtureMappingException with a type, a fixtureMap and a cause
+     * @param type the type
+     * @param fixtureMap the fixtureMap
+     * @param cause the cause
+     */
+    public FixtureMappingException(Class<?> type, FixtureMap fixtureMap, Throwable cause) {
+        super("can not create a instance of " + type + " by '" + fixtureMap.getFixtureName() + "'", cause);
+    }
+
+    /**
+     * Create a FixtureMappingException with a specific message and cause.
      *
      * @param message the message
      * @param cause the cause
@@ -24,7 +36,7 @@ public class FixtureMappingException extends RuntimeException {
     }
 
     /**
-     * Create an FixtureMappingException with a cause.
+     * Create a FixtureMappingException with a cause.
      *
      * @param cause the cause
      */

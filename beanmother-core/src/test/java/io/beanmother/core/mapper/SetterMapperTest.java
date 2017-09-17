@@ -1,7 +1,7 @@
 package io.beanmother.core.mapper;
 
 /**
- * Test for {@link SetterMapperMediator}
+ * Test for {@link MapperMediatorImpl}
  */
 public class SetterMapperTest extends MapperTest {
 
