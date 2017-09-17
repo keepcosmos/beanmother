@@ -12,10 +12,37 @@ Beanmother is a kind of class used in testing to help create example objects tha
 [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html)
 
 
+## Installation
+
+Apache Maven
+```xml
+<dependency>
+    <groupId>io.beanmother</groupId>
+    <artifactId>beanmother-core</artifactId>
+    <version>0.7.1</version>
+    <scope>test</scope>
+</dependency>
+
+<!-- For java 8 converter add additional dependency -->
+<dependency>
+    <groupId>io.beanmother</groupId>
+    <artifactId>beanmother-java8-converter</artifactId>
+    <version>0.7.1</version>
+    <scope>test</scope>
+</dependency>
+```
+
+Gradle
+```groovy
+testCompile 'io.beanmother:beanmother-core:0.7.1'
+
+# For java 8
+testCompile 'io.beanmother:beanmother-java8-converter:0.7.1'
+```
 
 ## Example
 
-Create fixture `.yml` files in `test/resources/fixtures`
+Create fixture `.yml` files in `test/resources/fixtures` as a convention.
 
 ```yaml
 # test/resources/fixtures/publishing.yml
@@ -55,3 +82,154 @@ public void testMultipleObjects() {
 
 ```
 
+## Fixture Script
+
+A script in beanmother is kind of fake property value generator. It used in fixture `.yml` file.
+
+```yml
+author:
+  title: ${faker.book.title}
+```
+
+Currently, `FakerScriptRunner` and `SeqenceScriptRunner` are registered.
+
+* `FakerScriptRunner` works with `faker` namespace. This script runner is from [java-faker](https://github.com/DiUS/java-faker). you can find the ScriptRunner usage.
+
+* `SequenceScriptRunner` works with `${sequence.number}`. This script return a number that is increased 1 everytime it called globally.
+
+## Customize
+
+Extend `AbstractBeanMother` for customize. Highly recommended build ObjectMother as a Singleton instance.  
+
+```java
+public class MyObjectMother extends AbstractBeanMother {
+
+    private static MyObjectMother myObjectMother = new MyObjectMother();
+
+    private MyObjectMother() {
+        super();
+    }
+
+    @Override
+    public String[] defaultFixturePaths() {
+        // Add your default fixture dic path
+        return new String[]{ 'test-models', 'fixtures' };
+    }
+
+    @Override
+    protected void configureConverterFactory(ConverterFactory converterFactory) {
+        // Add your custom Converter.
+        converterFactory.register(new MyConverter());
+    }
+
+    @Override
+    protected void configureScriptHandler(ScriptHandler scriptHandler) {
+        // Add your custom ScriptRunner.
+        scriptHandler.register(new MyScriptRunner);     
+    }
+
+    @Override
+    protected void configurePostProcessorFactory(PostProcessorFactory postProcessorFactory) {
+        // Add your custom PostProcessor.
+        postProcessorFactory.register(new MyPostProcessor);
+    }
+}
+```
+
+### Customize default fixture path.
+
+Just register path(it scan all files under the path) to the instance of ObjectMother.
+
+```java
+ObjectMother.addFixtureLocation("mocks");
+ObjectMother.addFixtureLocation("");
+```
+
+Or, override `#defaultFixturePaths` in your custom ObjectMother.
+
+```java
+@Override
+public String[] defaultFixturePaths() {
+    // Add your default fixture dic path
+    return new String[]{ 'test-models', 'fixtures' };
+}
+```  
+
+### Add PostProcessor
+
+A PostProcessor can handle you bean after mapper. 
+
+```java
+public class AuthorPostProcessor extends PostProcessor<Author> {
+    @Override
+    public void process(Author bean, FixtureMap fixtureMap) {
+        bean.createdAt(new Date());       
+    }
+}
+``` 
+
+And, register to your custom ObjectMother.
+
+
+```java
+@Override
+protected void configurePostProcessorFactory(PostProcessorFactory postProcessorFactory) {
+    postProcessorFactory.register(new AuthorPostProcessor);
+}
+```
+
+For example, 
+
+If you bear a instance of Author, `AuthorPostProcessor` will run before return a instance of Author.
+
+
+### Customize converter
+
+You can write your own converter for some reason.
+
+```java
+public class MyIntegerToStringConverter extends AbstractGenericConverter<Integer, String> {
+
+    @Override
+    public String convert(Integer source) {
+        return String.valueOf(source + 1);
+    }
+}
+```
+
+And, register to your custom ObjectMother.
+
+```java
+@Override
+protected void configureConverterFactory(ConverterFactory converterFactory) {
+    converterFactory.register(new MyIntegerToStringConverter());
+}
+```
+
+### Customize ScriptRunner
+
+You can write your own ScriptRunner
+
+```java 
+public class MyScriptRunner implements ScriptRunner {
+    
+    @Override
+    public Object run(ScriptFragment scriptFragment) {
+        return "Joshua";
+    }
+    
+    @Override
+    public boolean canHandle(ScriptFragment scriptFragment) {
+        return scriptFragment.getMethodName.equal("myname");
+    }
+}
+```
+
+And, register to your custom ObjectMother.
+
+```java
+@Override
+protected void configureScriptHandler(ScriptHandler scriptHandler) {
+    scriptHandler.register(new MyScriptRunner());     
+}
+```

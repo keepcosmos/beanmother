@@ -35,7 +35,7 @@ public abstract class AbstractBeanMother implements BeanMother {
 
     private PostProcessorFactory postProcessorFactory;
 
-    public AbstractBeanMother() {
+    protected AbstractBeanMother() {
         fixturesStore = new DefaultFixturesStore();
         converterFactory = new ConverterFactory();
         fixtureMapper = new DefaultFixtureMapper(converterFactory);
