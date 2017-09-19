@@ -21,4 +21,13 @@ public class Price {
     public Currency getCurrency() {
         return currency;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this.getClass() == obj.getClass()){
+            return this.amount == ((Price) obj).amount
+                    && this.currency == ((Price) obj).currency;
+        }
+        return false;
+    }
 }

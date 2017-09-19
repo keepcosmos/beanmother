@@ -8,9 +8,15 @@ import io.beanmother.core.converter.AbstractConverter;
  */
 public class ObjectToStringConverter extends AbstractConverter {
 
-    public ObjectToStringConverter() {
-    }
+    /**
+     * Create a ObjectToStringConverter.
+     */
+    public ObjectToStringConverter() {}
 
+    /**
+     * Create a ObjectToStringConverter with a priority
+     * @param priority the priority
+     */
     public ObjectToStringConverter(int priority) {
         super(priority);
     }

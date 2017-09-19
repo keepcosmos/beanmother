@@ -8,7 +8,6 @@ import io.beanmother.core.common.FixtureMap;
  */
 public class DefaultFixtureMapper implements FixtureMapper, MapperMediator {
 
-    private ConverterFactory converterFactory;
     private MapperMediator mapperMediator;
 
     public DefaultFixtureMapper(ConverterFactory converterFactory) {
@@ -23,10 +22,6 @@ public class DefaultFixtureMapper implements FixtureMapper, MapperMediator {
     @Override
     public void map(FixtureMap fixtureMap, Object target) {
         getFixtureMapper().map(fixtureMap, target);
-    }
-
-    public ConverterFactory getConverterFactory() {
-        return converterFactory;
     }
 
     @Override

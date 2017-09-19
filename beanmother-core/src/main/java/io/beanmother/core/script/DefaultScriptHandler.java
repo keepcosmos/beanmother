@@ -1,6 +1,5 @@
 package io.beanmother.core.script;
 
-import io.beanmother.core.common.FixtureValue;
 import io.beanmother.core.script.std.FakerScriptRunner;
 import io.beanmother.core.script.std.SequenceScriptRunner;
 
@@ -8,6 +7,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * A default implementation of a {@link ScriptHandler}
+ */
 public class DefaultScriptHandler implements ScriptHandler {
 
     private Set<ScriptRunner> scriptRunners = new HashSet<>();
@@ -18,13 +20,12 @@ public class DefaultScriptHandler implements ScriptHandler {
     }
 
     @Override
-    public void runScript(FixtureValue fixtureValue) {
-        ScriptFragment fragment = ScriptFragment.of(fixtureValue);
-        ScriptRunner process = get(fragment);
+    public Object runScript(ScriptFragment scriptFragment) {
+        ScriptRunner process = get(scriptFragment);
         if (process == null) {
-            throw new RuntimeException("can not find ScriptRunner for " + fixtureValue);
+            throw new IllegalArgumentException("can not find ScriptRunner for " + scriptFragment.toScriptString());
         }
-        fixtureValue.setValue(process.run(fragment));
+        return process.run(scriptFragment);
     }
 
     @Override

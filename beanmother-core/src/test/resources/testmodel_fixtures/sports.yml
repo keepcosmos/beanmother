@@ -1,0 +1,2 @@
+player:
+  id: ${sequence.number}

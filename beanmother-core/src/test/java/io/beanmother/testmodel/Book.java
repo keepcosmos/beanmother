@@ -6,6 +6,7 @@ public class Book {
 
     private String title;
     private String language;
+    private Price price;
     private Date publishedAt;
 
     public String getTitle() {
@@ -22,6 +23,14 @@ public class Book {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
     public Date getPublishedAt() {

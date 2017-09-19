@@ -6,6 +6,12 @@ import org.junit.Test;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+/**
+ * Test for {@link AbstractBeanMother}
+ */
 public class AbstractBeanMotherTest {
 
     static class TestObjectMother extends AbstractBeanMother {
@@ -29,8 +35,15 @@ public class AbstractBeanMotherTest {
     TestObjectMother beanMother = TestObjectMother.getInstance();
 
     @Test
-    public void testMapping() throws URISyntaxException {
+    public void testSingleMapping() throws URISyntaxException {
+        Author author = beanMother.bear("unknown_author", Author.class);
+        assertNotNull(author);
+        assertNotNull(author.getName());
+    }
+
+    @Test
+    public void testMappingList() throws URISyntaxException {
         List<Author> authors = beanMother.bear("unknown_author", Author.class, 5);
-        System.out.println(authors);
+        assertEquals(5, authors.size());
     }
 }

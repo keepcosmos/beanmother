@@ -19,6 +19,10 @@ public abstract class MethodReflectionEvalScriptRunner implements ScriptRunner {
 
     @Override
     public Object run(ScriptFragment scriptFragment) {
+        if (!canHandle(scriptFragment)) {
+            throw new ScriptOperationException("Fail to operate " + scriptFragment.toScriptString());
+        }
+
         ScriptFragment mainScript = scriptFragment.getNext();
         try {
             return callScriptRecursively(getTargetObject(), mainScript);

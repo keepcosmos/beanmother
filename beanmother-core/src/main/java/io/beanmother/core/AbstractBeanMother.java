@@ -64,15 +64,6 @@ public abstract class AbstractBeanMother implements BeanMother {
     }
 
     @Override
-    public <T> List<T> bear(String fixtureName, T target, int size) {
-        List<T> result = new ArrayList<>();
-        for (int i = 0 ; i < size ; i++) {
-            result.add(bear(fixtureName, target));
-        }
-        return result;
-    }
-
-    @Override
     public <T> List<T> bear(String fixtureName, Class<T> targetClass, int size) {
         List<T> result = new ArrayList<>();
         for (int i = 0 ; i < size ; i++) {
@@ -113,14 +104,7 @@ public abstract class AbstractBeanMother implements BeanMother {
     }
 
     private <T> T _bear(T target, FixtureMap fixtureMap) {
-        FixtureMapTraversal.traverse(fixtureMap, new FixtureMapTraversal.Processor() {
-            @Override
-            public void visit(FixtureValue edge) {
-                if (ScriptFragment.isScript(edge)) {
-                    scriptHandler.runScript(edge);
-                }
-            }
-        });
+        handleScriptFixtureValue(fixtureMap);
 
         fixtureMapper.map(fixtureMap, target);
 
@@ -130,6 +114,18 @@ public abstract class AbstractBeanMother implements BeanMother {
         }
 
         return target;
+    }
+
+    private void handleScriptFixtureValue(FixtureMap fixtureMap) {
+        FixtureMapTraversal.traverse(fixtureMap, new FixtureMapTraversal.Processor() {
+            @Override
+            public void visit(FixtureValue edge) {
+                if (ScriptFragment.isScript(edge)) {
+                    ScriptFragment scriptFragment = ScriptFragment.of(edge);
+                    edge.setValue(scriptHandler.runScript(scriptFragment));
+                }
+            }
+        });
     }
 
     private void assertFixtureMapExists(String fixtureName) {

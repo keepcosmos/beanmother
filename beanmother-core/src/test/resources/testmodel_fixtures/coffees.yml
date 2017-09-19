@@ -1,0 +1,19 @@
+blue_mountain:
+  id: 1
+  price:
+    _construct:
+      - 1
+      - USD
+  bean: BlueMountain
+  roasted: true
+  seller: MyCoffee
+
+java:
+  id: 3
+  price:
+    _construct:
+      - 2.1
+      - KRW
+  bean: java
+  roasted: false
+  seller: Gosling's Coffee

@@ -1,7 +1,6 @@
 package io.beanmother.core.script;
 
 import com.github.javafaker.Faker;
-import io.beanmother.core.common.FixtureValue;
 import io.beanmother.core.script.std.FakerScriptRunner;
 import org.junit.Test;
 
@@ -20,16 +19,9 @@ public class FakerScriptRunnerTest extends ScriptProcessorTest {
 
     @Test
     public void testCanHandle() {
-        ScriptFragment fragment = null;
-
-        fragment = ScriptFragment.of(new FixtureValue("${faker}"));
-        assertFalse(scriptRunner.canHandle(fragment));
-
-        fragment = ScriptFragment.of(new FixtureValue("${faker.name.fullName}"));
-        assertTrue(scriptRunner.canHandle(fragment));
-
-        fragment = ScriptFragment.of(new FixtureValue("${real.name.fullName}"));
-        assertFalse(scriptRunner.canHandle(fragment));
+        assertFalse(scriptRunner.canHandle(ScriptFragment.of("faker")));
+        assertTrue(scriptRunner.canHandle(ScriptFragment.of("faker.name.fullName")));
+        assertFalse(scriptRunner.canHandle(ScriptFragment.of("real.name.fullName")));
     }
 
     @Test
@@ -68,5 +60,10 @@ public class FakerScriptRunnerTest extends ScriptProcessorTest {
         assertTrue(date.compareTo(new Date()) == -1);
         date = run(scriptRunner, "faker.date.past(1, 'days')", Date.class);
         assertTrue(date.compareTo(new Date()) == -1);
+    }
+
+    @Test(expected = ScriptOperationException.class)
+    public void testRaiseException() {
+        scriptRunner.run(ScriptFragment.of("faker.unkown.fail"));
     }
 }

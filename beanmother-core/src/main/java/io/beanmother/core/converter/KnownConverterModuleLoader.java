@@ -34,7 +34,7 @@ public abstract class KnownConverterModuleLoader {
                 try {
                     modules.add(module.newInstance());
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             } catch (ClassNotFoundException e) {
                 // Do nothing

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A Factory of {@link Converter}
+ */
 public class ConverterFactory {
 
     private static Converter sameClassConverter = new SameClassConverter();
