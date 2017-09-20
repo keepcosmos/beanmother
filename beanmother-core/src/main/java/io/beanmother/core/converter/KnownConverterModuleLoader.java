@@ -16,14 +16,15 @@ public abstract class KnownConverterModuleLoader {
         knownConverterModules = new String[]{
                 "io.beanmother.core.converter.std.StandardConverterModule",
                 "io.beanmother.java8.converter.JavaTimeConverterModule",
+                "io.beanmother.java8.converter.JavaOptionalConverterModule",
                 "io.beanmother.core.DummyConverterModule" // for test
         };
     }
 
     /**
      * Load instances of converters in known converter modules
-     * @return
      */
+    @SuppressWarnings("unchecked")
     public static List<ConverterModule> load() {
         List<ConverterModule> modules = new ArrayList<>();
 

@@ -125,7 +125,7 @@ public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implement
         Field field = findField(target.getClass(), key);
         if (field == null) return;
 
-        TypeToken<?> targetType = TypeToken.of(field.getType());
+        TypeToken<?> targetType = TypeToken.of(field.getGenericType());
         Object value = getFixtureConverter().convert(template, targetType);
         if (value == null) return;
 

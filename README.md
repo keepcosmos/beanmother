@@ -18,7 +18,7 @@ Apache Maven
 <dependency>
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother-core</artifactId>
-    <version>0.7.1</version>
+    <version>0.7.2</version>
     <scope>test</scope>
 </dependency>
 
@@ -26,17 +26,17 @@ Apache Maven
 <dependency>
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother-java8-converter</artifactId>
-    <version>0.7.1</version>
+    <version>0.7.2</version>
     <scope>test</scope>
 </dependency>
 ```
 
 Gradle
 ```groovy
-testCompile 'io.beanmother:beanmother-core:0.7.1'
+testCompile 'io.beanmother:beanmother-core:0.7.2'
 
 # For java 8
-testCompile 'io.beanmother:beanmother-java8-converter:0.7.1'
+testCompile 'io.beanmother:beanmother-java8-converter:0.7.2'
 ```
 
 ## Example

@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Java8 time converter module
+ */
 public class JavaTimeConverterModule implements ConverterModule {
 
     private final static StringToDateConverter stringToDateConverter = new StringToDateConverter();
@@ -36,6 +39,7 @@ public class JavaTimeConverterModule implements ConverterModule {
     }
 
     private static LocalDateTime convertDateToLocalDateTime(Date source) {
+
         return LocalDateTime.ofInstant(source.toInstant(), DEFAULT_TIMEZONE);
     }
 

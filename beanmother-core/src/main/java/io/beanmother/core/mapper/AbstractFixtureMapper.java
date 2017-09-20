@@ -42,9 +42,9 @@ public abstract class AbstractFixtureMapper implements FixtureMapper {
 
     /**
      * Set a value of the key to target object.
-     * @param target
-     * @param key
-     * @param fixtureTemplate
+     * @param target the target instance.
+     * @param key the key(name) of the Fixture
+     * @param fixtureTemplate the FixtureTemplate
      */
     public void map(final Object target, final String key, FixtureTemplate fixtureTemplate) {
         new FixtureTemplateSubTypeHandler() {

@@ -4,11 +4,13 @@ import com.google.common.reflect.TypeToken;
 import io.beanmother.core.common.*;
 import io.beanmother.core.converter.Converter;
 import io.beanmother.core.converter.ConverterFactory;
+import io.beanmother.core.util.ClassUtils;
 import io.beanmother.core.util.PrimitiveTypeUtils;
 import io.beanmother.core.util.TypeTokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Constructor;
 import java.util.*;
 
 /**
@@ -17,6 +19,8 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class FixtureConverterImpl implements FixtureConverter {
     private final static Logger logger = LoggerFactory.getLogger(FixtureConverterImpl.class);
+
+    private final static String java8OptionalConverterKlass = "io.beanmother.java8.converter.OptionalTypeFixtureConverter";
 
     private MapperMediator mapperMediator;
     private ConverterFactory converterFactory;
@@ -32,7 +36,16 @@ public class FixtureConverterImpl implements FixtureConverter {
     }
 
     @Override
-    public Object convert(FixtureTemplate fixtureTemplate, final TypeToken<?> typeToken) {
+    public Object convert(FixtureTemplate fixtureTemplate, final TypeToken typeToken) {
+
+        // convert java.util.Optional if it can.
+        if (isJava8OptionalTypeToken(typeToken)) {
+            FixtureConverter optionalConverter = loadJava8OptionalConverter();
+            if (optionalConverter != null) {
+                return optionalConverter.convert(fixtureTemplate, typeToken);
+            }
+        }
+
         final Object[] converted = new Object[1];
         new FixtureTemplateSubTypeHandler() {
             @Override
@@ -55,7 +68,6 @@ public class FixtureConverterImpl implements FixtureConverter {
 
     /**
      * Get converterFactory
-     * @return
      */
     public ConverterFactory getConverterFactory() {
         return converterFactory;
@@ -63,7 +75,6 @@ public class FixtureConverterImpl implements FixtureConverter {
 
     /**
      * Get mapperMediator
-     * @return
      */
     public MapperMediator getMapperMediator() {
         return mapperMediator;
@@ -71,7 +82,6 @@ public class FixtureConverterImpl implements FixtureConverter {
 
     /**
      * Get fixtureMapper
-     * @return
      */
     public FixtureMapper getFixtureMapper() {
         return getMapperMediator().getFixtureMapper();
@@ -79,9 +89,9 @@ public class FixtureConverterImpl implements FixtureConverter {
 
     /**
      * Convert the fixtureValue to the given TypeToken
-     * @param fixtureValue
-     * @param typeToken
-     * @return converted object from fixtureValue.
+     * @param fixtureValue the FixtureValue
+     * @param typeToken the TypeToken
+     * @return the converted object from fixtureValue.
      */
     protected Object convert(FixtureValue fixtureValue, TypeToken<?> typeToken) {
         if (typeToken.isPrimitive()) {
@@ -199,6 +209,30 @@ public class FixtureConverterImpl implements FixtureConverter {
             }
             getFixtureMapper().map(fixtureMap, obj);
             return obj;
+        }
+    }
+
+    private boolean isJava8OptionalTypeToken(TypeToken<?> typeToken) {
+        String name = typeToken.getRawType().getName();
+        return typeToken.getRawType().getName().equals("java.util.Optional");
+    }
+
+    private FixtureConverter loadJava8OptionalConverter() {
+        try {
+            Constructor[] constructors = ClassUtils.getDefaultClassLoader().loadClass(java8OptionalConverterKlass).getConstructors();
+            for (Constructor constructor : constructors) {
+                if (constructor.getParameterTypes().length == 1 && constructor.getParameterTypes()[0] == FixtureConverter.class) {
+                    try {
+                        return (FixtureConverter) constructor.newInstance(this);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
         }
     }
 }

@@ -10,13 +10,11 @@ public interface MapperMediator {
 
     /**
      * Get FixtureMapper
-     * @return
      */
     FixtureMapper getFixtureMapper();
 
     /**
      * Get FixtureConverter
-     * @return
      */
     FixtureConverter getFixtureConverter();
 }

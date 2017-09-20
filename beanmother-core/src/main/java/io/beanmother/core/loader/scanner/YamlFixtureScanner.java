@@ -13,7 +13,7 @@ public class YamlFixtureScanner extends AbstractFixtureScanner {
 
     /**
      * Create a YamlFixtureScanner wiath a ClassLoader.
-     * @param classLoader
+     * @param classLoader the ClassLoader
      */
     public YamlFixtureScanner(ClassLoader classLoader) {
         super(classLoader);

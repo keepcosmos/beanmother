@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 /**
  * FixtureMap decorates a map from fixture
  *
- * The source of FixtureMap generally {@link LinkedHashMap<String, Object>} that is parsed by {@link io.beanmother.core.loader.parser.FixtureParser}.
+ * The source of FixtureMap generally {@link LinkedHashMap} that is parsed by {@link io.beanmother.core.loader.parser.FixtureParser}.
  * It can be the root fixture template.
  */
 public class FixtureMap extends LinkedHashMap<String, FixtureTemplate> implements FixtureTemplate {

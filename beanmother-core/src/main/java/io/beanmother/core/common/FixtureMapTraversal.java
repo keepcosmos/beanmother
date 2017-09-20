@@ -13,7 +13,7 @@ public class FixtureMapTraversal {
     public interface Processor {
         /**
          * Run when visiting a edge.
-         * @param edge
+         * @param edge the edge
          */
         void visit(FixtureValue edge);
     }
@@ -21,8 +21,8 @@ public class FixtureMapTraversal {
 
     /**
      * Traverse each edges({@link FixtureValue}) and run {@link Processor} when it meets a edge.
-     * @param fixtureMap
-     * @param processor
+     * @param fixtureMap the FixtureMap
+     * @param processor the Processor
      */
     public static void traverse(FixtureMap fixtureMap, final Processor processor) {
         for (Map.Entry<String, FixtureTemplate> entry : fixtureMap.entrySet()) {

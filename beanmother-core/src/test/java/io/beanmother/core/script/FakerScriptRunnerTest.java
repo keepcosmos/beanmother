@@ -2,6 +2,7 @@ package io.beanmother.core.script;
 
 import com.github.javafaker.Faker;
 import io.beanmother.core.script.std.FakerScriptRunner;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;
@@ -60,6 +61,17 @@ public class FakerScriptRunnerTest extends ScriptProcessorTest {
         assertTrue(date.compareTo(new Date()) == -1);
         date = run(scriptRunner, "faker.date.past(1, 'days')", Date.class);
         assertTrue(date.compareTo(new Date()) == -1);
+    }
+
+    @Test
+    public void testOptions() {
+        String selected = run(scriptRunner, "faker.options('MALE', 'FEMALE')", String.class);
+        Assert.assertTrue(selected.equals("MALE") || selected.equals("FEMALE"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testOptionsRaiseError() {
+        String selected = run(scriptRunner, "faker.options", String.class);
     }
 
     @Test(expected = ScriptOperationException.class)

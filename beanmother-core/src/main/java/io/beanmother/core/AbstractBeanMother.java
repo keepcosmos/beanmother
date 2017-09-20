@@ -18,6 +18,7 @@ import io.beanmother.core.script.ScriptFragment;
 import io.beanmother.core.script.ScriptHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
@@ -48,26 +49,39 @@ public abstract class AbstractBeanMother implements BeanMother {
 
     @Override
     public <T> T bear(String fixtureName, T target) {
-        assertFixtureMapExists(fixtureName);
-
-        FixtureMap fixtureMap = fixturesStore.reproduce(fixtureName);
-        return _bear(target, fixtureMap);
+        return bear(fixtureName, target, null);
     }
 
     @Override
     public <T> T bear(String fixtureName, Class<T> targetClass) {
-        assertFixtureMapExists(fixtureName);
         FixtureMap fixtureMap = fixturesStore.reproduce(fixtureName);
-
         T inst = (T) ConstructHelper.construct(targetClass, fixtureMap, fixtureConverter);
-        return bear(fixtureName, inst);
+        return _bear(inst, fixtureMap,null);
+    }
+
+    @Override
+    public <T> T bear(String fixtureName, T target, PostProcessor<T> postProcessor) {
+        FixtureMap fixtureMap = fixturesStore.reproduce(fixtureName);
+        return _bear(target, fixtureMap, postProcessor);
+    }
+
+    @Override
+    public <T> T bear(String fixtureName, Class<T> targetClass, PostProcessor<T> postProcessor) {
+        FixtureMap fixtureMap = fixturesStore.reproduce(fixtureName);
+        T inst = (T) ConstructHelper.construct(targetClass, fixtureMap, fixtureConverter);
+        return _bear(inst, fixtureMap, postProcessor);
     }
 
     @Override
     public <T> List<T> bear(String fixtureName, Class<T> targetClass, int size) {
+        return bear(fixtureName, targetClass, size, null);
+    }
+
+    @Override
+    public <T> List<T> bear(String fixtureName, Class<T> targetClass, int size, PostProcessor<T> postProcessor) {
         List<T> result = new ArrayList<>();
         for (int i = 0 ; i < size ; i++) {
-            result.add(bear(fixtureName, targetClass));
+            result.add(bear(fixtureName, targetClass, postProcessor));
         }
         return result;
     }
@@ -78,22 +92,51 @@ public abstract class AbstractBeanMother implements BeanMother {
         return this;
     }
 
-    public String[] defaultFixturePaths() {
+    private <T> T _bear(T target, FixtureMap fixtureMap, PostProcessor<T> postProcessor) {
+        handleScriptFixtureValue(fixtureMap);
+
+        fixtureMapper.map(fixtureMap, target);
+
+        List<PostProcessor<T>> postProcessors = postProcessorFactory.get((Class<T>) target.getClass());
+        if (postProcessor != null) {
+            postProcessors.add(postProcessor);
+            Collections.sort(postProcessors);
+        }
+        for (PostProcessor<T> pp : postProcessors) {
+            pp.process(target, fixtureMap);
+        }
+
+        return target;
+    }
+
+    protected String[] defaultFixturePaths() {
         return new String[] { "fixtures" };
     }
 
+    /**
+     * Configure the ConverterFactory
+     */
     protected void configureConverterFactory(ConverterFactory converterFactory) {
         // Do nothing.
     }
 
+    /**
+     * Configure the ScriptHandler
+     */
     protected void configureScriptHandler(ScriptHandler scriptHandler) {
         // Do nothing.
     }
 
+    /**
+     * Configure the PostProcessorFactory
+     */
     protected void configurePostProcessorFactory(PostProcessorFactory postProcessorFactory) {
         // Do nothing.
     }
 
+    /**
+     * Initialize beanmother
+     */
     protected void initialize() {
         for ( String path : defaultFixturePaths()) {
             this.fixturesStore.addLocation(new Location(path));
@@ -101,19 +144,6 @@ public abstract class AbstractBeanMother implements BeanMother {
         configureConverterFactory(converterFactory);
         configureScriptHandler(scriptHandler);
         configurePostProcessorFactory(postProcessorFactory);
-    }
-
-    private <T> T _bear(T target, FixtureMap fixtureMap) {
-        handleScriptFixtureValue(fixtureMap);
-
-        fixtureMapper.map(fixtureMap, target);
-
-        List<PostProcessor<T>> postProcessors = postProcessorFactory.get((Class<T>) target.getClass());
-        for (PostProcessor<T> postProcessor : postProcessors) {
-            postProcessor.process(target, fixtureMap);
-        }
-
-        return target;
     }
 
     private void handleScriptFixtureValue(FixtureMap fixtureMap) {
@@ -126,11 +156,5 @@ public abstract class AbstractBeanMother implements BeanMother {
                 }
             }
         });
-    }
-
-    private void assertFixtureMapExists(String fixtureName) {
-        if (!fixturesStore.exists(fixtureName)) {
-            throw new IllegalArgumentException("can not find " + fixtureName);
-        }
     }
 }

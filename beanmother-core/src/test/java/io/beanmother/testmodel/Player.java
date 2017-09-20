@@ -1,7 +1,5 @@
 package io.beanmother.testmodel;
 
-import com.github.javafaker.Team;
-
 public class Player extends Person {
 
     private int number;

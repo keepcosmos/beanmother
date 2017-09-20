@@ -45,7 +45,6 @@ public class ScriptFragment {
     /**
      * Parse a FixtueValue to ScriptFragments
      * @param fixtureValue the FixtureValue
-     * @return
      */
     public static ScriptFragment of(FixtureValue fixtureValue) {
         if (fixtureValue.getValue() instanceof String) {
@@ -61,7 +60,6 @@ public class ScriptFragment {
     /**
      * Parse a String to ScriptFragments
      * @param script the string of script
-     * @return
      */
     public static ScriptFragment of(String script) {
         String[] fragmentStrings = script.split(FRAGMENT_DELIM);
@@ -120,7 +118,6 @@ public class ScriptFragment {
 
     /**
      * Get script method name.
-     * @return
      */
     public String getMethodName() {
         return methodName;
@@ -128,7 +125,6 @@ public class ScriptFragment {
 
     /**
      * Get script arguments.
-     * @return
      */
     public List<String> getArguments() {
         return arguments;
@@ -136,7 +132,6 @@ public class ScriptFragment {
 
     /**
      * Check existence of arguments.
-     * @return
      */
     public boolean hasArguments() {
         return (arguments != null) && !arguments.isEmpty();
@@ -144,7 +139,6 @@ public class ScriptFragment {
 
     /**
      * Get next(trailing) ScriptFragment.
-     * @return
      */
     public ScriptFragment getNext() {
         return next;
@@ -152,7 +146,6 @@ public class ScriptFragment {
 
     /**
      * Append ScriptFragment to tail.
-     * @param scriptFragment
      */
     public void appendToTail(ScriptFragment scriptFragment) {
         if (next == null) {
@@ -164,7 +157,6 @@ public class ScriptFragment {
 
     /**
      * Get string of all trailing script.
-     * @return
      */
     public String toScriptString() {
         StringBuilder builder = new StringBuilder();

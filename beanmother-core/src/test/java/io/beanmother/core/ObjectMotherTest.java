@@ -1,11 +1,15 @@
 package io.beanmother.core;
 
-import io.beanmother.testmodel.Coffee;
-import io.beanmother.testmodel.Price;
+import io.beanmother.core.common.FixtureMap;
+import io.beanmother.core.postprocessor.PostProcessor;
+import io.beanmother.testmodel.*;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * Test for {@link ObjectMother}
@@ -37,7 +41,60 @@ public class ObjectMotherTest {
     }
 
     @Test
-    public void testLoadSports() {
+    public void testBearCoffeeWithExistingInst() {
+        Coffee blueMountain = new Coffee();
+        objectMother.bear("blue_mountain", blueMountain);
+        assertEquals(1l, blueMountain.id);
+        assertEquals(new Price(1, Price.Currency.USD), blueMountain.price);
+        assertEquals(Coffee.Bean.BlueMountain, blueMountain.bean);
+        assertEquals("MyCoffee", blueMountain.seller);
+    }
 
+    @Test
+    public void testBearSports() {
+        Sports sports = objectMother.bear("soccer", Sports.class, new SportsMappingPostProcessor());
+        assertSports(sports);
+    }
+
+    @Test
+    public void testBearMultipleSports() {
+        List<Sports> sportsList = objectMother.bear("soccer", Sports.class, 10, new SportsMappingPostProcessor());
+
+        Assert.assertEquals(10, sportsList.size());
+        for (Sports sports : sportsList) {
+            assertSports(sports);
+        }
+    }
+
+    protected void assertSports(Sports sports) {
+        assertNotNull(sports.getName());
+        assertTrue(sports.getTeams().size() == 4);
+
+        for (Team team : sports.getTeams()) {
+            assertNotNull(team.getName());
+            assertNotNull(team.getDirector());
+            assertNotNull(team.getCreatedAt());
+            assertTrue(team.getPlayers().length == 5);
+            assertEquals(sports, team.getSports());
+            for (Player player : team.getPlayers()) {
+                assertNotNull(player.getNumber());
+                assertNotNull(player.getName());
+                assertNotNull(player.getGender());
+                assertEquals(team, player.getTeam());
+            }
+        }
+    }
+
+    public static class SportsMappingPostProcessor extends PostProcessor<Sports> {
+
+        @Override
+        public void process(Sports bean, FixtureMap fixtureMap) {
+            for(Team team : bean.getTeams()) {
+                team.setSports(bean);
+                for(Player player : team.getPlayers()) {
+                    player.setTeam(team);
+                }
+            }
+        }
     }
 }

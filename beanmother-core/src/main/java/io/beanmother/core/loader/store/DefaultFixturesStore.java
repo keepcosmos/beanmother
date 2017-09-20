@@ -74,7 +74,8 @@ public class DefaultFixturesStore implements FixturesStore {
     @Override
     public FixtureMap reproduce(String fixtureKey) {
         FixtureMap fixtureMap = get(fixtureKey);
-        return fixtureMap == null ? null : fixtureMap.reproduce();
+        if (fixtureMap == null) throw new IllegalArgumentException("can not find " + fixtureKey);
+        return fixtureMap.reproduce();
     }
 
     @Override
@@ -122,7 +123,6 @@ public class DefaultFixturesStore implements FixturesStore {
 
     /**
      * Get registered fixture locations
-     * @return
      */
     public Set<Location> getFixtureLocations() {
         return fixtureLocations;
@@ -130,7 +130,6 @@ public class DefaultFixturesStore implements FixturesStore {
 
     /**
      * Get registered fixture files
-     * @return
      */
     public Set<File> getFixtureFiles() {
         return fixtureFiles;
@@ -138,7 +137,6 @@ public class DefaultFixturesStore implements FixturesStore {
 
     /**
      * Get fixtureMap
-     * @return
      */
     public Map<String, FixtureMap> getFixtureMaps() {
         return fixtureMaps;

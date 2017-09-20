@@ -11,9 +11,8 @@ public interface Converter extends Comparable<Converter> {
     /**
      * Convert to given type
      *
-     * @param source
-     * @param targetTypeToken
-     *
+     * @param source the source
+     * @param targetTypeToken the TypeToken of the type
      * @return converted object
      */
     Object convert(Object source, TypeToken<?> targetTypeToken);
@@ -21,9 +20,8 @@ public interface Converter extends Comparable<Converter> {
     /**
      * Check that source can convert to given type
      *
-     * @param source
-     * @param targetTypeToken
-     *
+     * @param source the source
+     * @param targetTypeToken the TypeToken of the type
      * @return true if it can convert
      */
     boolean canHandle(Object source, TypeToken<?> targetTypeToken);

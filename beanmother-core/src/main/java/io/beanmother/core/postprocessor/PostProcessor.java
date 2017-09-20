@@ -17,7 +17,8 @@ public abstract class PostProcessor<T> implements Comparable<PostProcessor<T>> {
 
     private int priority = DEFAULT_PRIORITY;
 
-    public Class<T> targetClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    @SuppressWarnings("unchecked")
+    private Class<T> targetClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
     /**
      * Create a PostProcessor.

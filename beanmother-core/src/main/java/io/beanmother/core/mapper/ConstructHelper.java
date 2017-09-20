@@ -27,6 +27,7 @@ public abstract class ConstructHelper {
      * @param fixtureMap the fixtureMap
      * @return a instance of the type
      */
+    @SuppressWarnings("unchecked")
     public static Object construct(Class<?> type, FixtureMap fixtureMap, FixtureConverter fixtureConverter) {
         final Constructor<?>[] constructs = type.getConstructors();
         if (constructs.length == 0) throw new UnsupportedOperationException("cna not create a instance. " + type + " has not constructor.");
@@ -86,6 +87,7 @@ public abstract class ConstructHelper {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     private static Object constructByFixtureValue(Class<?> type, FixtureValue fixtureValue, FixtureConverter fixtureConverter) {
         for (Constructor constructor : type.getConstructors()) {
             if (constructor.getParameterTypes().length == 1) {
@@ -99,9 +101,6 @@ public abstract class ConstructHelper {
                 }
             }
         }
-
         return null;
     }
-
-    private static Class<?>[] convertToParamterTypes(){return null;}
 }

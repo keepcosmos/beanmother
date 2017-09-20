@@ -6,7 +6,7 @@
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother</artifactId>
     <packaging>pom</packaging>
-    <version>0.7.1</version>
+    <version>0.7.2</version>
 
     <name>beanmother</name>
     <url>https://github.com/keepcosmos/beanmother</url>
@@ -77,6 +77,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
                 <configuration>
+                    <compilerArgument>-Xlint:unchecked</compilerArgument>
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>

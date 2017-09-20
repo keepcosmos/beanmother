@@ -5,7 +5,7 @@ import io.beanmother.core.common.FixtureMap;
 import java.util.Map;
 
 /**
- * The root interface for parsing fixture string to {@link java.util.Map<String, Object>}
+ * The root interface for parsing fixture string to {@link java.util.Map}
  */
 public interface FixtureParser {
     /**

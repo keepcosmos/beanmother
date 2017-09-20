@@ -39,7 +39,6 @@ public interface FixtureTemplate extends Serializable {
 
     /**
      * Check If a FixtureTemplate has a parent.
-     * @return
      */
     boolean hasParent();
 

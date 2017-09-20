@@ -13,7 +13,7 @@ public abstract class PrimitiveTypeUtils {
 
     /**
      * Convert primitive type to Wrapper type
-     * @param primitiveTypeToken
+     * @param primitiveTypeToken the TypeToken of primitive.
      * @return Wrapper type
      */
     public static Class<?> toWrapper(final TypeToken<?> primitiveTypeToken) {
@@ -22,7 +22,7 @@ public abstract class PrimitiveTypeUtils {
 
     /**
      * Convert primitive type token to Wrapper type token
-     * @param primitiveTypeToken
+     * @param primitiveTypeToken the TypeToken of primitive.
      * @return Wrapper type
      */
     public static TypeToken<?> toWrapperTypeToken(final TypeToken<?> primitiveTypeToken) {
@@ -31,7 +31,7 @@ public abstract class PrimitiveTypeUtils {
 
     /**
      * Convert primitive type to Wrapper type
-     * @param primitiveType
+     * @param primitiveType the primitive type
      * @return Wrapper type
      */
     public static Class<?> toWrapper(final Class<?> primitiveType) {
@@ -58,9 +58,8 @@ public abstract class PrimitiveTypeUtils {
 
     /**
      * Convert primitive array to Wrapper type list
-     * @param wrapperList
-     * @param primitiveType
-     * @return
+     * @param wrapperList the List of wrapper
+     * @param primitiveType Array of primitive type
      */
     public static Object toWrapperListToPrimitiveArray(final List wrapperList, Class<?> primitiveType) {
         if (primitiveType.isArray()) {

@@ -10,7 +10,9 @@ import java.util.List;
 
 /**
  * {@link String} to {@link Date} converter.
- * The converter uses natty library {@see http://natty.joestelmach.com}.
+ * The converter uses natty library
+ *
+ * @see <a href="http://natty.joestelmach.com">natty</a>
  */
 public class StringToDateConverter extends AbstractGenericConverter<String, Date> {
     private final static Parser dateParser = new Parser();

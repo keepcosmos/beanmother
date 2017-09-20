@@ -17,7 +17,7 @@ public class FixtureValue extends Object implements FixtureTemplate {
 
     /**
      * Create FixtureValue
-     * @param value
+     * @param value the value
      */
     public FixtureValue(Object value) {
         this.value = value;
@@ -41,7 +41,6 @@ public class FixtureValue extends Object implements FixtureTemplate {
 
     /**
      * Check the value is null.
-     * @return
      */
     public boolean isNull() {
         return value == null;
