@@ -35,7 +35,7 @@ Gradle
 ```groovy
 testCompile 'io.beanmother:beanmother-core:0.7.2'
 
-# For java 8
+// For java 8
 testCompile 'io.beanmother:beanmother-java8-converter:0.7.2'
 ```
 
