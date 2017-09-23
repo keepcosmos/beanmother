@@ -15,6 +15,7 @@ Beanmother is a implementation of [ObjectMother](https://martinfowler.com/bliki/
 
 Fixtures can be written in [YAML foromat](http://yaml.org/spec/1.1/) that is very easy to read and write. It is expressive and extensible. You can use the scripts provided by Beanmother to create multiple types of random data and global sequentail numbers.
 
+Java 7 and above are supported.
 
 ## Installation
 
