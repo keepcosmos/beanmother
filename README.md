@@ -13,7 +13,7 @@ Beanmother helps to create your various and complex objects super easily with fi
 
 Beanmother is a implementation of [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html) pattern and also fixture replacement tool. You do not need to write extra code like factories or builders for creating test objects. Beanmother helps to create fresh and randomized bean objects for every single test. You can use your beans as it is.
 
-Fixtures can be written in [YAML foromat](http://yaml.org/spec/1.1/) that is very easy to read and write. It is expressive and extensible. You can use the scripts provided by Beanmother to create multiple types of random data and global sequentail numbers.
+Fixtures can be written in [YAML format](http://yaml.org/spec/1.1/) that is very easy to read and write. It is expressive and extensible. You can use the scripts provided by Beanmother to create multiple types of random data and global sequentail numbers.
 
 Java 7 and above are supported.
 
