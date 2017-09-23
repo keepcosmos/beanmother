@@ -54,6 +54,7 @@ testCompile 'io.beanmother:beanmother-java8-converter:0.7.2'
 * [Post Processor](#post-processor)
 * [Customization](#customization)
 
+
 ### Example
 
 Create fixture `.yml` file in `test/resources/fixtures` as a convention.
@@ -79,7 +80,6 @@ author:
 ```
 
 
-
 ```java
 
 ObjectMother objectMother = ObjectMother.getInstance();
@@ -98,6 +98,7 @@ public void testMultipleObjects() {
 ```
 
 
+
 ### Fixture Script
 
 The scripts provided by Beanmother is a kind of fake property value generator.
@@ -109,6 +110,7 @@ author:
 
 Currently, `FakerScriptRunner` and `SeqenceScriptRunner` are registered as a default.
 
+
 * `FakerScriptRunner` works with `faker` namespace. the script runner is implemented by [java-faker](https://github.com/DiUS/java-faker). you can find a usage of java-faker in [document](http://dius.github.io/java-faker/apidocs/index.html). If a method has no arguments, you can ignore parentheses. for example,
 
 ```yaml
@@ -118,6 +120,7 @@ beer:
   created_at: ${faker.date.between('1990-01-01', '2000-01-01')}
 ```
 
+
 * `SequenceScriptRunner` works with `sequence` namespace. the script generate sequential number globally. for example,
 
 ```yaml
@@ -126,7 +129,9 @@ person:
 ```
 
 
+
 ###  Arguments constructor bean
+
 If a bean does not have no-argument contructor, just add `_construct` key. for example,
 
 ```yaml
@@ -136,8 +141,11 @@ price:
     - USD
 ```
 
+
 ### PostProcessor
-* If you need to common configuration for specific beans, you can use [PostProcessor](#register-post-processors).
+
+If you need to common configuration for specific beans, you can use [PostProcessor](#register-post-processors).
+
 
 ## Customization
 
@@ -179,7 +187,7 @@ public class MyObjectMother extends AbstractBeanMother {
 }
 ```
 
-### Register PostProcessors
+#### Register PostProcessors
 
 A PostProcessor can handle you bean after mapper.
 
@@ -212,7 +220,7 @@ protected void configurePostProcessorFactory(PostProcessorFactory postProcessorF
 Everytime you create a instance of Author, `AuthorPostProcessor` will run before return a instance of Author.
 
 
-### Customize default fixture path.
+#### Customize default fixture path.
 
 Just register the path in ObjectMother. It wil scan all files under the path.
 
@@ -231,7 +239,7 @@ public String[] defaultFixturePaths() {
 ```  
 
 
-### Customize converter
+#### Customize converter
 
 You can write your own converter for some reason.
 
@@ -253,7 +261,7 @@ protected void configureConverterFactory(ConverterFactory converterFactory) {
 }
 ```
 
-### Customize ScriptRunner
+#### Customize ScriptRunner
 
 You can write your own ScriptRunner
 
