@@ -132,8 +132,8 @@ If a bean does not have no-argument contructor, just add `_construct` key. for e
 ```yaml
 price:
   _construct:
-	- 3
-	- USD
+    - 3
+    - USD
 ```
 
 ### PostProcessor
