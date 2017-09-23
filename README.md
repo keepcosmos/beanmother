@@ -80,6 +80,8 @@ author:
     - <<: *book
 ```
 
+And, Just create!
+
 
 ```java
 
@@ -97,6 +99,8 @@ public void testMultipleObjects() {
 }
 
 ```
+
+
 
 
 
