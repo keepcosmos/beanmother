@@ -95,8 +95,7 @@ public void testMultipleObjects() {
 
 ```
 
-And, just create!
-
+And just create!
 
 
 ### Fixture Script
