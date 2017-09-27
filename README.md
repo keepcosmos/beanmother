@@ -1,4 +1,4 @@
-# beanmother
+# Beanmother
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.beanmother/beanmother-core/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Cio.beanmother)
 [![Build Status](https://travis-ci.org/keepcosmos/beanmother.svg?branch=master)](https://travis-ci.org/keepcosmos/beanmother)
@@ -6,14 +6,9 @@
 [![Javadocs](http://javadoc.io/badge/io.beanmother/beanmother-core.svg)](http://javadoc.io/doc/io.beanmother/beanmother-core)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  
 
-
-# Beanmother
-
 Beanmother helps to create your various and complex objects super easily with fixtures for testing. It encourages developers to write more tests.
 
-Beanmother is a implementation of [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html) pattern and also fixture replacement tool. You do not need to write extra code like factories or builders for creating test objects. Beanmother helps to create fresh and randomized bean objects for every single test. You can use your beans as it is.
-
-Fixtures can be written in [YAML format](http://yaml.org/spec/1.1/) that is very easy to read and write. It is expressive and extensible. You can use the scripts provided by Beanmother to create multiple types of random data and global sequentail numbers.
+Beanmother is a implementation of [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html) pattern and also fixture replacement tool. You do not need to write extra code(like factories or builders) for creating test objects. Beanmother helps to create fresh and randomized bean objects for every types of test. You can use a your bean as it is.
 
 Java 7 and above are supported.
 
@@ -80,6 +75,8 @@ author:
     - <<: *book
 ```
 
+[YAML format](http://yaml.org/spec/1.1/) is very easy to read and write. It is expressive and extensible. You can use scripts provided by Beanmother to create multiple types of random data and global sequentail numbers.
+
 
 ```java
 
@@ -97,6 +94,8 @@ public void testMultipleObjects() {
 }
 
 ```
+
+And, just create!
 
 
 
@@ -160,26 +159,26 @@ public class MyObjectMother extends AbstractBeanMother {
     private MyObjectMother() {
         super();
     }
-    
-    
+
+
     // Override for adding your default fixture directory paths
     @Override
     public String[] defaultFixturePaths() {
         return new String[]{ 'test-models', 'fixtures' };
     }
-    
+
     // Override for adding your custom Converter.
     @Override
     protected void configureConverterFactory(ConverterFactory converterFactory) {
         converterFactory.register(new MyConverter());
     }
-    
+
     // Override for adding your custom ScriptRunner.
     @Override
     protected void configureScriptHandler(ScriptHandler scriptHandler) {
         scriptHandler.register(new MyScriptRunner);     
     }
-    
+
     // Override for adding your custom PostProcessor.
     @Override
     protected void configurePostProcessorFactory(PostProcessorFactory postProcessorFactory) {
@@ -201,7 +200,7 @@ public class AuthorPostProcessor extends PostProcessor<Author> {
         }
     }
 }
-``` 
+```
 
 And pass the instance as a argument when you create a instance.
 
@@ -266,15 +265,15 @@ protected void configureConverterFactory(ConverterFactory converterFactory) {
 
 You can write your own ScriptRunner
 
-```java 
+```java
 public class MyScriptRunner implements ScriptRunner {
-    
+
     @Override
     public Object run(ScriptFragment scriptFragment) {
 		    // Do something
         return any;
     }
-    
+
     @Override
     public boolean canHandle(ScriptFragment scriptFragment) {
         return scriptFragment.getMethodName.equal("myname");
@@ -292,5 +291,5 @@ protected void configureScriptHandler(ScriptHandler scriptHandler) {
 ```
 
 
-## Constribution
-Any kind of contributions are very welcome! Coding style guideline is not prepared yet. Although I use Intellij IDE default style, follow a common sense you believe except 4 space indentation.
+## Contributions
+Any kind of contributions are very welcome! Coding style guideline is not prepared yet. Although I use Intellij IDE default style, follow a common sense you believe. But please 4 space indentation.
