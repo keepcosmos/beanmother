@@ -43,7 +43,6 @@
     <modules>
         <module>beanmother-core</module>
         <module>beanmother-java8-converter</module>
-        <module>beanmotherjodatimeconverter</module>
         <module>beanmother-joda-time-converter</module>
     </modules>
 
