@@ -20,7 +20,7 @@ Java 7 and above are supported.
 <dependency>
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother-core</artifactId>
-    <version>0.7.2</version>
+    <version>0.7.3</version>
     <scope>test</scope>
 </dependency>
 
@@ -28,7 +28,7 @@ Java 7 and above are supported.
 <dependency>
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother-java8-converter</artifactId>
-    <version>0.7.2</version>
+    <version>0.7.3</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -36,10 +36,10 @@ Java 7 and above are supported.
 - Gradle
 
 ```groovy
-testCompile 'io.beanmother:beanmother-core:0.7.2'
+testCompile 'io.beanmother:beanmother-core:0.7.3'
 
 // For java 8 time and optional datatype
-testCompile 'io.beanmother:beanmother-java8-converter:0.7.2'
+testCompile 'io.beanmother:beanmother-java8-converter:0.7.3'
 ```
 
 
