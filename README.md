@@ -6,6 +6,9 @@
 [![Javadocs](http://javadoc.io/badge/io.beanmother/beanmother-core.svg)](http://javadoc.io/doc/io.beanmother/beanmother-core)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  
 
+
+![image](image.png)
+
 Beanmother helps to create your various and complex objects super easily with fixtures for testing. It encourages developers to write more tests.
 
 Beanmother is a implementation of [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html) pattern and also fixture replacement tool. You do not need to write extra code(like factories or builders) for creating test objects. Beanmother helps to create fresh and randomized bean objects for every types of test. You can use a your bean as it is.
