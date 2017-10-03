@@ -45,7 +45,7 @@ public class StringToBooleanConverter extends AbstractGenericConverter<String, B
         } else if (FALSE_STRING.contains(normalize)) {
             return false;
         } else {
-            throw new ConverterException(source, getTargetTypeToken().getRawType(), null);
+            throw new ConverterException(source, getTargetTypeToken().getRawType());
         }
     }
 }

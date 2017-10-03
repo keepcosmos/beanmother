@@ -23,7 +23,7 @@ public abstract class AbstractGenericConverter<S, D> extends AbstractConverter {
     @SuppressWarnings("unchecked")
     @Override
     public Object convert(Object source, TypeToken<?> typeToken) {
-        if (!canHandle(source, typeToken)) throw new ConverterException(source, typeToken.getRawType(), null);
+        if (!canHandle(source, typeToken)) throw new ConverterException(source, typeToken.getRawType());
         return convert((S) source);
     }
 

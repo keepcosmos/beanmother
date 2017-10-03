@@ -14,7 +14,7 @@ public class NumberToNumberConverter extends AbstractConverter {
     @SuppressWarnings("unchecked")
     @Override
     public Object convert(Object source, TypeToken<?> targetTypeToken) {
-        if (!canHandle(source, targetTypeToken)) throw new ConverterException(source, targetTypeToken.getRawType(), null);
+        if (!canHandle(source, targetTypeToken)) throw new ConverterException(source, targetTypeToken.getRawType());
         if (targetTypeToken.isPrimitive()) {
             targetTypeToken = PrimitiveTypeUtils.toWrapperTypeToken(targetTypeToken);
         }

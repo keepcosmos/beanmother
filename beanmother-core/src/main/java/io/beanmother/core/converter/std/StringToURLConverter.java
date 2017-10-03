@@ -16,7 +16,7 @@ public class StringToURLConverter extends AbstractGenericConverter<String, URL> 
         try {
             return new URL(source);
         } catch (MalformedURLException e) {
-            throw new ConverterException(source, getTargetTypeToken().getRawType(), null, e);
+            throw new ConverterException(source, getTargetTypeToken().getRawType(), e);
         }
     }
 }
