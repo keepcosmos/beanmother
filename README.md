@@ -12,46 +12,7 @@ Beanmother is a implementation of [ObjectMother](https://martinfowler.com/bliki/
 
 Java 7 and above are supported.
 
-## Installation
-
-* Apache Maven
-
-```xml
-<dependency>
-    <groupId>io.beanmother</groupId>
-    <artifactId>beanmother-core</artifactId>
-    <version>0.7.3</version>
-    <scope>test</scope>
-</dependency>
-
-<!-- For java 8 time and optional datatype -->
-<dependency>
-    <groupId>io.beanmother</groupId>
-    <artifactId>beanmother-java8-converter</artifactId>
-    <version>0.7.3</version>
-    <scope>test</scope>
-</dependency>
-```
-
-- Gradle
-
-```groovy
-testCompile 'io.beanmother:beanmother-core:0.7.3'
-
-// For java 8 time and optional datatype
-testCompile 'io.beanmother:beanmother-java8-converter:0.7.3'
-```
-
-
-## Usage
-* [Example](#example)
-* [Fixture Script](#fxture-script)
-* [Arguments-constructor bean](#arguments-constructor-bean)
-* [Post Processor](#post-processor)
-* [Customization](#customization)
-
-
-### Example
+## Example
 
 Create fixture `.yml` file in `test/resources/fixtures` as a convention.
 
@@ -97,6 +58,65 @@ public void testMultipleObjects() {
 
 And just create!
 
+
+## Usage
+* [Installation](#installation)
+* [Fixture Script](#fxture-script)
+* [Arguments-constructor bean](#arguments-constructor-bean)
+* [Post Processor](#post-processor)
+* [Customization](#customization)
+
+
+### Installation
+
+* Apache Maven
+
+```xml
+<dependency>
+    <groupId>io.beanmother</groupId>
+    <artifactId>beanmother-core</artifactId>
+    <version>0.7.3</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Gradle
+
+```groovy
+testCompile 'io.beanmother:beanmother-core:0.7.3'
+```
+
+#### Extensions
+
+* For java8 time and optional data type
+
+```xml
+<dependency>
+    <groupId>io.beanmother</groupId>
+    <artifactId>beanmother-java8-converter</artifactId>
+    <version>0.7.3</version>
+    <scope>test</scope>
+</dependency>
+```
+
+```groovy
+testCompile 'io.beanmother:beanmother-java8-converter:0.7.3'
+```
+
+* For Joda-time data type
+
+```xml
+<dependency>
+    <groupId>io.beanmother</groupId>
+    <artifactId>beanmother-joda-time-converter</artifactId>
+    <version>0.7.3</version>
+    <scope>test</scope>
+</dependency>
+```
+
+```groovy
+testCompile 'io.beanmother:beanmother-joda-time-converter:0.7.3'
+```
 
 ### Fixture Script
 

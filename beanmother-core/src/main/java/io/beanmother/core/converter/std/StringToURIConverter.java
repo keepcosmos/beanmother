@@ -16,7 +16,7 @@ public class StringToURIConverter extends AbstractGenericConverter<String, URI> 
         try {
             return new URI(source);
         } catch (URISyntaxException e) {
-            throw new ConverterException(source, getTargetTypeToken().getClass(), null, e);
+            throw new ConverterException(source, getTargetTypeToken().getClass(), e);
         }
     }
 }

@@ -31,6 +31,15 @@ public class ConverterException extends RuntimeException {
     }
 
     /**
+     * Create an ConverterException with a source and a target class.
+     * @param source the source
+     * @param targetClass the target class
+     */
+    public ConverterException(Object source, Class<?> targetClass) {
+        this("can not convert " + source + " to " + targetClass);
+    }
+
+    /**
      * Create an ConverterException with a source, a target class and a specific message.
      * @param source the source
      * @param targetClass the target class
@@ -41,13 +50,12 @@ public class ConverterException extends RuntimeException {
     }
 
     /**
-     * Create an ConverterException with a source, a target class, a specific message and a cause.
+     * Create an ConverterException with a source, a target class and a cause.
      * @param source the source
      * @param targetClass the target class
-     * @param message the message
      * @param cause the cause
      */
-    public ConverterException(Object source, Class<?> targetClass, String message, Throwable cause) {
+    public ConverterException(Object source, Class<?> targetClass, Throwable cause) {
         this("can not convert " + source + " to " + targetClass, cause);
     }
 }

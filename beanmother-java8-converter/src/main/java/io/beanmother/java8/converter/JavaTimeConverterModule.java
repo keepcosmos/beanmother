@@ -43,6 +43,9 @@ public class JavaTimeConverterModule implements ConverterModule {
         return LocalDateTime.ofInstant(source.toInstant(), DEFAULT_TIMEZONE);
     }
 
+    /**
+     * Date to LocalDate converter.
+     */
     public static class DateToLocalDateTimeConverter extends AbstractGenericConverter<Date, LocalDateTime> {
         @Override
         public LocalDateTime convert(Date source) {
@@ -50,6 +53,9 @@ public class JavaTimeConverterModule implements ConverterModule {
         }
     }
 
+    /**
+     * Date to LocalTime converter.
+     */
     public static class DateToLocalTimeConverter extends AbstractGenericConverter<Date, LocalTime> {
         @Override
         public LocalTime convert(Date source) {
@@ -57,6 +63,9 @@ public class JavaTimeConverterModule implements ConverterModule {
         }
     }
 
+    /**
+     * Date to LocalDate converter.
+     */
     public static class DateToLocalDateConverter extends AbstractGenericConverter<Date, LocalDate> {
         @Override
         public LocalDate convert(Date source) {
@@ -64,6 +73,9 @@ public class JavaTimeConverterModule implements ConverterModule {
         }
     }
 
+    /**
+     * String to LocalDate converter.
+     */
     public static class StringToLocalDateTimeConverter extends AbstractGenericConverter<String, LocalDateTime> {
         @Override
         public LocalDateTime convert(String source) {
@@ -71,6 +83,9 @@ public class JavaTimeConverterModule implements ConverterModule {
         }
     }
 
+    /**
+     * String to LocalTime converter.
+     */
     public static class StringToLocalTimeConverter extends AbstractGenericConverter<String, LocalTime> {
         @Override
         public LocalTime convert(String source) {
@@ -78,6 +93,9 @@ public class JavaTimeConverterModule implements ConverterModule {
         }
     }
 
+    /**
+     * String to LocalDate converter.
+     */
     public static class StringToLocalDateConverter extends AbstractGenericConverter<String, LocalDate> {
         @Override
         public LocalDate convert(String source) {

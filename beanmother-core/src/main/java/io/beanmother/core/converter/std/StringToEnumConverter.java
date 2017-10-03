@@ -12,7 +12,7 @@ public class StringToEnumConverter extends AbstractConverter {
     @SuppressWarnings("unchecked")
     @Override
     public Object convert(Object source, TypeToken<?> targetTypeToken) {
-        if (!canHandle(source, targetTypeToken)) throw new ConverterException(source, targetTypeToken.getRawType(), null);
+        if (!canHandle(source, targetTypeToken)) throw new ConverterException(source, targetTypeToken.getRawType());
 
         Class enumClass = targetTypeToken.getRawType();
         for (Object enumConstant : enumClass.getEnumConstants()) {
