@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class DateToJodaTimeBaseLocalConverter extends AbstractConverter {
 
+    @SuppressWarnings("unchecked")
     @Override
     public Object convert(Object source, TypeToken<?> targetTypeToken) {
         if (!canHandle(source, targetTypeToken)) {
