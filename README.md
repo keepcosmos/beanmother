@@ -312,6 +312,11 @@ protected void configureScriptHandler(ScriptHandler scriptHandler) {
 }
 ```
 
+## Tests
+
+```
+$ mvn test
+```
 
 ## Contributions
 Any kind of contributions are very welcome! Coding style guideline is not prepared yet. Although I use Intellij IDE default style, follow a common sense you believe. But please 4 space indentation.
