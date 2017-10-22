@@ -44,6 +44,7 @@
         <module>beanmother-core</module>
         <module>beanmother-java8-converter</module>
         <module>beanmother-joda-time-converter</module>
+        <module>beanmother-guava-converter</module>
     </modules>
 
     <properties>

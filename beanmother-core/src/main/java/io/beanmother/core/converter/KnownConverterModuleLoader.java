@@ -18,6 +18,7 @@ public abstract class KnownConverterModuleLoader {
                 "io.beanmother.java8.converter.JavaTimeConverterModule",
                 "io.beanmother.java8.converter.JavaOptionalConverterModule",
                 "io.beanmother.joda.converter.JodaTimeConverterModule",
+                "io.beanmother.guava.converter.GuavaOptionalConverterModule",
                 "io.beanmother.core.DummyConverterModule" // for test
         };
     }
