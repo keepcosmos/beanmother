@@ -91,35 +91,12 @@ testCompile 'io.beanmother:beanmother-core:0.7.4'
 
 #### Extensions
 
-* For java8 time and optional data type
+* [beanmother-java8-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-java8-converter|0.7.4|jar) - For java8 time and optional data type
 
-```xml
-<dependency>
-    <groupId>io.beanmother</groupId>
-    <artifactId>beanmother-java8-converter</artifactId>
-    <version>0.7.4</version>
-    <scope>test</scope>
-</dependency>
-```
+* [beanmother-joda-time-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-joda-time-converter|0.7.4|jar) - For Joda-time data type
 
-```groovy
-testCompile 'io.beanmother:beanmother-java8-converter:0.7.4'
-```
+* [beanmother-guava-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-guava-converter|0.7.4|jar) - For Google Guava optional data type
 
-* For Joda-time data type
-
-```xml
-<dependency>
-    <groupId>io.beanmother</groupId>
-    <artifactId>beanmother-joda-time-converter</artifactId>
-    <version>0.7.4</version>
-    <scope>test</scope>
-</dependency>
-```
-
-```groovy
-testCompile 'io.beanmother:beanmother-joda-time-converter:0.7.4'
-```
 
 ### Fixture Script
 
