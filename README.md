@@ -9,9 +9,9 @@
 
 ![image](image.png)
 
-Beanmother helps you to create various complex objects effortlessly with fixtures for testing. It encourages developers to write more tests.
+Beanmother helps to create various objects, simple and complex, super easily with fixtures for testing. It encourages developers to write more tests.
 
-Beanmother is an implementation of [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html) pattern and also a fixture replacement tool. You need not write extra code (such as, factories or builders) for creating test objects. Beanmother helps in creating fresh and randomized bean objects for every type of test. You can use your bean as is!
+Beanmother is an implementation of [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html) pattern and also fixture replacement tool. You do not need to write extra code(like factories or builders) for creating test objects. Beanmother helps to create fresh and randomized bean objects for every type of test. You can use a bean as is!.
 
 Java 7 and above are supported.
 
@@ -132,7 +132,6 @@ author:
 
 Currently, `FakerScriptRunner` and `SeqenceScriptRunner` are registered as a default.
 
-
 * `FakerScriptRunner` works with `faker` namespace. The script runner is implemented by [java-faker](https://github.com/DiUS/java-faker). You can find a usage of java-faker in [this document](http://dius.github.io/java-faker/apidocs/index.html). If a method has no arguments, parentheses can be ignored. For example,
 
 ```yaml
@@ -142,8 +141,7 @@ beer:
   created_at: ${faker.date.between('1990-01-01', '2000-01-01')}
 ```
 
-
-* `SequenceScriptRunner` works with `sequence` namespace. The script generates a sequential number globally. For example,
+* `SequenceScriptRunner` works with the `sequence` namespace. The script generates sequential numbers globally. For example,
 
 ```yaml
 person:
@@ -171,7 +169,7 @@ If you need a common configuration for specific beans, you can use [PostProcesso
 
 ## Customization
 
-`ObjectMother` class is a default implementation of `AbstractBeanMother` class. For customization, simply extend `AbstractBeanMother` class. It is highly recommended to build this as a singleton instance.  
+`ObjectMother` class is a default implementation of `AbstractBeanMother` class. For customization, simply extend `AbstractBeanMother`. I highly recommend building it as a singleton instance.
 
 ```java
 public class MyObjectMother extends AbstractBeanMother {
@@ -230,7 +228,7 @@ And, pass the instance as an argument when you create an instance.
 Author author = ObjectMother.bear("author", Author.class, new AuthorPostProcessor());
 ```
 
-Or, you can register the PostProcessor to your custom BeanMother for using it globally.
+or, register the PostProcessor to your custom BeanMother for using it globally.
 
 ```java
 @Override
@@ -241,10 +239,9 @@ protected void configurePostProcessorFactory(PostProcessorFactory postProcessorF
 
 Everytime you create an instance of Author, `AuthorPostProcessor` will run before returning an instance of Author.
 
-
 #### Customize default fixture path.
 
-Just register the path in ObjectMother. It wil scan all the files under the path.
+Just register the path in ObjectMother. It will scan all files under the path.
 
 ```java
 ObjectMother.addFixtureLocation("mocks");
@@ -263,7 +260,7 @@ public String[] defaultFixturePaths() {
 
 #### Customize converter
 
-You can write your own converter for some reason.
+You can write your own converter if you want to.
 
 ```java
 public class MyIntegerToStringConverter extends AbstractGenericConverter<Integer, String> {
@@ -319,4 +316,5 @@ $ mvn test
 ```
 
 ## Contributions
-Any kind of contributions are welcome! Coding style guidelines are not yet prepared. Although I use IntelliJ IDE default style, feel free to follow your common sense and use 4 space indentation please.
+
+Any kind of contributions are very welcome! Coding style guideline is not prepared yet. Although I use Intellij IDE default style, follow common sense and please use four-space indentation.
