@@ -319,4 +319,4 @@ $ mvn test
 ```
 
 ## Contributions
-Any kind of contributions are welcome! Coding style guidelines are not yet prepared. Although I use IntelliJ IDE default style, feel free to follow your common sense and please use 4 space indentation.
+Any kind of contributions are welcome! Coding style guidelines are not yet prepared. Although I use IntelliJ IDE default style, feel free to follow your common sense and use 4 space indentation please.
