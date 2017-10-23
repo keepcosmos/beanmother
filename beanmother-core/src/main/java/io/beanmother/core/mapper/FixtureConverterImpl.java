@@ -21,6 +21,7 @@ public class FixtureConverterImpl implements FixtureConverter {
     private final static Logger logger = LoggerFactory.getLogger(FixtureConverterImpl.class);
 
     private final static String java8OptionalConverterKlass = "io.beanmother.java8.converter.OptionalTypeFixtureConverter";
+    private final static String guavaOptionalConverterKlass = "io.beanmother.guava.converter.OptionalTypeFixtureConverter";
 
     private MapperMediator mapperMediator;
     private ConverterFactory converterFactory;
@@ -41,6 +42,14 @@ public class FixtureConverterImpl implements FixtureConverter {
         // convert java.util.Optional if it can.
         if (isJava8OptionalTypeToken(typeToken)) {
             FixtureConverter optionalConverter = loadJava8OptionalConverter();
+            if (optionalConverter != null) {
+                return optionalConverter.convert(fixtureTemplate, typeToken);
+            }
+        }
+
+        // convert com.google.common.base.Optional if it can.
+        if (isGuavaOptionalTypeToken(typeToken)) {
+            FixtureConverter optionalConverter = loadGuavaOptionalConverter();
             if (optionalConverter != null) {
                 return optionalConverter.convert(fixtureTemplate, typeToken);
             }
@@ -217,9 +226,13 @@ public class FixtureConverterImpl implements FixtureConverter {
         return typeToken.getRawType().getName().equals("java.util.Optional");
     }
 
-    private FixtureConverter loadJava8OptionalConverter() {
+    private boolean isGuavaOptionalTypeToken(TypeToken<?> typeToken) {
+        return typeToken.getRawType().equals(com.google.common.base.Optional.class);
+    }
+
+    private FixtureConverter loadFixtureConverter(String className) {
         try {
-            Constructor[] constructors = ClassUtils.getDefaultClassLoader().loadClass(java8OptionalConverterKlass).getConstructors();
+            Constructor[] constructors = ClassUtils.getDefaultClassLoader().loadClass(className).getConstructors();
             for (Constructor constructor : constructors) {
                 if (constructor.getParameterTypes().length == 1 && constructor.getParameterTypes()[0] == FixtureConverter.class) {
                     try {
@@ -234,5 +247,13 @@ public class FixtureConverterImpl implements FixtureConverter {
         } catch (ClassNotFoundException e) {
             return null;
         }
+    }
+
+    private FixtureConverter loadJava8OptionalConverter() {
+        return loadFixtureConverter(java8OptionalConverterKlass);
+    }
+
+    private FixtureConverter loadGuavaOptionalConverter() {
+        return loadFixtureConverter(guavaOptionalConverterKlass);
     }
 }
