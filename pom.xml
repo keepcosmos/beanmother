@@ -6,7 +6,7 @@
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother</artifactId>
     <packaging>pom</packaging>
-    <version>0.7.3</version>
+    <version>0.7.4</version>
 
     <name>beanmother</name>
     <url>https://github.com/keepcosmos/beanmother</url>
@@ -130,7 +130,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <skip>true</skip>
+                    <!--<skip>true</skip>-->
                 </configuration>
             </plugin>
 
