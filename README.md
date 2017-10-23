@@ -78,7 +78,7 @@ And just create!
 <dependency>
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother-core</artifactId>
-    <version>0.7.3</version>
+    <version>0.7.4</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -86,7 +86,7 @@ And just create!
 - Gradle
 
 ```groovy
-testCompile 'io.beanmother:beanmother-core:0.7.3'
+testCompile 'io.beanmother:beanmother-core:0.7.4'
 ```
 
 #### Extensions
@@ -97,13 +97,13 @@ testCompile 'io.beanmother:beanmother-core:0.7.3'
 <dependency>
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother-java8-converter</artifactId>
-    <version>0.7.3</version>
+    <version>0.7.4</version>
     <scope>test</scope>
 </dependency>
 ```
 
 ```groovy
-testCompile 'io.beanmother:beanmother-java8-converter:0.7.3'
+testCompile 'io.beanmother:beanmother-java8-converter:0.7.4'
 ```
 
 * For Joda-time data type
@@ -112,13 +112,13 @@ testCompile 'io.beanmother:beanmother-java8-converter:0.7.3'
 <dependency>
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother-joda-time-converter</artifactId>
-    <version>0.7.3</version>
+    <version>0.7.4</version>
     <scope>test</scope>
 </dependency>
 ```
 
 ```groovy
-testCompile 'io.beanmother:beanmother-joda-time-converter:0.7.3'
+testCompile 'io.beanmother:beanmother-joda-time-converter:0.7.4'
 ```
 
 ### Fixture Script
