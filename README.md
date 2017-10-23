@@ -64,9 +64,9 @@ And just create!
 
 ## Usage
 * [Installation](#installation)
-* [Fixture Script](#fxture-script)
+* [Fixture Script](#fixture-script)
 * [Arguments-constructor bean](#arguments-constructor-bean)
-* [Post Processor](#post-processor)
+* [Post Processor](#postprocessor)
 * [Customization](#customization)
 
 
@@ -319,4 +319,4 @@ $ mvn test
 ```
 
 ## Contributions
-Any kind of contributions are very welcome! Coding style guideline is not prepared yet. Although I use Intellij IDE default style, follow a common sense you believe. But please 4 space indentation.
+Any kind of contributions are very welcome! Coding style guideline is not prepared yet. Although I use Intellij IDE default style, follow common sense and please use four-space indentation.
