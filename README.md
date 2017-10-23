@@ -9,9 +9,9 @@
 
 ![image](image.png)
 
-Beanmother helps to create your various and complex objects super easily with fixtures for testing. It encourages developers to write more tests.
+Beanmother helps to create various objects, simple and complex, super easily with fixtures for testing. It encourages developers to write more tests.
 
-Beanmother is a implementation of [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html) pattern and also fixture replacement tool. You do not need to write extra code(like factories or builders) for creating test objects. Beanmother helps to create fresh and randomized bean objects for every types of test. You can use a your bean as it is.
+Beanmother is aa implementation of [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html) pattern and also fixture replacement tool. You do not need to write extra code(like factories or builders) for creating test objects. Beanmother helps to create fresh and randomized bean objects for every type of test. You can use a bean as is.
 
 Java 7 and above are supported.
 
@@ -39,7 +39,7 @@ author:
     - <<: *book
 ```
 
-[YAML format](http://yaml.org/spec/1.1/) is very easy to read and write. It is expressive and extensible. You can use scripts provided by Beanmother to create multiple types of random data and global sequentail numbers.
+[YAML format](http://yaml.org/spec/1.1/) is very easy to read and write. It is expressive and extensible. You can use scripts provided by Beanmother to create multiple types of random data and global sequential numbers.
 
 
 ```java
@@ -123,7 +123,7 @@ testCompile 'io.beanmother:beanmother-joda-time-converter:0.7.3'
 
 ### Fixture Script
 
-The scripts provided by Beanmother is a kind of fake property value generator.
+The scripts provided by Beanmother are kind of fake property value generators.
 
 ```yml
 author:
@@ -133,7 +133,7 @@ author:
 Currently, `FakerScriptRunner` and `SeqenceScriptRunner` are registered as a default.
 
 
-* `FakerScriptRunner` works with `faker` namespace. the script runner is implemented by [java-faker](https://github.com/DiUS/java-faker). you can find a usage of java-faker in [document](http://dius.github.io/java-faker/apidocs/index.html). If a method has no arguments, you can ignore parentheses. for example,
+* `FakerScriptRunner` works with `faker` namespace. the script runner is implemented by [java-faker](https://github.com/DiUS/java-faker). you can find a usage of java-faker in [document](http://dius.github.io/java-faker/apidocs/index.html). If a method has no arguments, you can ignore parentheses. For example,
 
 ```yaml
 beer:
@@ -143,7 +143,7 @@ beer:
 ```
 
 
-* `SequenceScriptRunner` works with `sequence` namespace. the script generate sequential number globally. for example,
+* `SequenceScriptRunner` works with the `sequence` namespace. The script generates sequential numbers globally. For example,
 
 ```yaml
 person:
@@ -154,7 +154,7 @@ person:
 
 ###  Arguments constructor bean
 
-If a bean does not have no-argument contructor, just add `_construct` key. for example,
+If a bean does not have no-argument constructor, just add `_construct` key. For example,
 
 ```yaml
 price:
@@ -166,12 +166,12 @@ price:
 
 ### PostProcessor
 
-If you need to common configuration for specific beans, you can use [PostProcessor](#register-post-processors).
+If you need a common configuration for specific beans, you can use [PostProcessor](#register-post-processors).
 
 
 ## Customization
 
-`ObjectMother` class is a default implementation of `AbstractBeanMother` class. For customization, simply extend `AbstractBeanMother`. Highly recommended to build as a singleton instance.  
+`ObjectMother` class is a default implementation of `AbstractBeanMother` class. For customization, simply extend `AbstractBeanMother`. I highly recommend building it as a singleton instance.  
 
 ```java
 public class MyObjectMother extends AbstractBeanMother {
@@ -230,7 +230,7 @@ And pass the instance as a argument when you create a instance.
 Author author = ObjectMother.bear("author", Author.class, new AuthorPostProcessor());
 ```
 
-or, register the PostProcessor to your custom BeanMother for using globally.
+or, register the PostProcessor to your custom BeanMother for using it globally.
 
 ```java
 @Override
@@ -239,12 +239,12 @@ protected void configurePostProcessorFactory(PostProcessorFactory postProcessorF
 }
 ```
 
-Everytime you create a instance of Author, `AuthorPostProcessor` will run before return a instance of Author.
+Everytime you create an instance of Author, `AuthorPostProcessor` will run before returning a instance of Author.
 
 
 #### Customize default fixture path.
 
-Just register the path in ObjectMother. It wil scan all files under the path.
+Just register the path in ObjectMother. It will scan all files under the path.
 
 ```java
 ObjectMother.addFixtureLocation("mocks");
@@ -263,7 +263,7 @@ public String[] defaultFixturePaths() {
 
 #### Customize converter
 
-You can write your own converter for some reason.
+You can write your own converter if you want to.
 
 ```java
 public class MyIntegerToStringConverter extends AbstractGenericConverter<Integer, String> {
