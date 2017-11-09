@@ -29,9 +29,9 @@ book: &book
 
 author:
   id: ${sequence.number}
-  name: ${faker.book.author}
+  name: Ernest Hemingway
   introduction: ${faker.lorem.paragraph}
-  birth: ${faker.date.between('1990-01-01', '2000-01-01')}
+  birth: July 21, 1899
   gender: MALE
   works:
     - <<: *book
