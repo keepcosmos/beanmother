@@ -123,7 +123,15 @@ public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implement
 
     private void bindByField(Object target, String key, FixtureTemplate template) {
         Field field = findField(target.getClass(), key);
-        if (field == null) return;
+        if (field == null) {
+            //Lets try private fields as well
+            try {
+                field = target.getClass().getDeclaredField(key);
+                field.setAccessible(true);//Very important, this allows the setting to work.
+            } catch (NoSuchFieldException e) {
+                return;
+            }
+        }
 
         TypeToken<?> targetType = TypeToken.of(field.getGenericType());
         Object value = getFixtureConverter().convert(template, targetType);
