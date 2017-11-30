@@ -1,4 +1,4 @@
-# Beanmother
+# ![beanmother](logo.png)
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.beanmother/beanmother-core/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Cio.beanmother)
 [![Build Status](https://travis-ci.org/keepcosmos/beanmother.svg?branch=master)](https://travis-ci.org/keepcosmos/beanmother)
@@ -7,9 +7,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  
 
 
-![image](logo.png)
-
-Beanmother helps to create various objects, simple and complex, super easily with fixtures for testing. It encourages developers to write more tests.
+**Beanmother** helps to create various objects, simple and complex, super easily with fixtures for testing. It encourages developers to write more tests.
 
 Beanmother is an implementation of [ObjectMother](https://martinfowler.com/bliki/ObjectMother.html) pattern and also fixture replacement tool. You do not need to write extra code(like factories or builders) for creating test objects. Beanmother helps to create fresh and randomized bean objects for every type of test. You can use a bean as is!.
 
