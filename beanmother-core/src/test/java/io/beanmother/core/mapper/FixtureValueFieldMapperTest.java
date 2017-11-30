@@ -40,6 +40,24 @@ public class FixtureValueFieldMapperTest {
     }
 
     @Test
+    public void testPrivateSimpleObjectMapping() {
+        FieldObject obj = new FieldObject();
+
+        mapper.map(obj, "pvtInteger", new FixtureValue(10));
+        assertEquals(obj.pvtInteger, new Integer(10));
+
+        mapper.map(obj, "pvtPrimitiveInt", new FixtureValue(11));
+        assertEquals(obj.pvtPrimitiveInt, 11);
+
+        Date date = new Date();
+        mapper.map(obj, "pvtDate", new FixtureValue(date));
+        assertEquals(obj.pvtDate, date);
+
+        mapper.map(obj, "pvtString", new FixtureValue("test"));
+        assertEquals(obj.pvtString, "test");
+    }
+
+    @Test
     public void testCastingAndMapping() {
         FieldObject obj = new FieldObject();
         mapper.map(obj, "number", new FixtureValue(10));
@@ -56,5 +74,12 @@ public class FixtureValueFieldMapperTest {
         public Float ploat;
         public Date date;
         public String string;
+
+        private int pvtPrimitiveInt;
+        private Integer pvtInteger;
+        private Number pvtNumber;
+        private Float pvtPloat;
+        private Date pvtDate;
+        private String pvtString;
     }
 }
