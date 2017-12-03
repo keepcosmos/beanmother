@@ -1,4 +1,4 @@
-# ![beanmother](logo.png) 
+# Beanmother 
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.beanmother/beanmother-core/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Cio.beanmother)
 [![Build Status](https://travis-ci.org/keepcosmos/beanmother.svg?branch=master)](https://travis-ci.org/keepcosmos/beanmother)
@@ -6,6 +6,8 @@
 [![Javadocs](http://javadoc.io/badge/io.beanmother/beanmother-core.svg)](http://javadoc.io/doc/io.beanmother/beanmother-core)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  
 
+
+![beanmother](logo.png) 
 
 **Beanmother** helps to create various objects, simple and complex, super easily with fixtures for testing. It encourages developers to write more tests.
 
@@ -76,7 +78,7 @@ And just create!
 <dependency>
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother-core</artifactId>
-    <version>0.7.4</version>
+    <version>0.7.5</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -84,16 +86,16 @@ And just create!
 - Gradle
 
 ```groovy
-testCompile 'io.beanmother:beanmother-core:0.7.4'
+testCompile 'io.beanmother:beanmother-core:0.7.5'
 ```
 
 #### Extensions
 
-* [beanmother-java8-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-java8-converter|0.7.4|jar) - For java8 time and optional data type
+* [beanmother-java8-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-java8-converter|0.7.5|jar) - For java8 time and optional data type
 
-* [beanmother-joda-time-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-joda-time-converter|0.7.4|jar) - For Joda-time data type
+* [beanmother-joda-time-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-joda-time-converter|0.7.5|jar) - For Joda-time data type
 
-* [beanmother-guava-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-guava-converter|0.7.4|jar) - For Google Guava optional data type
+* [beanmother-guava-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-guava-converter|0.7.5|jar) - For Google Guava optional data type
 
 
 ### Fixture Script
