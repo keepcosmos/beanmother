@@ -19,6 +19,9 @@ price-for-constructor: &price-for-constructor
   _construct:
     - 1
     - USD
+    
+pattern-builder:
+  _builder: build
 
 bean-constructor:
   _construct:

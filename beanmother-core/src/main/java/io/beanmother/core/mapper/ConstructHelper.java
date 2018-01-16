@@ -1,14 +1,16 @@
 package io.beanmother.core.mapper;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.reflect.TypeToken;
+
 import io.beanmother.core.common.FixtureList;
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.common.FixtureTemplate;
 import io.beanmother.core.common.FixtureValue;
-
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A ConstructHelper helps to create instance by values of a FixtureMap
@@ -21,6 +23,11 @@ public abstract class ConstructHelper {
     private final static String CONSTRUCT_KEY = "_construct";
 
     /**
+     * A key of FixtureMap that is a kind of source for creating a instance, using builder pattern.
+     */
+    private final static String BUILDER_KEY = "_builder";
+    
+    /**
      * Create instance of a given type.
      *
      * @param type the type
@@ -29,8 +36,8 @@ public abstract class ConstructHelper {
      */
     @SuppressWarnings("unchecked")
     public static Object construct(Class<?> type, FixtureMap fixtureMap, FixtureConverter fixtureConverter) {
-        final Constructor<?>[] constructs = type.getConstructors();
-        if (constructs.length == 0) throw new UnsupportedOperationException("cna not create a instance. " + type + " has not constructor.");
+//        final Constructor<?>[] constructs = type.getConstructors();
+//        if (constructs.length == 0) throw new UnsupportedOperationException("cna not create a instance. " + type + " has not constructor.");
 
         Object newInstance = null;
 
@@ -42,13 +49,19 @@ public abstract class ConstructHelper {
             } else if (constructorFixture instanceof FixtureList) {
                 newInstance = constructByFixtureList(type, (FixtureList) constructorFixture, fixtureConverter);
             }
-        }
-
-        if (newInstance == null) {
-            try {
-                newInstance = type.newInstance();
-            } catch (Exception e) {
-                throw new FixtureMappingException(type, fixtureMap, e);
+            
+            if (newInstance == null) {
+                try {
+                    newInstance = type.newInstance();
+                } catch (Exception e) {
+                    throw new FixtureMappingException(type, fixtureMap, e);
+                }
+            }            
+            
+        } else if (fixtureMap.containsKey(BUILDER_KEY)) {
+        	FixtureTemplate constructorFixture = fixtureMap.get(BUILDER_KEY);
+        	if (constructorFixture instanceof FixtureValue) {
+                newInstance = constructByFixtureCustom(type, (FixtureValue) constructorFixture, fixtureConverter);
             }
         }
 
@@ -87,6 +100,16 @@ public abstract class ConstructHelper {
         return null;
     }
 
+    private static Object constructByFixtureCustom(Class<?> type, FixtureValue fixtureValue, FixtureConverter fixtureConverter) {
+        try {
+			return type.getMethod((String)fixtureValue.getValue(), null).invoke(type, null);
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+    }    
+    
     @SuppressWarnings("unchecked")
     private static Object constructByFixtureValue(Class<?> type, FixtureValue fixtureValue, FixtureConverter fixtureConverter) {
         for (Constructor constructor : type.getConstructors()) {

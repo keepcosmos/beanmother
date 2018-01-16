@@ -1,15 +1,16 @@
 package io.beanmother.core.mapper;
 
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.converter.ConverterFactory;
 import io.beanmother.core.loader.Location;
 import io.beanmother.core.loader.store.DefaultFixturesStore;
 import io.beanmother.core.loader.store.FixturesStore;
 import io.beanmother.testmodel.Price;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Test for {@link ConstructHelper}
@@ -36,6 +37,14 @@ public class ConstructHelperTest {
         Object obj = ConstructHelper.construct(SingleArgsConstuctorClass.class, fixtureMap, fixtureConverter);
 
         assertTrue(obj instanceof SingleArgsConstuctorClass);
+    }
+
+    @Test
+    public void testBuilderConstructor() {
+    	FixtureMap fixtureMap = store.reproduce("pattern-builder");
+        Object obj = ConstructHelper.construct(BuilderClass.class, fixtureMap, fixtureConverter);
+
+        assertTrue(obj instanceof BuilderClass);
     }
 
     @Test
@@ -69,6 +78,16 @@ public class ConstructHelperTest {
         public String getStr() {
             return str;
         }
+    }
+    
+    public static class BuilderClass {
+    	private BuilderClass() {
+    	}
+
+    	public static BuilderClass build() {
+    		return new BuilderClass();
+    	}
+    
     }
 
     public static class SingleArgAndNoArgConstuctorClass {
