@@ -36,32 +36,31 @@ public abstract class ConstructHelper {
      */
     @SuppressWarnings("unchecked")
     public static Object construct(Class<?> type, FixtureMap fixtureMap, FixtureConverter fixtureConverter) {
-//        final Constructor<?>[] constructs = type.getConstructors();
-//        if (constructs.length == 0) throw new UnsupportedOperationException("cna not create a instance. " + type + " has not constructor.");
-
         Object newInstance = null;
 
         if (fixtureMap.containsKey(CONSTRUCT_KEY)) {
-            FixtureTemplate constructorFixture = fixtureMap.get(CONSTRUCT_KEY);
+            final Constructor<?>[] constructs = type.getConstructors();
+            if (constructs.length == 0) throw new UnsupportedOperationException("cna not create a instance. " + type + " has not constructor.");
+        	
+        	FixtureTemplate constructorFixture = fixtureMap.get(CONSTRUCT_KEY);
 
             if (constructorFixture instanceof FixtureValue) {
                 newInstance = constructByFixtureValue(type, (FixtureValue) constructorFixture, fixtureConverter);
             } else if (constructorFixture instanceof FixtureList) {
                 newInstance = constructByFixtureList(type, (FixtureList) constructorFixture, fixtureConverter);
             }
-            
-            if (newInstance == null) {
-                try {
-                    newInstance = type.newInstance();
-                } catch (Exception e) {
-                    throw new FixtureMappingException(type, fixtureMap, e);
-                }
-            }            
-            
         } else if (fixtureMap.containsKey(BUILDER_KEY)) {
         	FixtureTemplate constructorFixture = fixtureMap.get(BUILDER_KEY);
         	if (constructorFixture instanceof FixtureValue) {
                 newInstance = constructByFixtureCustom(type, (FixtureValue) constructorFixture, fixtureConverter);
+            }
+        }
+
+        if (newInstance == null) {
+            try {
+                newInstance = type.newInstance();
+            } catch (Exception e) {
+                throw new FixtureMappingException(type, fixtureMap, e);
             }
         }
 
