@@ -5,11 +5,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import io.beanmother.core.ObjectMother;
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.converter.ConverterFactory;
 import io.beanmother.core.loader.Location;
 import io.beanmother.core.loader.store.DefaultFixturesStore;
 import io.beanmother.core.loader.store.FixturesStore;
+import io.beanmother.core.mapper.ConstructHelperTest.PatternBuilderClass.BuilderPC;
 import io.beanmother.testmodel.Price;
 
 /**
@@ -20,9 +22,12 @@ public class ConstructHelperTest {
     FixturesStore store = new DefaultFixturesStore();
     FixtureConverter fixtureConverter = new DefaultFixtureMapper(new ConverterFactory()).getFixtureConverter();
 
+    ObjectMother objectMother = ObjectMother.getInstance();
+    
     @Before
     public void setup(){
         store.addLocation(new Location("testmodel_fixtures"));
+        objectMother.addFixtureLocation("testmodel_fixtures");
     }
 
     @Test
@@ -42,10 +47,16 @@ public class ConstructHelperTest {
     @Test
     public void testBuilderConstructor() {
     	FixtureMap fixtureMap = store.reproduce("pattern-builder");
-        Object obj = ConstructHelper.construct(BuilderClass.class, fixtureMap, fixtureConverter);
+        Object obj = ConstructHelper.construct(PatternBuilderClass.class, fixtureMap, fixtureConverter);
 
-        assertTrue(obj instanceof BuilderClass);
+        assertTrue(obj instanceof BuilderPC);
     }
+    
+    @Test
+    public void testBuilderAndAttr() {
+    	PatternBuilderClass obj = objectMother.bear("pattern-builder", PatternBuilderClass.class);
+    	assertTrue("1".equals(((PatternBuilderClass)obj).attr1));
+    }    
 
     @Test
     public void testMultipleArgsConstructor() {
@@ -80,16 +91,47 @@ public class ConstructHelperTest {
         }
     }
     
-    public static class BuilderClass {
-    	private BuilderClass() {
+    public static final class PatternBuilderClass {
+    	
+    	private String attr1;
+    	
+		public static BuilderPC newBuilder() {
+			return new BuilderPC();
+    	}
+    	
+    	public static final class BuilderPC {
+    		
+    		private static PatternBuilderClass pbc;
+    		
+    		private BuilderPC() {
+    			pbc = new PatternBuilderClass();
+    		}
+    		
+        	public BuilderPC setAttr1(String value) {
+        		pbc.attr1=value;
+        		return this;
+        	}
+    		
+        	public PatternBuilderClass build() {
+        		return pbc;
+        	}
+    	}
+    	
+    	private PatternBuilderClass() {
+    		attr1 = "";
     	}
 
-    	public static BuilderClass build() {
-    		return new BuilderClass();
-    	}
-    
+    	public String getAttr1() {
+			return attr1;
+		}
+    	
     }
 
+	public static void main(String[] args) {
+		PatternBuilderClass pbc = PatternBuilderClass.newBuilder().setAttr1("attr1").build();
+		System.out.println(pbc.getAttr1());
+	}
+    
     public static class SingleArgAndNoArgConstuctorClass {
         private String str;
 

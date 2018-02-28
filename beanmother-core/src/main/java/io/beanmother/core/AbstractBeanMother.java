@@ -11,6 +11,7 @@ import io.beanmother.core.mapper.ConstructHelper;
 import io.beanmother.core.mapper.DefaultFixtureMapper;
 import io.beanmother.core.mapper.FixtureConverter;
 import io.beanmother.core.mapper.FixtureMapper;
+import io.beanmother.core.mapper.ConstructHelperTest.PatternBuilderClass.BuilderPC;
 import io.beanmother.core.postprocessor.PostProcessor;
 import io.beanmother.core.postprocessor.PostProcessorFactory;
 import io.beanmother.core.script.DefaultScriptHandler;
@@ -104,6 +105,12 @@ public abstract class AbstractBeanMother implements BeanMother {
         }
         for (PostProcessor<T> pp : postProcessors) {
             pp.process(target, fixtureMap);
+        }
+        
+        if (fixtureMap.containsKey(ConstructHelper.BUILDER_KEY)) {
+        	// TODO Need to be adjusted, reading from fixture a new param to use "build()" method 
+        	// and not to need know or yes (maybe) that the builder class is BuildPC
+        	return (T) ((BuilderPC)target).build();
         }
 
         return target;
