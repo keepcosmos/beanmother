@@ -1,0 +1,5 @@
+pattern-builder:
+  _initBuilder: newBuilder
+  _finishBuilder: build
+  _targetClass: io.beanmother.core.grpc.PatternBuilderClass$BuilderPC
+  attr1: 1

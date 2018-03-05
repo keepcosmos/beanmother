@@ -1,5 +1,9 @@
 package io.beanmother.core;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.common.FixtureMapTraversal;
 import io.beanmother.core.common.FixtureValue;
@@ -11,21 +15,20 @@ import io.beanmother.core.mapper.ConstructHelper;
 import io.beanmother.core.mapper.DefaultFixtureMapper;
 import io.beanmother.core.mapper.FixtureConverter;
 import io.beanmother.core.mapper.FixtureMapper;
-import io.beanmother.core.mapper.ConstructHelperTest.PatternBuilderClass.BuilderPC;
 import io.beanmother.core.postprocessor.PostProcessor;
 import io.beanmother.core.postprocessor.PostProcessorFactory;
 import io.beanmother.core.script.DefaultScriptHandler;
 import io.beanmother.core.script.ScriptFragment;
 import io.beanmother.core.script.ScriptHandler;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 @SuppressWarnings("unchecked")
 public abstract class AbstractBeanMother implements BeanMother {
 
     private FixturesStore fixturesStore;
+    
+    public FixturesStore getFixturesStore() {
+		return fixturesStore;
+	}
 
     private ConverterFactory converterFactory;
 
@@ -93,7 +96,7 @@ public abstract class AbstractBeanMother implements BeanMother {
         return this;
     }
 
-    private <T> T _bear(T target, FixtureMap fixtureMap, PostProcessor<T> postProcessor) {
+    protected <T> T _bear(T target, FixtureMap fixtureMap, PostProcessor<T> postProcessor) {
         handleScriptFixtureValue(fixtureMap);
 
         fixtureMapper.map(fixtureMap, target);
@@ -107,12 +110,6 @@ public abstract class AbstractBeanMother implements BeanMother {
             pp.process(target, fixtureMap);
         }
         
-        if (fixtureMap.containsKey(ConstructHelper.BUILDER_KEY)) {
-        	// TODO Need to be adjusted, reading from fixture a new param to use "build()" method 
-        	// and not to need know or yes (maybe) that the builder class is BuildPC
-        	return (T) ((BuilderPC)target).build();
-        }
-
         return target;
     }
 
