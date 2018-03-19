@@ -1,11 +1,11 @@
-package io.beanmother.core;
+package io.beanmother.grpc;
 
 import java.lang.reflect.InvocationTargetException;
 
+import io.beanmother.core.AbstractBeanMother;
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.common.FixtureTemplate;
 import io.beanmother.core.common.FixtureValue;
-import io.beanmother.core.grpc.PatternBuilderClass.BuilderPC;
 import io.beanmother.core.postprocessor.PostProcessor;
 
 public class GRPCObjectMother extends AbstractBeanMother {

@@ -1,11 +1,11 @@
-package io.beanmother.core;
+package io.beanmother.grpc;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import io.beanmother.core.grpc.PatternBuilderClass;
+import io.beanmother.grpc.util.PatternBuilderClass;
 
 /**
  * Test for {@link GRPCObjectMother}

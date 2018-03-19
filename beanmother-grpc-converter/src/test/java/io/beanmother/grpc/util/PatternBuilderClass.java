@@ -1,4 +1,4 @@
-package io.beanmother.core.grpc;
+package io.beanmother.grpc.util;
 
 public final class PatternBuilderClass {
 

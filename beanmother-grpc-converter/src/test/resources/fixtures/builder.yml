@@ -1,5 +1,5 @@
 pattern-builder:
   _initBuilder: newBuilder
   _finishBuilder: build
-  _targetClass: io.beanmother.core.grpc.PatternBuilderClass$BuilderPC
+  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
   attr1: 1
