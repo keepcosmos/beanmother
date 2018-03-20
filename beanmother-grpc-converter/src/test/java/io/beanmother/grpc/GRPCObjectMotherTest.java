@@ -20,8 +20,14 @@ public class GRPCObjectMotherTest {
     }
 	
 	@Test
+    public void testBuilderException() {
+    	PatternBuilderClass obj = objectMother.bear("pattern-builder-nomethod", PatternBuilderClass.class);
+    	assertTrue(null==obj);
+    }  
+    
+    @Test
     public void testBuilderAndAttr() {
     	PatternBuilderClass obj = objectMother.bear("pattern-builder", PatternBuilderClass.class);
     	assertTrue("1".equals(((PatternBuilderClass)obj).getAttr1()));
-    }   
+    }       
 }

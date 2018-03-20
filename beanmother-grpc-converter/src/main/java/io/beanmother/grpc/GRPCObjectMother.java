@@ -54,28 +54,30 @@ public class GRPCObjectMother extends AbstractBeanMother {
 	    		inst = (T) executeByFixture(targetClass, (FixtureValue) constructorFixture);
 	        }
 	    }        
-        
-        _bear(inst, fixtureMap, postProcessor);
+		
+		if (inst!=null) {
+			_bear(inst, fixtureMap, postProcessor);
 
-        if (fixtureMap.containsKey(FINISH_BUILDER_KEY)) {
-        	FixtureTemplate finishFixture = fixtureMap.get(FINISH_BUILDER_KEY);
-        	if (finishFixture instanceof FixtureValue) {
-
-        		FixtureTemplate targetFixture = fixtureMap.get(TARGET_BUILDER_KEY);
-        		
-        		try {
-            		// Create a new JavaClassLoader
-            		ClassLoader classLoader = this.getClass().getClassLoader();
-            		// Load the target class using its binary name
-            		Class loadedMyClass = classLoader.loadClass(((FixtureValue)targetFixture).getValue().toString());
-
-        			inst = (T) loadedMyClass.getMethod((String)((FixtureValue)finishFixture).getValue(), null).invoke(inst, null);
-				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-						| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
-					e.printStackTrace();
+			if (fixtureMap.containsKey(FINISH_BUILDER_KEY)) {
+				FixtureTemplate finishFixture = fixtureMap.get(FINISH_BUILDER_KEY);
+				if (finishFixture instanceof FixtureValue) {
+	
+					FixtureTemplate targetFixture = fixtureMap.get(TARGET_BUILDER_KEY);
+					
+					try {
+						// Create a new JavaClassLoader
+						ClassLoader classLoader = this.getClass().getClassLoader();
+						// Load the target class using its binary name
+						Class loadedMyClass = classLoader.loadClass(((FixtureValue)targetFixture).getValue().toString());
+	
+						inst = (T) loadedMyClass.getMethod((String)((FixtureValue)finishFixture).getValue(), null).invoke(inst, null);
+					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+							| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+						e.printStackTrace();
+					}
 				}
-        	}
-        }    
+			}    	
+		}
         
         return inst;
 

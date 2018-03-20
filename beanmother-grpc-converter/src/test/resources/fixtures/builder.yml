@@ -3,3 +3,10 @@ pattern-builder:
   _finishBuilder: build
   _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
   attr1: 1
+
+pattern-builder-nomethod:
+  _initBuilder: nonExistingMethod
+  _finishBuilder: nonExisitingBuilder
+  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  attr1: 1
+  nonExistAttr: 2
