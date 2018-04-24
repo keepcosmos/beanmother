@@ -67,12 +67,22 @@ public class GRPCObjectMother extends AbstractBeanMother {
 					try {
 						// Create a new JavaClassLoader
 						ClassLoader classLoader = this.getClass().getClassLoader();
-						// Load the target class using its binary name
-						Class loadedMyClass = classLoader.loadClass(((FixtureValue)targetFixture).getValue().toString());
+
+						if (targetFixture!=null) {
+							// Load the target class using its binary name
+							Class loadedMyClass = classLoader.loadClass(((FixtureValue)targetFixture).getValue().toString());
 	
-						inst = (T) loadedMyClass.getMethod((String)((FixtureValue)finishFixture).getValue(), null).invoke(inst, null);
+							inst = (T) loadedMyClass.getMethod((String)((FixtureValue)finishFixture).getValue(), null).invoke(inst, null);
+						} else {
+							// targetClass not found
+							inst = null;
+						}
 					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 							| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+						
+						// finish not found
+						inst = null;
+
 						e.printStackTrace();
 					}
 				}

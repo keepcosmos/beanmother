@@ -4,9 +4,42 @@ pattern-builder:
   _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
   attr1: 1
 
-pattern-builder-nomethod:
-  _initBuilder: nonExistingMethod
-  _finishBuilder: nonExisitingBuilder
+pattern-builder-attr-non-existing:
+  _initBuilder: newBuilder
+  _finishBuilder: build
   _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
   attr1: 1
   nonExistAttr: 2
+
+pattern-builder-init-non-existing:
+  _initBuilder: notNewBuilder
+  _finishBuilder: build
+  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  attr1: 1
+
+pattern-builder-init-param-not-found:
+  _finishBuilder: build
+  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  attr1: 1
+
+pattern-builder-finish-non-existing:
+  _initBuilder: newBuilder
+  _finishBuilder: notBuild
+  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  attr1: 1
+
+pattern-builder-finish-param-not-found:
+  _initBuilder: newBuilder
+  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  attr1: 1  
+
+pattern-builder-targetclass-non-existing:
+  _initBuilder: newBuilder
+  _finishBuilder: build
+  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$notBuilderPC
+  attr1: 1  
+
+pattern-builder-targetclass-not-found:
+  _initBuilder: newBuilder
+  _finishBuilder: build
+  attr1: 1  
