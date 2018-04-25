@@ -19,7 +19,7 @@ price-for-constructor: &price-for-constructor
   _construct:
     - 1
     - USD
-
+    
 bean-constructor:
   _construct:
     - <<: *price-for-constructor

@@ -1,15 +1,16 @@
 package io.beanmother.core.mapper;
 
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.converter.ConverterFactory;
 import io.beanmother.core.loader.Location;
 import io.beanmother.core.loader.store.DefaultFixturesStore;
 import io.beanmother.core.loader.store.FixturesStore;
 import io.beanmother.testmodel.Price;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Test for {@link ConstructHelper}
@@ -70,7 +71,7 @@ public class ConstructHelperTest {
             return str;
         }
     }
-
+     
     public static class SingleArgAndNoArgConstuctorClass {
         private String str;
 

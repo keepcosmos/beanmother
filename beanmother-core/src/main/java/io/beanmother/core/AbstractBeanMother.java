@@ -1,5 +1,9 @@
 package io.beanmother.core;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.common.FixtureMapTraversal;
 import io.beanmother.core.common.FixtureValue;
@@ -17,14 +21,14 @@ import io.beanmother.core.script.DefaultScriptHandler;
 import io.beanmother.core.script.ScriptFragment;
 import io.beanmother.core.script.ScriptHandler;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 @SuppressWarnings("unchecked")
 public abstract class AbstractBeanMother implements BeanMother {
 
     private FixturesStore fixturesStore;
+    
+    public FixturesStore getFixturesStore() {
+		return fixturesStore;
+	}
 
     private ConverterFactory converterFactory;
 
@@ -92,7 +96,7 @@ public abstract class AbstractBeanMother implements BeanMother {
         return this;
     }
 
-    private <T> T _bear(T target, FixtureMap fixtureMap, PostProcessor<T> postProcessor) {
+    protected <T> T _bear(T target, FixtureMap fixtureMap, PostProcessor<T> postProcessor) {
         handleScriptFixtureValue(fixtureMap);
 
         fixtureMapper.map(fixtureMap, target);
@@ -105,7 +109,7 @@ public abstract class AbstractBeanMother implements BeanMother {
         for (PostProcessor<T> pp : postProcessors) {
             pp.process(target, fixtureMap);
         }
-
+        
         return target;
     }
 
