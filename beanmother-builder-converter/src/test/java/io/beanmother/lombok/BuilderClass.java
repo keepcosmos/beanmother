@@ -31,6 +31,11 @@ public class BuilderClass {
 		return this.prop2;
 	}
 
+	public static void main(String[] args) {
+		BuilderClass bc = BuilderClass.builder().prop1("prop1").build();
+		System.out.println(bc.getProp1());		
+	}
+
 
 }
 
