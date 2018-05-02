@@ -30,4 +30,10 @@ public class WikipediaObjectMotherTest {
     	assertTrue(4==obj.getWheels());
     }
 
+    @Test
+    public void testBuilderAndAttrNotFound() {
+    	Car obj = objectMother.bear("pattern-builder-wikipedia-targetclass-not-found", Car.class);
+        assertTrue(obj==null);
+    }
+
 }

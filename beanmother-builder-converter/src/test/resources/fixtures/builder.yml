@@ -57,3 +57,10 @@ pattern-builder-wikipedia:
   _targetClass: io.beanmother.wikipedia.CarBuilderImpl
   wheels: 4
   color: Red
+
+pattern-builder-wikipedia-targetclass-not-found:
+  _construct:
+  _finishBuilder: build
+  _targetClass: io.beanmother.wikipedia.CarBuilderImplNotFound
+  wheels: 4
+  color: Red
