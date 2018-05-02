@@ -1,4 +1,4 @@
-package io.beanmother.grpc;
+package io.beanmother.builder;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -6,13 +6,16 @@ import io.beanmother.core.AbstractBeanMother;
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.common.FixtureTemplate;
 import io.beanmother.core.common.FixtureValue;
+import io.beanmother.core.converter.ConverterFactory;
+import io.beanmother.core.mapper.ConstructHelper;
+import io.beanmother.core.mapper.DefaultFixtureMapper;
 import io.beanmother.core.postprocessor.PostProcessor;
 
-public class GRPCObjectMother extends AbstractBeanMother {
+public class BuilderObjectMother extends AbstractBeanMother {
 
-    private final static GRPCObjectMother beanMother = new GRPCObjectMother();
+    private final static BuilderObjectMother beanMother = new BuilderObjectMother();
 
-    public static GRPCObjectMother getInstance() {
+    public static BuilderObjectMother getInstance() {
         return beanMother;
     }
 	
@@ -21,9 +24,10 @@ public class GRPCObjectMother extends AbstractBeanMother {
      */
     public final static String INIT_BUILDER_KEY = "_initBuilder";
     public final static String FINISH_BUILDER_KEY = "_finishBuilder";
-    public final static String TARGET_BUILDER_KEY = "_targetClass";
+	public final static String TARGET_BUILDER_KEY = "_targetClass";
+	public final static String CONSTRUCT_BUILDER_KEY = "_construct";
 
-    public GRPCObjectMother() {
+    public BuilderObjectMother() {
     	super();
 	}
 
@@ -53,7 +57,15 @@ public class GRPCObjectMother extends AbstractBeanMother {
 	    	if (constructorFixture instanceof FixtureValue) {
 	    		inst = (T) executeByFixture(targetClass, (FixtureValue) constructorFixture);
 	        }
-	    }        
+	    } else if (fixtureMap.containsKey(CONSTRUCT_BUILDER_KEY)) {
+			// Use the target class by fixture, not by method call
+			FixtureValue targetFixtureAux = (FixtureValue)fixtureMap.get(TARGET_BUILDER_KEY);
+			try {
+				inst = (T) ConstructHelper.construct(Class.forName(targetFixtureAux.getValue().toString()), fixtureMap, null);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}     
 		
 		if (inst!=null) {
 			_bear(inst, fixtureMap, postProcessor);

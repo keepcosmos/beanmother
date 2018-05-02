@@ -1,45 +1,59 @@
 pattern-builder:
   _initBuilder: newBuilder
   _finishBuilder: build
-  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  _targetClass: io.beanmother.grpc.GrpcBuilderClass$BuilderPC
   attr1: 1
 
 pattern-builder-attr-non-existing:
   _initBuilder: newBuilder
   _finishBuilder: build
-  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  _targetClass: io.beanmother.grpc.GrpcBuilderClass$BuilderPC
   attr1: 1
   nonExistAttr: 2
 
 pattern-builder-init-non-existing:
   _initBuilder: notNewBuilder
   _finishBuilder: build
-  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  _targetClass: io.beanmother.grpc.GrpcBuilderClass$BuilderPC
   attr1: 1
 
 pattern-builder-init-param-not-found:
   _finishBuilder: build
-  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  _targetClass: io.beanmother.grpc.GrpcBuilderClass$BuilderPC
   attr1: 1
 
 pattern-builder-finish-non-existing:
   _initBuilder: newBuilder
   _finishBuilder: notBuild
-  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  _targetClass: io.beanmother.grpc.GrpcBuilderClass$BuilderPC
   attr1: 1
 
 pattern-builder-finish-param-not-found:
   _initBuilder: newBuilder
-  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$BuilderPC
+  _targetClass: io.beanmother.grpc.GrpcBuilderClass$BuilderPC
   attr1: 1  
 
 pattern-builder-targetclass-non-existing:
   _initBuilder: newBuilder
   _finishBuilder: build
-  _targetClass: io.beanmother.grpc.util.PatternBuilderClass$notBuilderPC
+  _targetClass: io.beanmother.grpc.GrpcBuilderClass$notBuilderPC
   attr1: 1  
 
 pattern-builder-targetclass-not-found:
   _initBuilder: newBuilder
   _finishBuilder: build
   attr1: 1  
+
+pattern-builder-lombok:
+  _initBuilder: builder
+  _finishBuilder: build
+  _targetClass: io.beanmother.lombok.BuilderClass
+  prop1: 1
+  prop2: 2
+
+pattern-builder-wikipedia:
+  _construct:
+  _finishBuilder: build
+  _targetClass: io.beanmother.wikipedia.CarBuilderImpl
+  wheels: 4
+  color: Red
