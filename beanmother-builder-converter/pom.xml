@@ -14,7 +14,7 @@
 
     <artifactId>beanmother-builder-converter</artifactId>
 
-    <name>beanmother-grpc-converter</name>
+    <name>beanmother-builder-converter</name>
 
     <dependencies>
         <dependency>
