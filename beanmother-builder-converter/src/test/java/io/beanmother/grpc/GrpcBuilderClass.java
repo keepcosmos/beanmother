@@ -1,6 +1,6 @@
-package io.beanmother.grpc.util;
+package io.beanmother.grpc;
 
-public final class PatternBuilderClass {
+public final class GrpcBuilderClass {
 
 	private String attr1;
 
@@ -10,10 +10,10 @@ public final class PatternBuilderClass {
 
 	public static final class BuilderPC {
 
-		private static PatternBuilderClass pbc;
+		private static GrpcBuilderClass pbc;
 
 		private BuilderPC() {
-			pbc = new PatternBuilderClass();
+			pbc = new GrpcBuilderClass();
 		}
 
 		public BuilderPC setAttr1(String value) {
@@ -21,12 +21,12 @@ public final class PatternBuilderClass {
 			return this;
 		}
 
-		public PatternBuilderClass build() {
+		public GrpcBuilderClass build() {
 			return pbc;
 		}
 	}
 
-	private PatternBuilderClass() {
+	private GrpcBuilderClass() {
 		attr1 = "";
 	}
 
@@ -35,7 +35,7 @@ public final class PatternBuilderClass {
 	}
 
 	public static void main(String[] args) {
-		PatternBuilderClass pbc = PatternBuilderClass.newBuilder().setAttr1("attr1").build();
+		GrpcBuilderClass pbc = GrpcBuilderClass.newBuilder().setAttr1("attr1").build();
 		System.out.println(pbc.getAttr1());
 	}
 	

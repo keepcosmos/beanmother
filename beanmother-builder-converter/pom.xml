@@ -12,9 +12,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>beanmother-grpc-converter</artifactId>
+    <artifactId>beanmother-builder-converter</artifactId>
 
-    <name>beanmother-grpc-converter</name>
+    <name>beanmother-builder-converter</name>
 
     <dependencies>
         <dependency>
