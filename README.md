@@ -61,6 +61,17 @@ public void testMultipleObjects() {
 
 And just create!
 
+But if for some reason, you need load the fixtures from another directory inside the classpath
+
+```java
+objectMother.addFixtureLocation("another_dir/") // test/resources/another_dir
+```
+
+And if the directory it's outside classpath
+
+```java
+objectMother.addFixtureLocation("filesystem:///absolute/path/to/fixture/dir/") // /absolute/path/to/fixture/dir 
+```
 
 ## Usage
 * [Installation](#installation)
