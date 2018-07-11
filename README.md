@@ -89,7 +89,7 @@ objectMother.addFixtureLocation("filesystem:///absolute/path/to/fixture/dir") //
 <dependency>
     <groupId>io.beanmother</groupId>
     <artifactId>beanmother-core</artifactId>
-    <version>0.7.5</version>
+    <version>0.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -97,16 +97,18 @@ objectMother.addFixtureLocation("filesystem:///absolute/path/to/fixture/dir") //
 - Gradle
 
 ```groovy
-testCompile 'io.beanmother:beanmother-core:0.7.5'
+testCompile 'io.beanmother:beanmother-core:0.8.0'
 ```
 
 #### Extensions
 
-* [beanmother-java8-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-java8-converter|0.7.5|jar) - For java8 time and optional data type
+* [beanmother-java8-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-java8-converter|0.8.0|jar) - For java8 time and optional data type
 
-* [beanmother-joda-time-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-joda-time-converter|0.7.5|jar) - For Joda-time data type
+* [beanmother-joda-time-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-joda-time-converter|0.8.0|jar) - For Joda-time data type
 
-* [beanmother-guava-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-guava-converter|0.7.5|jar) - For Google Guava optional data type
+* [beanmother-guava-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-guava-converter|0.8.0|jar) - For Google Guava optional data type
+
+* [beanmother-builder-converter](https://search.maven.org/#artifactdetails|io.beanmother|beanmother-builder-converter|0.8.0|jar) - For builder pattern initializer
 
 
 ### Fixture Script
