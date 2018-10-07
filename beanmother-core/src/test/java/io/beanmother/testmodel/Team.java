@@ -1,11 +1,13 @@
 package io.beanmother.testmodel;
 
 import java.util.Calendar;
+import java.util.Set;
 
 public class Team {
     private Sports sports;
     private String name;
     private Player[] players;
+    private Set<Staff> staff;
     private NamedPerson director;
     private Calendar createdAt;
 
@@ -47,5 +49,13 @@ public class Team {
 
     public void setCreatedAt(Calendar createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Set<Staff> getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Set<Staff> staff) {
+        this.staff = staff;
     }
 }

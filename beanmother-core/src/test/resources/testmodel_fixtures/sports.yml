@@ -8,8 +8,16 @@ player: &PLAYER
   name: ${faker.name.fullName}
   number: ${sequence.number}
 
+staff: &STAFF
+  <<: *PERSON
+  name: ${faker.name.fullName}
+  position: Management
+
 team: &TEAM
   name: ${faker.team.name}
+  staff:
+  - <<: *STAFF
+  - <<: *STAFF
   players:
     - <<: *PLAYER
     - <<: *PLAYER

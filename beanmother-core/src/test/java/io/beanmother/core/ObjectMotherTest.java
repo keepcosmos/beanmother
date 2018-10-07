@@ -74,6 +74,13 @@ public class ObjectMotherTest {
             assertNotNull(team.getName());
             assertNotNull(team.getDirector());
             assertNotNull(team.getCreatedAt());
+            assertTrue(team.getStaff().size() == 2);
+            for (Staff staff : team.getStaff()) {
+                assertNotNull(staff.getPosition());
+                assertNotNull(staff.getName());
+                assertNotNull(staff.getGender());
+                assertEquals(team, staff.getTeam());
+            }
             assertTrue(team.getPlayers().length == 5);
             assertEquals(sports, team.getSports());
             for (Player player : team.getPlayers()) {
@@ -93,6 +100,9 @@ public class ObjectMotherTest {
                 team.setSports(bean);
                 for(Player player : team.getPlayers()) {
                     player.setTeam(team);
+                }
+                for(Staff stuff : team.getStaff()) {
+                    stuff.setTeam(team);
                 }
             }
         }
