@@ -5,6 +5,7 @@ import com.google.common.reflect.TypeToken;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public abstract class TypeTokenUtils {
      * @return generic TypeToken if typeToken is array or component TypeToken if typeToken is Array
      */
     public static TypeToken<?> extractElementTypeToken(TypeToken<?> typeToken) {
-        if (typeToken.isSubtypeOf(List.class)) {
+        if (typeToken.isSubtypeOf(Collection.class)) {
             List<TypeToken<?>> genericTypeTokens = TypeTokenUtils.extractGenericTypeTokens(typeToken);
             if (genericTypeTokens.size() == 0) {
                 return TypeToken.of(Object.class);

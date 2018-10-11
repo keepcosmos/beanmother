@@ -129,9 +129,10 @@ public class FixtureConverterImpl implements FixtureConverter {
     protected Object convert(FixtureList fixtureList, TypeToken<?> typeToken) {
         boolean isArray = typeToken.isArray();
         boolean isList = typeToken.isSubtypeOf(TypeToken.of(List.class));
+        boolean isSet = typeToken.isSubtypeOf(TypeToken.of(Set.class));
 
-        if (!isList && !isArray) {
-            throw new FixtureMappingException("Target setter of '" + fixtureList.getFixtureName() + "' must be List or array.");
+        if (!isList && !isArray && !isSet) {
+            throw new FixtureMappingException("Target setter of '" + fixtureList.getFixtureName() + "' must be List, Set or array.");
         }
 
         final List convertedList;
@@ -165,7 +166,12 @@ public class FixtureConverterImpl implements FixtureConverter {
             } else {
                 return Arrays.copyOf(convertedList.toArray(), convertedList.size(), (Class) typeToken.getRawType());
             }
+        } else if (isSet) {
+            Set set = new HashSet<>();
+            set.addAll(convertedList);
+            return set;
         } else {
+
             return convertedList;
         }
     }
