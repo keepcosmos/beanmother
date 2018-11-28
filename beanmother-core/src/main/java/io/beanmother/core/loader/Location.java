@@ -88,7 +88,7 @@ public class Location {
         }
 
         if (!isClasspath() && !isFilesystemPath()) {
-            throw new IllegalArgumentException(path + " is unkown path, must be either 'filesystem:' or 'classpath:'");
+            throw new IllegalArgumentException(path + " is unknown path, must be either 'filesystem:' or 'classpath:'");
         }
     }
 

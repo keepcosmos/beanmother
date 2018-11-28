@@ -22,7 +22,7 @@ public class FixtureMappingException extends RuntimeException {
      * @param cause the cause
      */
     public FixtureMappingException(Class<?> type, FixtureMap fixtureMap, Throwable cause) {
-        super("can not create a instance of " + type + " by '" + fixtureMap.getFixtureName() + "'", cause);
+        super("can not create an instance of " + type + " by fixture name '" + fixtureMap.getFixtureName() + "'", cause);
     }
 
     /**
