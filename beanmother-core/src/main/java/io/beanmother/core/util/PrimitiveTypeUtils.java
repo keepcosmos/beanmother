@@ -52,7 +52,7 @@ public abstract class PrimitiveTypeUtils {
         } else if (char.class.equals(primitiveType)) {
             return Character.class;
         } else {
-            throw new IllegalArgumentException(primitiveType.getName() + " is not supported primitive type");
+            throw new IllegalArgumentException(primitiveType.getName() + " is not a supported primitive type");
         }
     }
 
@@ -83,7 +83,7 @@ public abstract class PrimitiveTypeUtils {
         } else if (char.class.equals(primitiveType)) {
             return Chars.toArray(wrapperList);
         } else {
-            throw new IllegalArgumentException(primitiveType.getName() + " is not supported primitive type");
+            throw new IllegalArgumentException(primitiveType.getName() + " is not a supported primitive type");
         }
     }
 }

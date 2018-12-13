@@ -23,6 +23,6 @@ public class StringToDateConverter extends AbstractGenericConverter<String, Date
         if (groups.size() > 0 && groups.get(0).getDates().size() > 0) {
             return groups.get(0).getDates().get(0);
         }
-        throw new ConverterException("can not convert '" + source + "' to Date");
+        throw new ConverterException("can not convert '" + source + "' to java.util.Date");
     }
 }

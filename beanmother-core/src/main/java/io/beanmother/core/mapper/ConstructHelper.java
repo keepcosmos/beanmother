@@ -30,7 +30,7 @@ public abstract class ConstructHelper {
     @SuppressWarnings("unchecked")
     public static Object construct(Class<?> type, FixtureMap fixtureMap, FixtureConverter fixtureConverter) {
         final Constructor<?>[] constructs = type.getConstructors();
-        if (constructs.length == 0) throw new UnsupportedOperationException("cna not create a instance. " + type + " has not constructor.");
+        if (constructs.length == 0) throw new UnsupportedOperationException("can not create an instance. " + type + " does not have a constructor.");
 
         Object newInstance = null;
 

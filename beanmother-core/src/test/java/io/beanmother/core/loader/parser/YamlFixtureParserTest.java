@@ -3,11 +3,13 @@ package io.beanmother.core.loader.parser;
 import io.beanmother.core.common.FixtureList;
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.common.FixtureValue;
+import io.beanmother.core.util.ClassUtils;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
@@ -22,9 +24,9 @@ public class YamlFixtureParserTest {
     YamlFixtureParser parser = new YamlFixtureParser();
 
     @Test
-    public void testParse() throws IOException {
-        Path path = Paths.get(ClassLoader.getSystemClassLoader().getResource("fixtures/this.yml").getFile());
-        String fixtureStr = new String(Files.readAllBytes(path));
+    public void testParse() throws IOException, URISyntaxException {
+        URI uri = ClassUtils.getDefaultClassLoader().getResource("fixtures/this.yml").toURI();
+        String fixtureStr = new String(Files.readAllBytes(Paths.get(uri)));
 
         Map<String, FixtureMap> fixtureMaps = parser.parse(fixtureStr);
 
