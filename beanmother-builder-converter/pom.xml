@@ -8,7 +8,7 @@
     <parent>
         <artifactId>beanmother</artifactId>
         <groupId>io.beanmother</groupId>
-        <version>0.8.0</version>
+        <version>0.9.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
