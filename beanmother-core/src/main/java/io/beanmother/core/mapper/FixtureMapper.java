@@ -19,4 +19,6 @@ public interface FixtureMapper {
      * @param target
      */
     void map(FixtureMap fixtureMap, Object target);
+
+    void setSetterPrefix(String setterPrefix);
 }

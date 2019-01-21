@@ -25,6 +25,11 @@ public class DefaultFixtureMapper implements FixtureMapper, MapperMediator {
     }
 
     @Override
+    public void setSetterPrefix(String setterPrefix) {
+        getFixtureMapper().setSetterPrefix(setterPrefix);
+    }
+
+    @Override
     public FixtureMapper getFixtureMapper() {
         return mapperMediator.getFixtureMapper();
     }

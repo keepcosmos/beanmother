@@ -4,12 +4,28 @@ pattern-builder:
   _targetClass: io.beanmother.grpc.GrpcBuilderClass$BuilderPC
   attr1: 1
 
+pattern-builder-custom-setter:
+  _initBuilder: newBuilder
+  _finishBuilder: build
+  _targetClass: io.beanmother.grpcCustom.GrpcBuilderCustomSetterClass$BuilderPC
+  _setterPrefix: with
+  attr1: 1
+
 pattern-builder-attr-non-existing:
   _initBuilder: newBuilder
   _finishBuilder: build
   _targetClass: io.beanmother.grpc.GrpcBuilderClass$BuilderPC
   attr1: 1
   nonExistAttr: 2
+
+pattern-builder-custom-setter-non-existing:
+  _initBuilder: newBuilder
+  _finishBuilder: build
+  _targetClass: io.beanmother.grpcCustom.GrpcBuilderCustomSetterClass$BuilderPC
+  _setterPrefix: with
+  attr1: 1
+  nonExistAttr: 2
+
 
 pattern-builder-init-non-existing:
   _initBuilder: notNewBuilder
