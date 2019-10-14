@@ -16,10 +16,12 @@ public class StringToEnumConverter extends AbstractConverter {
 
         Class enumClass = targetTypeToken.getRawType();
         for (Object enumConstant : enumClass.getEnumConstants()) {
-            String enumStr = enumConstant.toString().replaceAll("\\_", "");
-            String sourceStr = ((String) source).replaceAll("\\-", "").replaceAll("\\_", "").replaceAll("\\s", "");
+            Enum constant = (Enum) enumConstant;
+            String enumStr = constant.name();
+            String sourceStr = ((String) source);
+
             if (enumStr.equalsIgnoreCase(sourceStr)) {
-                return Enum.valueOf(enumClass, enumConstant.toString());
+                return enumConstant;
             }
         }
 
