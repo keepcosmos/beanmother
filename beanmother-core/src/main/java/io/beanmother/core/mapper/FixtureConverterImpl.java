@@ -167,9 +167,7 @@ public class FixtureConverterImpl implements FixtureConverter {
                 return Arrays.copyOf(convertedList.toArray(), convertedList.size(), (Class) typeToken.getRawType());
             }
         } else if (isSet) {
-            Set set = new HashSet<>();
-            set.addAll(convertedList);
-            return set;
+            return new HashSet<>(convertedList);
         } else {
 
             return convertedList;
