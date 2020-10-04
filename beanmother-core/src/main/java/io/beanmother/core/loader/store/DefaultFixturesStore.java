@@ -100,7 +100,7 @@ public class DefaultFixturesStore implements FixturesStore {
         Map<String, FixtureMap> parsed = new HashMap<>();
         for (File file : files) {
             if (fixtureFiles.contains(file)) continue;
-            String fixtureStr = null;
+            String fixtureStr;
             try {
                 fixtureStr = new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
             } catch (IOException e) {

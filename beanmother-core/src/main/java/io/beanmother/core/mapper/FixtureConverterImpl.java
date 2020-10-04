@@ -214,7 +214,7 @@ public class FixtureConverterImpl implements FixtureConverter {
             }
             return convertedMap;
         } else {
-            Object obj = null;
+            Object obj;
             try {
                 obj = ConstructHelper.construct(typeToken.getRawType(), fixtureMap, this);
             } catch (Exception e) {
