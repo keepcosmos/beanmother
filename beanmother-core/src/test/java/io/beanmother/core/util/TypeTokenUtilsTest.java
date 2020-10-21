@@ -18,8 +18,8 @@ public class TypeTokenUtilsTest {
         TypeToken source = new TypeToken<List<String>>() {};
         List<TypeToken<?>> typeTokens = TypeTokenUtils.extractGenericTypeTokens(source);
 
-        assertEquals(typeTokens.size(), 1);
-        assertEquals(typeTokens.get(0), TypeToken.of(String.class));
+        assertEquals( 1, typeTokens.size());
+        assertEquals(TypeToken.of(String.class), typeTokens.get(0));
     }
 
     @Test

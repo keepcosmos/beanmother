@@ -21,7 +21,7 @@ public abstract class TypeTokenUtils {
     public static TypeToken<?> extractElementTypeToken(TypeToken<?> typeToken) {
         if (typeToken.isSubtypeOf(Collection.class)) {
             List<TypeToken<?>> genericTypeTokens = TypeTokenUtils.extractGenericTypeTokens(typeToken);
-            if (genericTypeTokens.size() == 0) {
+            if (genericTypeTokens.isEmpty()) {
                 return TypeToken.of(Object.class);
             } else {
                 return genericTypeTokens.get(0);
