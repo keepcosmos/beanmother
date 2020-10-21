@@ -19,16 +19,16 @@ public class YamlFixtureParser implements FixtureParser {
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, FixtureMap> parse(String fixture) {
-        Map<String, ? extends Object> fixtures = buildYaml().loadAs(fixture, Map.class);;
+        Map<String, ?> fixtures = buildYaml().loadAs(fixture, Map.class);
         Map<String, FixtureMap> fixtureMaps = new HashMap<>();
 
-        for (String key : fixtures.keySet()) {
-            if (fixtures.get(key) instanceof Map) {
-                FixtureMap fixtureMap = FixtureTemplateWrapper.wrap((Map) fixtures.get(key), key, null);
+        for (Map.Entry<String, ?> entry : fixtures.entrySet()) {
+            if (entry.getValue() instanceof Map) {
+                FixtureMap fixtureMap = FixtureTemplateWrapper.wrap((Map<String, ?>) entry.getValue(), entry.getKey(), null);
                 fixtureMap.setRoot(true);
-                fixtureMaps.put(key, fixtureMap);
+                fixtureMaps.put(entry.getKey(), fixtureMap);
             } else {
-                throw new FixtureFormatException(key, " the root of fixture data should be key - value");
+                throw new FixtureFormatException(entry.getKey(), " the root of fixture data should be key - value");
             }
         }
 
