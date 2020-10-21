@@ -3,6 +3,7 @@ package io.beanmother.java8.converter;
 import com.google.common.reflect.TypeToken;
 import io.beanmother.core.converter.Converter;
 import io.beanmother.core.converter.ConverterFactory;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -31,6 +32,7 @@ public class AutoLoadTest {
     }
 
     @Test
+    @Ignore("Need to be added")
     public void OptionalTest() {
 
     }
