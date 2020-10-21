@@ -19,8 +19,8 @@ public class YamlFixtureScannerTest {
         FixtureScanner scanner = new YamlFixtureScanner(classLoader);
         List<File> files = scanner.scan(new Location("fixtures/animals/pets/dog.yml"));
 
-        Assert.assertEquals(files.size(), 1);
-        Assert.assertEquals(files.get(0).getName(), "dog.yml");
+        Assert.assertEquals(1, files.size());
+        Assert.assertEquals("dog.yml", files.get(0).getName());
     }
 
     @Test
