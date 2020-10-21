@@ -15,8 +15,8 @@ import java.lang.reflect.Type;
  */
 public class JodaTimeSingleFieldPeriodConverter extends AbstractConverter {
 
-    private final static StringToNumberConverter stringToNumberConverter = new StringToNumberConverter();
-    private final static NumberToNumberConverter numberToNumberConverter = new NumberToNumberConverter();
+    private static final StringToNumberConverter stringToNumberConverter = new StringToNumberConverter();
+    private static final NumberToNumberConverter numberToNumberConverter = new NumberToNumberConverter();
 
     @Override
     public Object convert(Object source, TypeToken<?> targetTypeToken) {

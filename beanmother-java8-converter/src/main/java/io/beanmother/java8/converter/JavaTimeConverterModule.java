@@ -18,10 +18,10 @@ import java.util.Set;
  */
 public class JavaTimeConverterModule implements ConverterModule {
 
-    private final static StringToDateConverter stringToDateConverter = new StringToDateConverter();
-    private final static ZoneId DEFAULT_TIMEZONE = ZoneId.systemDefault();
+    private static final StringToDateConverter stringToDateConverter = new StringToDateConverter();
+    private static final ZoneId DEFAULT_TIMEZONE = ZoneId.systemDefault();
 
-    private final static Set<Converter> converters;
+    private static final Set<Converter> converters;
 
     static {
         converters = new HashSet<>();

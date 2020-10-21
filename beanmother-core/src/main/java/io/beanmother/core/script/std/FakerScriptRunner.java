@@ -14,10 +14,10 @@ import java.util.Random;
  */
 public class FakerScriptRunner extends MethodReflectionEvalScriptRunner {
 
-    private final static String SCRIPT_NAMESPACE = "faker";
-    private final static String OPTION_FAKER_FRAGMENT_METHOD_NAME = "options";
+    private static final String SCRIPT_NAMESPACE = "faker";
+    private static final String OPTION_FAKER_FRAGMENT_METHOD_NAME = "options";
 
-    private final static Faker faker = new Faker();
+    private static final Faker faker = new Faker();
 
     @Override
     public Object run(ScriptFragment scriptFragment) {

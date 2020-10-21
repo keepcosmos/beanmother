@@ -22,12 +22,12 @@ import java.util.List;
  * It maps target object properties by setter and maps public field as a fallback.
  */
 public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implements FixtureMapper {
-    private final static Logger logger = LoggerFactory.getLogger(SetterAndFieldFixtureMapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(SetterAndFieldFixtureMapper.class);
 
     /**
      * A prefix of setter names
      */
-    private final static String SETTER_PREFIX = "set";
+    private static final String SETTER_PREFIX = "set";
 
     /**
      * Create a SetterAndFieldFixtureMapper

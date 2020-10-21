@@ -11,9 +11,9 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class SequenceScriptRunner implements ScriptRunner {
 
-    private final static String NAMESPACE = "sequence";
+    private static final String NAMESPACE = "sequence";
 
-    private final static String NUMBER_SEQUENCE_METHOD_NAME = "number";
+    private static final String NUMBER_SEQUENCE_METHOD_NAME = "number";
 
     private AtomicLong longSequence = new AtomicLong(0);
 

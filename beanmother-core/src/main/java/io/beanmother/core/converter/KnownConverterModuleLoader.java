@@ -10,7 +10,7 @@ import java.util.List;
  */
 public abstract class KnownConverterModuleLoader {
 
-    private final static String[] knownConverterModules;
+    private static final String[] knownConverterModules;
 
     static {
         knownConverterModules = new String[]{

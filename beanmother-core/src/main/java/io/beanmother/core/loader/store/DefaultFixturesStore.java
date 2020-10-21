@@ -23,7 +23,7 @@ import java.util.*;
  */
 public class DefaultFixturesStore implements FixturesStore {
 
-    private final static Logger logger = LoggerFactory.getLogger(DefaultFixtureMapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultFixtureMapper.class);
 
     /**
      * Scanner to load fixture files.

@@ -18,10 +18,10 @@ import java.util.*;
  */
 @SuppressWarnings("unchecked")
 public class FixtureConverterImpl implements FixtureConverter {
-    private final static Logger logger = LoggerFactory.getLogger(FixtureConverterImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(FixtureConverterImpl.class);
 
-    private final static String java8OptionalConverterKlass = "io.beanmother.java8.converter.OptionalTypeFixtureConverter";
-    private final static String guavaOptionalConverterKlass = "io.beanmother.guava.converter.OptionalTypeFixtureConverter";
+    private static final String java8OptionalConverterKlass = "io.beanmother.java8.converter.OptionalTypeFixtureConverter";
+    private static final String guavaOptionalConverterKlass = "io.beanmother.guava.converter.OptionalTypeFixtureConverter";
 
     private MapperMediator mapperMediator;
     private ConverterFactory converterFactory;
