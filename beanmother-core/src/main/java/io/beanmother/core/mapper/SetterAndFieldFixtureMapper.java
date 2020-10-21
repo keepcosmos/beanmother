@@ -32,7 +32,7 @@ public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implement
     /**
      * Create a SetterAndFieldFixtureMapper
      *
-     * @param mapperMediator
+     * @param mapperMediator mapper mediator
      */
     public SetterAndFieldFixtureMapper(MapperMediator mapperMediator) {
         super(mapperMediator);

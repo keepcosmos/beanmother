@@ -12,7 +12,7 @@ public interface FixtureScanner {
 
     /**
      * Find all fixture files in the location.
-     * @param location
+     * @param location location
      * @return All fixture files.
      */
     List<File> scan(Location location);

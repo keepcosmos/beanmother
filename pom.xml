@@ -113,7 +113,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <doclint>none</doclint>
+                    <source>8</source>
                 </configuration>
             </plugin>
 
@@ -156,7 +157,6 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.9</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>

@@ -28,8 +28,8 @@ public class FixtureConverterImpl implements FixtureConverter {
 
     /**
      * Create a FixtureConverterImpl
-     * @param mapperMediator
-     * @param converterFactory
+     * @param mapperMediator mapper mediator
+     * @param converterFactory converter factory
      */
     public FixtureConverterImpl(MapperMediator mapperMediator, ConverterFactory converterFactory) {
         this.mapperMediator = mapperMediator;
@@ -120,11 +120,9 @@ public class FixtureConverterImpl implements FixtureConverter {
 
     /**
      * Convert the fixtureList to the given TypeToken
-     * @param fixtureList
-     * @param typeToken
+     * @param fixtureList fixture list
+     * @param typeToken type token
      * @return converted object from fixtureList.
-     * @throws IllegalAccessException
-     * @throws InstantiationException
      */
     protected Object convert(FixtureList fixtureList, TypeToken<?> typeToken) {
         boolean isArray = typeToken.isArray();
@@ -176,8 +174,8 @@ public class FixtureConverterImpl implements FixtureConverter {
 
     /**
      * Convert FixtureMap to given type
-     * @param fixtureMap
-     * @param typeToken
+     * @param fixtureMap fixture Map
+     * @param typeToken type token
      * @return converted Object from fixtureMap
      */
     protected Object convert(FixtureMap fixtureMap, TypeToken<?> typeToken) {

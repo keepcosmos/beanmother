@@ -10,8 +10,8 @@ public interface FixtureConverter {
 
     /**
      * Convert the fixtureTemplate to the give type.
-     * @param fixtureTemplate
-     * @param typeToken
+     * @param fixtureTemplate fixture template
+     * @param typeToken type token
      * @return converted object
      */
     Object convert(FixtureTemplate fixtureTemplate, TypeToken<?> typeToken);

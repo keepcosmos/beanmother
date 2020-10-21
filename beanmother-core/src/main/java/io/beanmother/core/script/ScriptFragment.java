@@ -98,7 +98,7 @@ public class ScriptFragment {
 
     /**
      * Create a ScriptFragment
-     * @param methodName
+     * @param methodName method name
      */
     public ScriptFragment(String methodName) {
         this.methodName = methodName.trim();
@@ -106,8 +106,8 @@ public class ScriptFragment {
 
     /**
      * Create a ScriptFragment.
-     * @param methodName
-     * @param arguments
+     * @param methodName method name
+     * @param arguments arguments
      */
     public ScriptFragment(String methodName, String ... arguments) {
         this(methodName);

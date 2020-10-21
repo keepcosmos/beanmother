@@ -41,7 +41,7 @@ public abstract class AbstractFixtureScanner implements FixtureScanner {
     /**
      * Check the file is a fixture file or not.
      * Subclass can override this method to determine which file is a fixture file.
-     * @param file
+     * @param file file
      * @return {@code true} if the file is a fixture file.
      */
     protected boolean isFixtureFile(File file) {
