@@ -7,8 +7,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Test for {@link FakerScriptRunner}
@@ -53,14 +52,14 @@ public class FakerScriptRunnerTest extends ScriptProcessorTest {
         assertTrue(date.getTime() > 1483282800000l && date.getTime() < 1485874800000l);
 
         date = run(scriptRunner, "faker.date.future(1, 'hours')", Date.class);
-        assertTrue(date.compareTo(new Date()) == 1);
+        assertEquals(date.compareTo(new Date()), 1);
         date = run(scriptRunner, "faker.date.future(1, 'days')", Date.class);
-        assertTrue(date.compareTo(new Date()) == 1);
+        assertEquals(date.compareTo(new Date()), 1);
 
         date = run(scriptRunner, "faker.date.past(1, 'hours')", Date.class);
-        assertTrue(date.compareTo(new Date()) == -1);
+        assertEquals(-1, date.compareTo(new Date()));
         date = run(scriptRunner, "faker.date.past(1, 'days')", Date.class);
-        assertTrue(date.compareTo(new Date()) == -1);
+        assertEquals(-1, date.compareTo(new Date()));
     }
 
     @Test

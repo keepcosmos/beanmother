@@ -83,11 +83,11 @@ public class FixtureMapSetterMapperTest {
         MapSetterObject target = new MapSetterObject();
         mapper.map(target, "stringToBean", fixture);
 
-        assertEquals(target.getStringToBean().size(), 2);
-        assertEquals(target.getStringToBean().get("bean1").getId(), 1);
-        assertEquals(target.getStringToBean().get("bean1").getName(), "Hemingway");
-        assertEquals(target.getStringToBean().get("bean2").getId(), 2);
-        assertEquals(target.getStringToBean().get("bean2").getName(), "Tolstoy");
+        assertEquals(2, target.getStringToBean().size());
+        assertEquals(1, target.getStringToBean().get("bean1").getId());
+        assertEquals("Hemingway", target.getStringToBean().get("bean1").getName());
+        assertEquals(2, target.getStringToBean().get("bean2").getId());
+        assertEquals("Tolstoy", target.getStringToBean().get("bean2").getName());
 
     }
 

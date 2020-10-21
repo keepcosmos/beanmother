@@ -35,7 +35,7 @@ public class FixtureValueSetterMapperTest {
         assertEquals(obj.getDate(), date);
 
         mapper.map(obj, "string", new FixtureValue("test"));
-        assertEquals(obj.getString(), "test");
+        assertEquals("test", obj.getString());
     }
 
     @Test
