@@ -158,7 +158,7 @@ public class FixtureConverterImpl implements FixtureConverter {
         }
 
         // not found converter
-        if (convertedList.size() == 0) return null;
+        if (convertedList.isEmpty()) return null;
 
         if(isArray) {
             if (elementTypeToken.isPrimitive()) {
@@ -179,8 +179,6 @@ public class FixtureConverterImpl implements FixtureConverter {
      * @param fixtureMap
      * @param typeToken
      * @return converted Object from fixtureMap
-     * @throws IllegalAccessException
-     * @throws InstantiationException
      */
     protected Object convert(FixtureMap fixtureMap, TypeToken<?> typeToken) {
         if (typeToken.isSubtypeOf(Map.class)) {
@@ -226,7 +224,6 @@ public class FixtureConverterImpl implements FixtureConverter {
     }
 
     private boolean isJava8OptionalTypeToken(TypeToken<?> typeToken) {
-        String name = typeToken.getRawType().getName();
         return typeToken.getRawType().getName().equals("java.util.Optional");
     }
 

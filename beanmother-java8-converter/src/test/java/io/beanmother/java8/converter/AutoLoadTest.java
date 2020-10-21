@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.OptionalLong;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -34,6 +35,6 @@ public class AutoLoadTest {
     @Test
     @Ignore("Need to be added")
     public void OptionalTest() {
-
+        assertEquals(2, 1 + 1);
     }
 }

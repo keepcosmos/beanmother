@@ -1,19 +1,17 @@
 package io.beanmother.builder;
 
-import java.lang.reflect.InvocationTargetException;
-
 import io.beanmother.core.AbstractBeanMother;
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.common.FixtureTemplate;
 import io.beanmother.core.common.FixtureValue;
-import io.beanmother.core.converter.ConverterFactory;
 import io.beanmother.core.mapper.ConstructHelper;
-import io.beanmother.core.mapper.DefaultFixtureMapper;
 import io.beanmother.core.postprocessor.PostProcessor;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class BuilderObjectMother extends AbstractBeanMother {
 
-    private final static BuilderObjectMother beanMother = new BuilderObjectMother();
+    private static final BuilderObjectMother beanMother = new BuilderObjectMother();
 
     public static BuilderObjectMother getInstance() {
         return beanMother;
@@ -22,10 +20,10 @@ public class BuilderObjectMother extends AbstractBeanMother {
     /**
      * A key of FixtureMap that is a kind of source for creating a instance, using builder pattern.
      */
-    public final static String INIT_BUILDER_KEY = "_initBuilder";
-    public final static String FINISH_BUILDER_KEY = "_finishBuilder";
-	public final static String TARGET_BUILDER_KEY = "_targetClass";
-	public final static String CONSTRUCT_BUILDER_KEY = "_construct";
+    public static final String INIT_BUILDER_KEY = "_initBuilder";
+    public static final String FINISH_BUILDER_KEY = "_finishBuilder";
+	public static final String TARGET_BUILDER_KEY = "_targetClass";
+	public static final String CONSTRUCT_BUILDER_KEY = "_construct";
 
     public BuilderObjectMother() {
     	super();

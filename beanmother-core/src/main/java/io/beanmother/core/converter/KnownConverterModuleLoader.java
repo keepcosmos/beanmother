@@ -39,9 +39,7 @@ public abstract class KnownConverterModuleLoader {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } catch (ClassNotFoundException e) {
-                // Do nothing
-            } catch (ClassCastException e) {
+            } catch (ClassNotFoundException | ClassCastException e) {
                 // Do nothing
             }
         }
