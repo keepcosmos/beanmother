@@ -127,11 +127,11 @@ public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implement
             //Lets try private fields as well
             try {
                 field = target.getClass().getDeclaredField(key);
-                field.setAccessible(true);//Very important, this allows the setting to work.
             } catch (NoSuchFieldException e) {
                 return;
             }
         }
+        field.setAccessible(true);//Very important, this allows the setting to work.
 
         TypeToken<?> targetType = TypeToken.of(field.getGenericType());
         Object value = getFixtureConverter().convert(template, targetType);
@@ -146,7 +146,7 @@ public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implement
 
     private Field findField(Class<?> targetClass, String key) {
         try {
-            return targetClass.getField(key);
+        	return targetClass.getDeclaredField(key);
         } catch (NoSuchFieldException e) {
             Class<?> superClass = targetClass.getSuperclass();
             if (superClass == null || superClass == Object.class) {

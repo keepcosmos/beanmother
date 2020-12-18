@@ -66,6 +66,13 @@ public class FixtureValueFieldMapperTest {
         mapper.map(obj, "ploat", new FixtureValue(10));
         assertEquals(obj.ploat, new Float(10));
     }
+    
+    @Test
+    public void testPrivateSimpleChildObjectMapping() {
+    	FieldChildObject childObj = new FieldChildObject();
+        mapper.map(childObj, "pvtString", new FixtureValue("test"));
+        assertEquals(childObj.getPvtString(), "test");
+    }
 
     public static class FieldObject {
         public int primitiveInt;
@@ -81,5 +88,17 @@ public class FixtureValueFieldMapperTest {
         private Float pvtPloat;
         private Date pvtDate;
         private String pvtString;
+    }
+    
+    public static class FieldParentObject {
+        private String pvtString;
+        
+        public String getPvtString () {
+        	return pvtString;
+        }
+    }
+    
+    public static class FieldChildObject extends FieldParentObject {
+    	
     }
 }
