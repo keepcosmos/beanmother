@@ -8,8 +8,6 @@ import io.beanmother.core.common.FixtureList;
 import io.beanmother.core.common.FixtureMap;
 import io.beanmother.core.common.FixtureTemplate;
 import io.beanmother.core.common.FixtureValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -22,20 +20,22 @@ import java.util.List;
  * It maps target object properties by setter and maps public field as a fallback.
  */
 public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implements FixtureMapper {
-    private final static Logger logger = LoggerFactory.getLogger(SetterAndFieldFixtureMapper.class);
-
     /**
      * A prefix of setter names
      */
-    private final static String SETTER_PREFIX = "set";
+    private String SETTER_PREFIX = "set";
 
     /**
      * Create a SetterAndFieldFixtureMapper
      *
-     * @param mapperMediator
      */
     public SetterAndFieldFixtureMapper(MapperMediator mapperMediator) {
         super(mapperMediator);
+    }
+
+    @Override
+    public void setSetterPrefix(String setterPrefix) {
+        this.SETTER_PREFIX = setterPrefix;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implement
         for (Method method : methods) {
             String name = method.getName();
             if(name.indexOf(SETTER_PREFIX) == 0) {
-                if (name.substring(SETTER_PREFIX.length(), name.length()).equalsIgnoreCase(key)) {
+                if (name.substring(SETTER_PREFIX.length()).equalsIgnoreCase(key)) {
                     result.add(method);
                 }
             }
@@ -127,7 +127,7 @@ public class SetterAndFieldFixtureMapper extends AbstractFixtureMapper implement
             //Lets try private fields as well
             try {
                 field = target.getClass().getDeclaredField(key);
-                field.setAccessible(true);//Very important, this allows the setting to work.
+                field.setAccessible(true); //Very important, this allows the setting to work.
             } catch (NoSuchFieldException e) {
                 return;
             }

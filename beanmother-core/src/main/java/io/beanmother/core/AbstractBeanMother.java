@@ -150,6 +150,10 @@ public abstract class AbstractBeanMother implements BeanMother {
         configurePostProcessorFactory(postProcessorFactory);
     }
 
+    protected void setSetterPrefix(String prefix) {
+        this.fixtureMapper.setSetterPrefix(prefix);
+    }
+
     private void handleScriptFixtureValue(FixtureMap fixtureMap) {
         FixtureMapTraversal.traverse(fixtureMap, new FixtureMapTraversal.Processor() {
             @Override
