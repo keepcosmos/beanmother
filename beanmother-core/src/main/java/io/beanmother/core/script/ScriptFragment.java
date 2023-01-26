@@ -17,15 +17,15 @@ public class ScriptFragment {
     /**
      * Script pattern of the value inside of {@link FixtureValue}
      */
-    private final static Pattern FIXTURE_VALUE_SCRIPT_PATTERN = Pattern.compile("(?<=\\$\\{)(.+?)(?=})");
+    private static final Pattern FIXTURE_VALUE_SCRIPT_PATTERN = Pattern.compile("(?<=\\$\\{)(.+?)(?=})");
 
     /**
      * Script Arguments pattern
      */
-    private final static Pattern ARGUMENTS_PATTERN = Pattern.compile("(?<=\\()(.*?)(?=\\))");
+    private static final Pattern ARGUMENTS_PATTERN = Pattern.compile("(?<=\\()(.*?)(?=\\))");
 
 
-    private final static String FRAGMENT_DELIM = "\\.";
+    private static final String FRAGMENT_DELIM = "\\.";
 
     /**
      * Script method name
@@ -98,7 +98,7 @@ public class ScriptFragment {
 
     /**
      * Create a ScriptFragment
-     * @param methodName
+     * @param methodName method name
      */
     public ScriptFragment(String methodName) {
         this.methodName = methodName.trim();
@@ -106,8 +106,8 @@ public class ScriptFragment {
 
     /**
      * Create a ScriptFragment.
-     * @param methodName
-     * @param arguments
+     * @param methodName method name
+     * @param arguments arguments
      */
     public ScriptFragment(String methodName, String ... arguments) {
         this(methodName);

@@ -11,7 +11,7 @@ import java.util.List;
 
 public abstract class MethodReflectionEvalScriptRunner implements ScriptRunner {
 
-    private final static ConverterFactory converterFactory = new ConverterFactory();
+    private static final ConverterFactory converterFactory = new ConverterFactory();
 
     public abstract Object getTargetObject();
 

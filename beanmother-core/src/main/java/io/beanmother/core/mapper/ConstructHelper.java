@@ -18,7 +18,7 @@ public abstract class ConstructHelper {
     /**
      * A key of FixtureMap that is a kind of source for creating a instance.
      */
-    private final static String CONSTRUCT_KEY = "_construct";
+    private static final String CONSTRUCT_KEY = "_construct";
 
     /**
      * Create instance of a given type.

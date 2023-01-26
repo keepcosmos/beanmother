@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class JodaTimeConverterModule implements ConverterModule {
 
-    private final static Set<Converter> converters;
+    private static final Set<Converter> converters;
 
     static {
         converters = new HashSet<>();

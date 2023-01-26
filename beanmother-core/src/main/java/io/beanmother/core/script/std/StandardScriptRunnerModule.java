@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class StandardScriptRunnerModule implements ScriptRunnerModule {
 
-    private final static Set<ScriptRunner> standardScriptRunners;
+    private static final Set<ScriptRunner> standardScriptRunners;
 
     static {
         standardScriptRunners = new HashSet<>();

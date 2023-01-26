@@ -32,7 +32,7 @@ public class YamlFixtureParserTest {
 
         FixtureMap beanmother = fixtureMaps.get("beanmother");
         assertTrue(beanmother.isRoot());
-        assertEquals(beanmother.getFixtureName(), "beanmother");
+        assertEquals("beanmother", beanmother.getFixtureName());
 
         assertTrue(beanmother.get("id") instanceof FixtureValue);
         assertEquals(beanmother.get("id"), new FixtureValue(1));

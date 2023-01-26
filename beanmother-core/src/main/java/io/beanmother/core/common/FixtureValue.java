@@ -83,7 +83,7 @@ public class FixtureValue extends Object implements FixtureTemplate {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof FixtureValue)) return false;
+        if (!(obj instanceof FixtureValue)) return false;
         return ((FixtureValue) obj).getValue().equals(this.getValue());
     }
 

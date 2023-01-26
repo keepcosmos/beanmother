@@ -28,14 +28,14 @@ public class FixtureValueSetterMapperTest {
         assertEquals(obj.getInteger(), new Integer(10));
 
         mapper.map(obj, "primitiveInt", new FixtureValue(11));
-        assertEquals(obj.getPrimitiveInt(), 11);
+        assertEquals(11, obj.getPrimitiveInt());
 
         Date date = new Date();
         mapper.map(obj, "date", new FixtureValue(date));
         assertEquals(obj.getDate(), date);
 
         mapper.map(obj, "string", new FixtureValue("test"));
-        assertEquals(obj.getString(), "test");
+        assertEquals("test", obj.getString());
     }
 
     @Test

@@ -13,7 +13,7 @@ public abstract class PostProcessor<T> implements Comparable<PostProcessor<T>> {
     /**
      * Default priority.
      */
-    public final static int DEFAULT_PRIORITY = 5;
+    public static final int DEFAULT_PRIORITY = 5;
 
     private int priority = DEFAULT_PRIORITY;
 

@@ -9,8 +9,8 @@ import java.util.Calendar;
  */
 public class StringToCalendarConverter extends AbstractGenericConverter<String, Calendar> {
 
-    private final static StringToDateConverter stringToDateConverter = new StringToDateConverter();
-    private final static DateToCalendarConverter dateToCalendarConverter = new DateToCalendarConverter();
+    private static final StringToDateConverter stringToDateConverter = new StringToDateConverter();
+    private static final DateToCalendarConverter dateToCalendarConverter = new DateToCalendarConverter();
 
     @Override
     public Calendar convert(String source) {

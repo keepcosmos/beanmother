@@ -9,8 +9,8 @@ import java.sql.Date;
  */
 public class StringToSQLDateConverter extends AbstractGenericConverter<String, Date> {
 
-    private final static StringToDateConverter stringToDateConverter = new StringToDateConverter();
-    private final static DateToSQLDateConverter dateToSQLDateConverter = new DateToSQLDateConverter();
+    private static final StringToDateConverter stringToDateConverter = new StringToDateConverter();
+    private static final DateToSQLDateConverter dateToSQLDateConverter = new DateToSQLDateConverter();
 
     @Override
     public Date convert(String source) {

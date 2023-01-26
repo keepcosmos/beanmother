@@ -15,10 +15,10 @@ import java.util.*;
  */
 public class JavaOptionalConverterModule implements ConverterModule {
 
-    private final static Converter numberConverter = new NumberToNumberConverter();
-    private final static Converter stringToNumberConverter = new StringToNumberConverter();
+    private static final Converter numberConverter = new NumberToNumberConverter();
+    private static final Converter stringToNumberConverter = new StringToNumberConverter();
 
-    private final static Set<Converter> converters;
+    private static final Set<Converter> converters;
 
     static {
         converters = new HashSet<>();

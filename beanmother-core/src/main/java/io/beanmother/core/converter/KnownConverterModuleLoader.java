@@ -10,7 +10,7 @@ import java.util.List;
  */
 public abstract class KnownConverterModuleLoader {
 
-    private final static String[] knownConverterModules;
+    private static final String[] knownConverterModules;
 
     static {
         knownConverterModules = new String[]{
@@ -39,9 +39,7 @@ public abstract class KnownConverterModuleLoader {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } catch (ClassNotFoundException e) {
-                // Do nothing
-            } catch (ClassCastException e) {
+            } catch (ClassNotFoundException | ClassCastException e) {
                 // Do nothing
             }
         }

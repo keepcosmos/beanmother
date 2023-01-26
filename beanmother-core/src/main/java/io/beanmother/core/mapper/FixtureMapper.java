@@ -15,8 +15,8 @@ public interface FixtureMapper {
 
     /**
      * map data to target object.
-     * @param fixtureMap
-     * @param target
+     * @param fixtureMap fixture map
+     * @param target target
      */
     void map(FixtureMap fixtureMap, Object target);
 }

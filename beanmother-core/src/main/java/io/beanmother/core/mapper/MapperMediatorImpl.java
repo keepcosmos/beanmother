@@ -13,7 +13,7 @@ public class MapperMediatorImpl implements MapperMediator {
 
     /**
      * Create a MapperMediatorImpl.
-     * @param converterFactory
+     * @param converterFactory coverter factory
      */
     public MapperMediatorImpl(ConverterFactory converterFactory) {
         this.fixtureConverter = new FixtureConverterImpl(this, converterFactory);

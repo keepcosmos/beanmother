@@ -14,12 +14,12 @@ public class StringToBooleanConverter extends AbstractGenericConverter<String, B
     /**
      * Strings that represent true value.
      */
-    private final static Set<String> TRUE_STRING;
+    private static final Set<String> TRUE_STRING;
 
     /**
      * Strings that represent false value.
      */
-    private final static Set<String> FALSE_STRING;
+    private static final Set<String> FALSE_STRING;
 
     static {
         TRUE_STRING = new HashSet<>();

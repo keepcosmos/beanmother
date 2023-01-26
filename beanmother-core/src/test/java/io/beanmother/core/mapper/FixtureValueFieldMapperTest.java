@@ -29,14 +29,14 @@ public class FixtureValueFieldMapperTest {
         assertEquals(obj.integer, new Integer(10));
 
         mapper.map(obj, "primitiveInt", new FixtureValue(11));
-        assertEquals(obj.primitiveInt, 11);
+        assertEquals(11, obj.primitiveInt);
 
         Date date = new Date();
         mapper.map(obj, "date", new FixtureValue(date));
         assertEquals(obj.date, date);
 
         mapper.map(obj, "string", new FixtureValue("test"));
-        assertEquals(obj.string, "test");
+        assertEquals("test", obj.string);
     }
 
     @Test
@@ -47,14 +47,14 @@ public class FixtureValueFieldMapperTest {
         assertEquals(obj.pvtInteger, new Integer(10));
 
         mapper.map(obj, "pvtPrimitiveInt", new FixtureValue(11));
-        assertEquals(obj.pvtPrimitiveInt, 11);
+        assertEquals(11, obj.pvtPrimitiveInt);
 
         Date date = new Date();
         mapper.map(obj, "pvtDate", new FixtureValue(date));
         assertEquals(obj.pvtDate, date);
 
         mapper.map(obj, "pvtString", new FixtureValue("test"));
-        assertEquals(obj.pvtString, "test");
+        assertEquals("test", obj.pvtString);
     }
 
     @Test

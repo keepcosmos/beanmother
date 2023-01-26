@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class StringToJodaTimeBaseLocalConverter extends AbstractConverter {
 
-    private final static StringToDateConverter stringToDateConverter = new StringToDateConverter();
-    private final static DateToJodaTimeBaseLocalConverter dateToJodaTimeBaseLocalConverter = new DateToJodaTimeBaseLocalConverter();
+    private static final StringToDateConverter stringToDateConverter = new StringToDateConverter();
+    private static final DateToJodaTimeBaseLocalConverter dateToJodaTimeBaseLocalConverter = new DateToJodaTimeBaseLocalConverter();
 
     @Override
     public Object convert(Object source, TypeToken<?> targetTypeToken) {

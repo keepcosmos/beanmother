@@ -15,12 +15,12 @@ import java.util.List;
  * @see <a href="http://natty.joestelmach.com">natty</a>
  */
 public class StringToDateConverter extends AbstractGenericConverter<String, Date> {
-    private final static Parser dateParser = new Parser();
+    private static final Parser dateParser = new Parser();
 
     @Override
     public Date convert(String source) {
         List<DateGroup> groups = dateParser.parse(source);
-        if (groups.size() > 0 && groups.get(0).getDates().size() > 0) {
+        if (!groups.isEmpty() && !groups.get(0).getDates().isEmpty()) {
             return groups.get(0).getDates().get(0);
         }
         throw new ConverterException("can not convert '" + source + "' to java.util.Date");

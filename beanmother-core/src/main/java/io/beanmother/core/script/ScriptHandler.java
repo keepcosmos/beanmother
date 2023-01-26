@@ -9,7 +9,7 @@ public interface ScriptHandler {
 
     /**
      * Run script and return the result.
-     * @param scriptFragment
+     * @param scriptFragment script fragment
      */
     Object runScript(ScriptFragment scriptFragment);
 
